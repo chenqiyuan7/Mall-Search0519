@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft, Search, Percent, Clock, MapPin } from "lucide-react";
+import { ChevronLeft, Search, Percent, Clock, MapPin, ThumbsUp } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const SouthernCuisineDiscounts = () => {
@@ -8,54 +8,87 @@ const SouthernCuisineDiscounts = () => {
   const restaurants = [
     {
       id: 1,
-      name: "粤香阁",
-      cuisine: "粤菜",
-      discount: "全场8.5折，儿童套餐买一送一",
-      validUntil: "2023-12-31",
-      location: "3楼 A区 308",
-      image: "https://nocode.meituan.com/photo/search?keyword=cantonese,cuisine&width=300&height=200"
+      name: "三清潭烧鹅",
+      rating: 4.9,
+      pricePerPerson: "165/人",
+      location: "L3",
+      tag: "酒仙桥风味地方菜人气榜第1名",
+      deals: [
+        {
+          price: 28.9,
+          discount: "7.5折",
+          name: "三清潭经典烧鹅套餐"
+        },
+        {
+          price: 80,
+          discount: "8折",
+          name: "80代100代金券"
+        }
+      ],
+      image: "https://nocode.meituan.com/photo/search?keyword=roasted,goose,cantonese&width=300&height=200"
     },
     {
       id: 2,
-      name: "湘味轩",
-      cuisine: "湘菜",
-      discount: "下单满200减30，儿童免费赠送小食",
-      validUntil: "2023-11-30",
-      location: "4楼 B区 415",
-      image: "https://nocode.meituan.com/photo/search?keyword=hunan,cuisine&width=300&height=200"
+      name: "中8楼风尚云南菜",
+      rating: 4.9,
+      pricePerPerson: "98/人",
+      location: "L4",
+      tag: "酒仙桥风味地方菜人气榜第3名",
+      deals: [
+        {
+          price: 196,
+          discount: "7.5折",
+          name: "三清潭经典烧鹅套餐"
+        },
+        {
+          price: 97,
+          discount: "9.7折",
+          name: "97代100代金券"
+        }
+      ],
+      image: "https://nocode.meituan.com/photo/search?keyword=yunnan,cuisine&width=300&height=200"
     },
     {
       id: 3,
-      name: "川香苑",
-      cuisine: "川菜",
-      discount: "特价菜单5折，家庭套餐立减50元",
-      validUntil: "2023-12-15",
-      location: "5楼 C区 503",
-      image: "https://nocode.meituan.com/photo/search?keyword=sichuan,cuisine&width=300&height=200"
+      name: "莆田餐厅PUTIEN",
+      rating: 4.9,
+      pricePerPerson: "105/人",
+      location: "L3",
+      features: ["儿童游乐区", "宝宝椅", "有露天位"],
+      deals: [
+        {
+          price: 308,
+          discount: "7.1折",
+          name: "乐享精致2人C餐"
+        },
+        {
+          price: 80,
+          discount: "8折",
+          name: "80代100代金券"
+        }
+      ],
+      image: "https://nocode.meituan.com/photo/search?keyword=putien,restaurant&width=300&height=200"
+    }
+  ];
+
+  // 网友推荐内容
+  const recommendations = [
+    {
+      id: 1,
+      title: "商场里的儿童餐我锁定这几家",
+      likes: 1326,
+      image: "https://nocode.meituan.com/photo/search?keyword=kids,meal,restaurant&width=300&height=200"
     },
     {
-      id: 4,
-      name: "闽南小馆",
-      cuisine: "闽菜",
-      discount: "周一至周四全场9折，儿童餐具免费升级",
-      validUntil: "2023-11-20",
-      location: "3楼 D区 320",
-      image: "https://nocode.meituan.com/photo/search?keyword=fujian,cuisine&width=300&height=200"
-    },
-    {
-      id: 5,
-      name: "云南风味",
-      cuisine: "云南菜",
-      discount: "新品上市，第二份半价",
-      validUntil: "2023-12-10",
-      location: "4楼 E区 428",
-      image: "https://nocode.meituan.com/photo/search?keyword=yunnan,cuisine&width=300&height=200"
+      id: 2,
+      title: "一家适合1人的日式拉面店",
+      likes: 1326,
+      image: "https://nocode.meituan.com/photo/search?keyword=japanese,ramen&width=300&height=200"
     }
   ];
 
   const filteredRestaurants = restaurants.filter(restaurant => 
     restaurant.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    restaurant.cuisine.toLowerCase().includes(searchQuery.toLowerCase()) ||
     restaurant.location.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -74,7 +107,7 @@ const SouthernCuisineDiscounts = () => {
         <div className="relative">
           <input
             type="text"
-            placeholder="搜索餐厅名称、菜系或位置"
+            placeholder="搜索餐厅名称或位置"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full p-3 pl-10 bg-white rounded-lg border border-gray-200"
@@ -83,58 +116,86 @@ const SouthernCuisineDiscounts = () => {
         </div>
       </div>
 
-      {/* 餐厅列表 */}
-      <div className="p-4">
-        <h2 className="text-lg font-bold mb-4">当前优惠餐厅</h2>
-        
-        <div className="space-y-4">
-          {filteredRestaurants.map((restaurant) => (
-            <div key={restaurant.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
+      {/* 网友推荐 */}
+      <div className="px-4 mb-4">
+        <div className="flex justify-between items-center mb-3">
+          <h2 className="text-lg font-bold">网友推荐</h2>
+          <Link to="/recommendations" className="text-gray-500 text-sm">
+            更多 &gt;
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          {recommendations.map((rec) => (
+            <div key={rec.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
               <img 
-                src={restaurant.image} 
-                alt={restaurant.name} 
-                className="mx-auto object-cover w-full h-40"
+                src={rec.image} 
+                alt={rec.title} 
+                className="mx-auto object-cover w-full h-24"
               />
-              <div className="p-4">
-                <div className="flex justify-between items-start">
-                  <h3 className="font-bold text-lg">{restaurant.name}</h3>
-                  <span className="bg-red-100 text-red-600 text-xs px-2 py-1 rounded">
-                    {restaurant.cuisine}
-                  </span>
-                </div>
-                
-                <div className="flex items-center mt-3">
-                  <Percent className="h-4 w-4 text-red-500 mr-1" />
-                  <span className="text-red-500 font-medium">{restaurant.discount}</span>
-                </div>
-                
-                <div className="flex items-center mt-2">
-                  <Clock className="h-4 w-4 mr-1" />
-                  <span className="text-gray-600 text-sm">有效期至: {restaurant.validUntil}</span>
-                </div>
-                
+              <div className="p-2">
+                <p className="text-sm font-medium line-clamp-2">{rec.title}</p>
                 <div className="flex items-center mt-1">
-                  <MapPin className="h-4 w-4 mr-1" />
-                  <span className="text-gray-600 text-sm">位置: {restaurant.location}</span>
-                </div>
-                
-                <div className="mt-4 flex justify-between">
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm">
-                    查看菜单
-                  </button>
-                  <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
-                    立即预约
-                  </button>
+                  <ThumbsUp className="h-3 w-3 text-pink-500" />
+                  <span className="text-xs text-gray-500 ml-1">{rec.likes}</span>
                 </div>
               </div>
             </div>
           ))}
+        </div>
+      </div>
 
-          {filteredRestaurants.length === 0 && (
-            <div className="text-center py-8">
-              <p className="text-gray-500">没有找到匹配的餐厅</p>
+      {/* 店铺对比 */}
+      <div className="px-4">
+        <h2 className="text-lg font-bold mb-4">店铺对比</h2>
+        <div className="space-y-4">
+          {filteredRestaurants.map((restaurant) => (
+            <div key={restaurant.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
+              <div className="flex p-4">
+                <img 
+                  src={restaurant.image} 
+                  alt={restaurant.name} 
+                  className="w-20 h-20 rounded-lg object-cover"
+                />
+                <div className="ml-3 flex-1">
+                  <div className="flex justify-between">
+                    <h3 className="font-bold">{restaurant.name}</h3>
+                    <span className="text-gray-500">{restaurant.location}</span>
+                  </div>
+                  <div className="flex items-center mt-1">
+                    <span className="text-orange-500 font-medium">{restaurant.rating}分</span>
+                    <span className="text-gray-500 ml-2">￥{restaurant.pricePerPerson}</span>
+                  </div>
+                  {restaurant.tag && (
+                    <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded mt-1">
+                      {restaurant.tag}
+                    </span>
+                  )}
+                  {restaurant.features && (
+                    <div className="flex flex-wrap gap-1 mt-1">
+                      {restaurant.features.map((feature, index) => (
+                        <span key={index} className="text-xs text-gray-500">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="border-t px-4 py-3">
+                {restaurant.deals.map((deal, index) => (
+                  <div key={index} className="flex justify-between items-center mb-2 last:mb-0">
+                    <div>
+                      <span className="text-red-500 text-lg font-bold">￥{deal.price}</span>
+                      <span className="ml-2 text-xs bg-red-100 text-red-500 px-1 rounded">
+                        {deal.discount}
+                      </span>
+                    </div>
+                    <span className="text-sm text-gray-600">{deal.name}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-          )}
+          ))}
         </div>
       </div>
 
