@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import ChatInput from "../components/ChatInput";
 
 const TrainingDiscounts = () => {
   const discountPrograms = [
@@ -42,7 +43,7 @@ const TrainingDiscounts = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-16">
+    <div className="min-h-screen bg-gray-50 pb-20">
       {/* 顶部导航栏 */}
       <div className="bg-white p-4 flex items-center shadow-sm">
         <Link to="/">
@@ -81,10 +82,8 @@ const TrainingDiscounts = () => {
         </div>
       </div>
 
-      {/* 底部提示 */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-lg text-center">
-        <p className="text-sm text-gray-600">更多优惠信息请咨询商场客服或各培训机构前台</p>
-      </div>
+      {/* 底部聊天输入框 */}
+      <ChatInput />
     </div>
   );
 };
