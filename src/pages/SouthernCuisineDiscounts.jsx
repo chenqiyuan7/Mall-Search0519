@@ -89,7 +89,13 @@ const SouthernCuisineDiscounts = () => {
   ];
 
   const handleRestaurantClick = (restaurant) => {
-    navigate(`/restaurant/${restaurant.id}`, { state: { restaurant } });
+    if (restaurant.id === 1) {
+      navigate('/sanqingtan-restaurant', { state: { restaurant } });
+    } else if (restaurant.id === 2) {
+      navigate('/restaurant/2', { state: { restaurant } });
+    } else if (restaurant.id === 3) {
+      navigate('/putian-restaurant', { state: { restaurant } });
+    }
   };
 
   return (

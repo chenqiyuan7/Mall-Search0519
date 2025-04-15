@@ -11,6 +11,8 @@ import FindStore from "./pages/FindStore.jsx";
 import EntertainmentPackages from "./pages/EntertainmentPackages.jsx";
 import RestaurantDetail from "./pages/RestaurantDetail.jsx";
 import Recommendations from "./pages/Recommendations.jsx";
+import SanqingtanRestaurant from "./pages/SanqingtanRestaurant.jsx";
+import PutianRestaurant from "./pages/PutianRestaurant.jsx";
 
 export const navItems = [
   {
@@ -73,5 +75,15 @@ export const navItems = [
     title: "网友推荐",
     to: "/recommendations",
     page: <Recommendations />,
+  },
+  {
+    title: "三清潭烧鹅",
+    to: "/sanqingtan-restaurant",
+    page: <SanqingtanRestaurant />,
+  },
+  {
+    title: "莆田餐厅",
+    to: "/putian-restaurant",
+    page: <PutianRestaurant />,
   }
 ];
