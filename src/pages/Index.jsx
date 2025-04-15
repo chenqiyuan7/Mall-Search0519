@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { ChevronLeft, MessageSquare, User } from "lucide-react";
 import { Link } from "react-router-dom";
+import ChatInput from "../components/ChatInput";
 
 const Index = () => {
-  const [inputValue, setInputValue] = useState("");
-
   const popularQuestions = [
     {
       id: 1,
@@ -48,13 +47,6 @@ const Index = () => {
       icon: "https://nocode.meituan.com/photo/search?keyword=kids,play&width=100&height=100",
       path: "/kids-activities"
     }
-  ];
-
-  const quickLinks = [
-    { id: 1, text: "亲子餐厅", path: "/family-restaurant" },
-    { id: 2, text: "停车引导", path: "/parking-guide" },
-    { id: 3, text: "找店铺", path: "/find-store" },
-    { id: 4, text: "吃喝玩乐套票", path: "/entertainment-packages" }
   ];
 
   return (
@@ -136,27 +128,8 @@ const Index = () => {
         </div>
       </div>
 
-      {/* 底部对话区 */}
-      <div className="fixed bottom-0 left-0 right-0 bg-black rounded-t-3xl p-4">
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="逛商场就问艾小团"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            className="w-full bg-gray-800 text-white rounded-full py-3 px-12 focus:outline-none"
-          />
-          <MessageSquare className="absolute left-4 top-3 h-5 w-5 text-green-400" />
-        </div>
-        
-        <div className="flex justify-between mt-3">
-          {quickLinks.map((link) => (
-            <Link to={link.path} key={link.id} className="text-white text-xs">
-              {link.text}
-            </Link>
-          ))}
-        </div>
-      </div>
+      {/* 底部聊天输入框 */}
+      <ChatInput />
     </div>
   );
 };
