@@ -42,6 +42,17 @@ const TrainingDiscounts = () => {
     }
   ];
 
+  const handleCardClick = (program) => {
+    // 处理卡片点击，查看详情
+    console.log("查看详情:", program);
+  };
+
+  const handleBooking = (e, program) => {
+    e.stopPropagation(); // 阻止事件冒泡到卡片
+    // 处理预约按钮点击
+    console.log("立即预约:", program);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
       {/* 顶部导航栏 */}
@@ -56,23 +67,33 @@ const TrainingDiscounts = () => {
       <div className="p-4">
         <h2 className="text-lg font-bold mb-4">当前优惠活动</h2>
         
-        <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-4">
           {discountPrograms.map((program) => (
-            <div key={program.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
+            <div 
+              key={program.id} 
+              className="bg-white rounded-lg overflow-hidden shadow-sm cursor-pointer transform transition-transform hover:scale-105"
+              onClick={() => handleCardClick(program)}
+            >
               <img 
                 src={program.image} 
                 alt={program.name} 
-                className="mx-auto object-cover w-full h-40"
+                className="mx-auto object-cover w-full h-32"
               />
-              <div className="p-4">
-                <h3 className="font-bold text-lg">{program.name}</h3>
-                <p className="text-red-500 font-medium my-1">{program.discount}</p>
-                <p className="text-gray-500 text-sm">位置: {program.location}</p>
-                <div className="mt-3 flex justify-between">
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm">
+              <div className="p-3">
+                <h3 className="font-bold text-sm line-clamp-1">{program.name}</h3>
+                <p className="text-red-500 text-xs my-1 line-clamp-2">{program.discount}</p>
+                <p className="text-gray-500 text-xs mb-2">位置: {program.location}</p>
+                <div className="flex justify-between items-center">
+                  <button 
+                    className="bg-blue-500 text-white px-3 py-1 rounded text-xs"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     查看详情
                   </button>
-                  <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
+                  <button 
+                    className="bg-green-500 text-white px-3 py-1 rounded text-xs"
+                    onClick={(e) => handleBooking(e, program)}
+                  >
                     立即预约
                   </button>
                 </div>
