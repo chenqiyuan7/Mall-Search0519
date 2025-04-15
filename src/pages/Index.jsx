@@ -14,7 +14,7 @@ const Index = () => {
     {
       id: 2,
       question: "看看适合儿童的餐厅当前排队情况",
-      count: "928人问过",
+      count: "928人问过", 
       path: "/restaurant-queue"
     },
     {
