@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { ChevronLeft, Search } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const TrainingDiscounts = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  
   const discountPrograms = [
     {
       id: 1,
@@ -43,11 +41,6 @@ const TrainingDiscounts = () => {
     }
   ];
 
-  const filteredPrograms = discountPrograms.filter(program => 
-    program.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    program.location.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
   return (
     <div className="min-h-screen bg-gray-50 pb-16">
       {/* 顶部导航栏 */}
@@ -58,26 +51,12 @@ const TrainingDiscounts = () => {
         <h1 className="text-lg font-bold">儿童培训机构优惠</h1>
       </div>
 
-      {/* 搜索栏 */}
-      <div className="p-4">
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="搜索培训机构名称或位置"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full p-3 pl-10 bg-white rounded-lg border border-gray-200"
-          />
-          <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-        </div>
-      </div>
-
       {/* 优惠列表 */}
       <div className="p-4">
         <h2 className="text-lg font-bold mb-4">当前优惠活动</h2>
         
         <div className="space-y-4">
-          {filteredPrograms.map((program) => (
+          {discountPrograms.map((program) => (
             <div key={program.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
               <img 
                 src={program.image} 
@@ -100,12 +79,6 @@ const TrainingDiscounts = () => {
             </div>
           ))}
         </div>
-
-        {filteredPrograms.length === 0 && (
-          <div className="text-center py-8">
-            <p className="text-gray-500">没有找到匹配的培训机构</p>
-          </div>
-        )}
       </div>
 
       {/* 底部提示 */}
