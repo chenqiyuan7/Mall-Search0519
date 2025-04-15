@@ -126,72 +126,69 @@ const RestaurantQueue = () => {
         </div>
       </div>
 
-      {/* 餐厅列表 */}
+      {/* 餐厅列表 - 双列瀑布流布局 */}
       <div className="p-4">
         {loading ? (
           <div className="flex justify-center items-center h-40">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
             {filteredRestaurants.map((restaurant) => (
               <div key={restaurant.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
                 <img 
                   src={restaurant.image} 
                   alt={restaurant.name} 
-                  className="mx-auto object-cover w-full h-40"
+                  className="mx-auto object-cover w-full h-32"
                 />
-                <div className="p-4">
+                <div className="p-3">
                   <div className="flex justify-between items-start">
-                    <h3 className="font-bold text-lg">{restaurant.name}</h3>
+                    <h3 className="font-bold text-sm line-clamp-1">{restaurant.name}</h3>
                     <div className="flex items-center">
-                      <Star className="h-4 w-4 text-yellow-400 mr-1" fill="#FACC15" />
-                      <span>{restaurant.rating}</span>
+                      <Star className="h-3 w-3 text-yellow-400 mr-1" fill="#FACC15" />
+                      <span className="text-xs">{restaurant.rating}</span>
                     </div>
                   </div>
                   
-                  <div className="flex items-center mt-2">
-                    <Clock className="h-4 w-4 mr-1" />
-                    <span className={`font-medium ${getWaitTimeColor(restaurant.waitTime)}`}>
-                      等待时间: {restaurant.waitTime} 分钟
-                    </span>
+                  <div className="mt-2">
+                    <div className="flex items-center">
+                      <Clock className="h-3 w-3 mr-1" />
+                      <span className={`text-xs font-medium ${getWaitTimeColor(restaurant.waitTime)}`}>
+                        等待时间: {restaurant.waitTime} 分钟
+                      </span>
+                    </div>
+                    
+                    <div className="flex items-center mt-1">
+                      <Users className="h-3 w-3 mr-1" />
+                      <span className="text-xs">排队人数: {restaurant.waitCount} 组</span>
+                    </div>
+                    
+                    <div className="flex items-center mt-1">
+                      <MapPin className="h-3 w-3 mr-1" />
+                      <span className="text-xs text-gray-500">{restaurant.location}</span>
+                    </div>
                   </div>
                   
-                  <div className="flex items-center mt-1">
-                    <Users className="h-4 w-4 mr-1" />
-                    <span>排队人数: {restaurant.waitCount} 组</span>
-                  </div>
-                  
-                  <div className="flex items-center mt-1">
-                    <MapPin className="h-4 w-4 mr-1" />
-                    <span className="text-gray-600">{restaurant.location}</span>
-                  </div>
-                  
-                  <div className="mt-3 flex flex-wrap gap-2">
+                  <div className="mt-2 flex flex-wrap gap-1">
                     {restaurant.tags.map((tag, index) => (
-                      <span key={index} className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
+                      <span key={index} className="bg-gray-100 text-gray-800 text-xs px-1.5 py-0.5 rounded">
                         {tag}
                       </span>
                     ))}
                   </div>
                   
-                  <div className="mt-4 flex justify-between">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm">
-                      查看菜单
-                    </button>
-                    <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
-                      在线预约
-                    </button>
-                  </div>
+                  <button className="w-full bg-green-500 text-white text-xs px-3 py-1.5 rounded mt-2">
+                    查看详情
+                  </button>
                 </div>
               </div>
             ))}
+          </div>
+        )}
 
-            {filteredRestaurants.length === 0 && (
-              <div className="text-center py-8">
-                <p className="text-gray-500">没有找到符合条件的餐厅</p>
-              </div>
-            )}
+        {filteredRestaurants.length === 0 && !loading && (
+          <div className="text-center py-8">
+            <p className="text-gray-500">没有找到符合条件的餐厅</p>
           </div>
         )}
       </div>
