@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { ChevronLeft, Search, Tag, Calendar, Users, Clock } from "lucide-react";
+import { ChevronLeft, Tag, Calendar, Users, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const EntertainmentPackages = () => {
-  const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
   
   const filters = [
@@ -84,12 +83,7 @@ const EntertainmentPackages = () => {
   ];
 
   const filteredPackages = packages.filter(pkg => {
-    const matchesSearch = pkg.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          pkg.description.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    const matchesFilter = activeFilter === "all" || pkg.type === activeFilter;
-    
-    return matchesSearch && matchesFilter;
+    return activeFilter === "all" || pkg.type === activeFilter;
   });
 
   return (
@@ -100,20 +94,6 @@ const EntertainmentPackages = () => {
           <ChevronLeft className="h-6 w-6 mr-2" />
         </Link>
         <h1 className="text-lg font-bold">吃喝玩乐套票</h1>
-      </div>
-
-      {/* 搜索栏 */}
-      <div className="p-4 bg-white">
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="搜索套票名称或描述"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full p-3 pl-10 bg-gray-100 rounded-lg"
-          />
-          <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-        </div>
       </div>
 
       {/* 筛选选项 */}
