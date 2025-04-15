@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft, Search, MapPin, Clock, Calendar, Users } from "lucide-react";
+import { ChevronLeft, Search, MapPin, Phone, Clock, ArrowRight, ThumbsUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
