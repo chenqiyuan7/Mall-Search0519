@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { ChevronLeft, Search, MapPin, Phone, Clock, ArrowRight, ThumbsUp } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
 const SouthernCuisineDiscounts = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
   
   const restaurants = [
     {
@@ -93,6 +94,10 @@ const SouthernCuisineDiscounts = () => {
     restaurant.location.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const handleRestaurantClick = (restaurant) => {
+    navigate(`/restaurant/${restaurant.id}`, { state: { restaurant } });
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
       {/* 顶部导航栏 */}
@@ -150,7 +155,11 @@ const SouthernCuisineDiscounts = () => {
         <h2 className="text-lg font-bold mb-4">店铺对比</h2>
         <div className="space-y-4">
           {filteredRestaurants.map((restaurant) => (
-            <div key={restaurant.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
+            <div 
+              key={restaurant.id} 
+              className="bg-white rounded-lg overflow-hidden shadow-sm cursor-pointer"
+              onClick={() => handleRestaurantClick(restaurant)}
+            >
               <div className="flex p-4">
                 <img 
                   src={restaurant.image} 
