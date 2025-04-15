@@ -36,13 +36,45 @@ const Recommendations = () => {
       description: "正宗的云南味道，让你一秒穿越到大理古城",
       author: "美食探店王",
       image: "https://nocode.meituan.com/photo/search?keyword=yunnan,cuisine&width=300&height=200"
+    },
+    {
+      id: 5,
+      title: "周末亲子游玩好去处",
+      likes: 756,
+      description: "精选商场内适合亲子活动的场所，让周末不再无聊",
+      author: "亲子玩乐达人",
+      image: "https://nocode.meituan.com/photo/search?keyword=family,weekend,fun&width=300&height=200"
+    },
+    {
+      id: 6,
+      title: "这家火锅店太适合聚会了",
+      likes: 689,
+      description: "环境舒适，菜品丰富，适合朋友聚会",
+      author: "火锅爱好者",
+      image: "https://nocode.meituan.com/photo/search?keyword=hotpot,restaurant&width=300&height=200"
+    },
+    {
+      id: 7,
+      title: "探秘商场里的甜品天堂",
+      likes: 578,
+      description: "精选5家人气甜品店，每一家都让人惊喜",
+      author: "甜品控",
+      image: "https://nocode.meituan.com/photo/search?keyword=dessert,cafe&width=300&height=200"
+    },
+    {
+      id: 8,
+      title: "带外国朋友必去的中餐厅",
+      likes: 467,
+      description: "既能品尝正宗中餐，又能感受现代餐饮文化",
+      author: "美食文化家",
+      image: "https://nocode.meituan.com/photo/search?keyword=chinese,restaurant,modern&width=300&height=200"
     }
   ];
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
       {/* 顶部导航栏 */}
-      <div className="bg-white p-4 flex items-center shadow-sm">
+      <div className="bg-white p-4 flex items-center shadow-sm sticky top-0 z-10">
         <Link to="/southern-cuisine-discounts">
           <ChevronLeft className="h-6 w-6 mr-2" />
         </Link>
@@ -53,7 +85,10 @@ const Recommendations = () => {
       <div className="p-4">
         <div className="grid grid-cols-2 gap-4">
           {recommendations.map((rec) => (
-            <div key={rec.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
+            <div 
+              key={rec.id} 
+              className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200"
+            >
               <img 
                 src={rec.image} 
                 alt={rec.title} 
