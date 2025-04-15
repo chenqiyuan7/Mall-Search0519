@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { ChevronLeft, MapPin, Clock, Users } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
 const RestaurantDetail = () => {
   const [activeTab, setActiveTab] = useState("menu");
+  const navigate = useNavigate();
 
   const store = {
     name: "中8楼风尚云南菜(颐提港店)",
@@ -77,13 +78,17 @@ const RestaurantDetail = () => {
     }
   ];
 
+  const handleBack = () => {
+    navigate('/southern-cuisine-discounts');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* 顶部导航栏 */}
       <div className="bg-white p-4 flex items-center">
-        <Link to="/">
+        <button onClick={handleBack}>
           <ChevronLeft className="h-6 w-6 mr-2" />
-        </Link>
+        </button>
         <h1 className="text-lg">AI帮你找</h1>
       </div>
 
