@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { ChevronLeft, Search, MapPin, Phone, Clock, ArrowRight } from "lucide-react";
+import { ChevronLeft, MapPin, Phone, Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const FindStore = () => {
-  const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
   
   const categories = [
@@ -79,13 +78,7 @@ const FindStore = () => {
   ];
 
   const filteredStores = stores.filter(store => {
-    const matchesSearch = store.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          store.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          store.location.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    const matchesCategory = activeCategory === "all" || store.category === activeCategory;
-    
-    return matchesSearch && matchesCategory;
+    return activeCategory === "all" || store.category === activeCategory;
   });
 
   return (
@@ -96,20 +89,6 @@ const FindStore = () => {
           <ChevronLeft className="h-6 w-6 mr-2" />
         </Link>
         <h1 className="text-lg font-bold">找店铺</h1>
-      </div>
-
-      {/* 搜索栏 */}
-      <div className="p-4 bg-white">
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="搜索店铺名称或位置"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full p-3 pl-10 bg-gray-100 rounded-lg"
-          />
-          <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-        </div>
       </div>
 
       {/* 分类选项 */}
