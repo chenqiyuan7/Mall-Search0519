@@ -49,25 +49,25 @@ const Recommendations = () => {
         <h1 className="text-lg font-bold">网友推荐</h1>
       </div>
 
-      {/* 推荐列表 */}
+      {/* 推荐列表 - 双列瀑布流布局 */}
       <div className="p-4">
-        <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-4">
           {recommendations.map((rec) => (
             <div key={rec.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
               <img 
                 src={rec.image} 
                 alt={rec.title} 
-                className="mx-auto object-cover w-full h-48"
+                className="mx-auto object-cover w-full h-40"
               />
-              <div className="p-4">
-                <h3 className="font-bold text-lg">{rec.title}</h3>
-                <p className="text-gray-600 mt-1">{rec.description}</p>
+              <div className="p-3">
+                <h3 className="font-bold text-sm line-clamp-2">{rec.title}</h3>
+                <p className="text-gray-600 mt-1 text-xs line-clamp-2">{rec.description}</p>
                 
-                <div className="mt-3 flex justify-between items-center">
-                  <span className="text-gray-500 text-sm">{rec.author}</span>
+                <div className="mt-2 flex justify-between items-center">
+                  <span className="text-gray-500 text-xs">{rec.author}</span>
                   <div className="flex items-center">
-                    <ThumbsUp className="h-4 w-4 text-pink-500 mr-1" />
-                    <span className="text-gray-500 text-sm">{rec.likes}</span>
+                    <ThumbsUp className="h-3 w-3 text-pink-500 mr-1" />
+                    <span className="text-gray-500 text-xs">{rec.likes}</span>
                   </div>
                 </div>
               </div>
