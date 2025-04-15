@@ -41,7 +41,7 @@ const PLUGINS  = isProdEnv ? [react()] : [
           </script>
           <script type="module" src="./hmr-client.js"></script>
           <script src="https://s3plus.meituan.net/mcopilot-pub/nocode-dep/html2canvas.min.js"></script>
-          <script src="https://s3plus.vip.sankuai.com/static-prod01/com.sankuai.mcopilot.nocode.front-files/public/script/element-selector-script.js"></script>
+          <script src="https://s3plus.vip.sankuai.com/static-prod01/com.sankuai.mcopilot.nocode.front-files/public/script/element-selector-script.js?v=2"></script>
           <script type="module">
           window.parent.postMessage({
               type: 'version',
