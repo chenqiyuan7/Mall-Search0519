@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { ChevronLeft, Search, Percent, Clock, MapPin, ThumbsUp } from "lucide-react";
+import { ChevronLeft, Search, MapPin, Clock, Calendar, Users } from "lucide-react";
 import { Link } from "react-router-dom";
+import ChatInput from "../components/ChatInput";
 
 const SouthernCuisineDiscounts = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -93,7 +94,7 @@ const SouthernCuisineDiscounts = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-16">
+    <div className="min-h-screen bg-gray-50 pb-20">
       {/* 顶部导航栏 */}
       <div className="bg-white p-4 flex items-center shadow-sm">
         <Link to="/">
@@ -199,10 +200,8 @@ const SouthernCuisineDiscounts = () => {
         </div>
       </div>
 
-      {/* 底部提示 */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-lg text-center">
-        <p className="text-sm text-gray-600">优惠信息实时更新，请以餐厅实际情况为准</p>
-      </div>
+      {/* 底部聊天输入框 */}
+      <ChatInput />
     </div>
   );
 };
