@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { ChevronLeft, Search, MapPin, Phone, Clock, ArrowRight, ThumbsUp } from "lucide-react";
+import { ChevronLeft, MapPin, Phone, Clock, ArrowRight, ThumbsUp } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
 const SouthernCuisineDiscounts = () => {
-  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   
   const restaurants = [
@@ -89,11 +88,6 @@ const SouthernCuisineDiscounts = () => {
     }
   ];
 
-  const filteredRestaurants = restaurants.filter(restaurant => 
-    restaurant.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    restaurant.location.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
   const handleRestaurantClick = (restaurant) => {
     navigate(`/restaurant/${restaurant.id}`, { state: { restaurant } });
   };
@@ -106,20 +100,6 @@ const SouthernCuisineDiscounts = () => {
           <ChevronLeft className="h-6 w-6 mr-2" />
         </Link>
         <h1 className="text-lg font-bold">南方菜系优惠</h1>
-      </div>
-
-      {/* 搜索栏 */}
-      <div className="p-4">
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="搜索餐厅名称或位置"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full p-3 pl-10 bg-white rounded-lg border border-gray-200"
-          />
-          <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-        </div>
       </div>
 
       {/* 网友推荐 */}
@@ -154,7 +134,7 @@ const SouthernCuisineDiscounts = () => {
       <div className="px-4">
         <h2 className="text-lg font-bold mb-4">店铺对比</h2>
         <div className="space-y-4">
-          {filteredRestaurants.map((restaurant) => (
+          {restaurants.map((restaurant) => (
             <div 
               key={restaurant.id} 
               className="bg-white rounded-lg overflow-hidden shadow-sm cursor-pointer"
