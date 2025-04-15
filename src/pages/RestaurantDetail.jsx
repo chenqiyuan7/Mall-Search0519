@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronLeft, MapPin, Clock, Users } from "lucide-react";
 import { Link } from "react-router-dom";
+import ChatInput from "../components/ChatInput";
 
 const RestaurantDetail = () => {
   const [activeTab, setActiveTab] = useState("menu");
@@ -232,17 +233,8 @@ const RestaurantDetail = () => {
         </div>
       </div>
 
-      {/* 底部聊天按钮 */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-black">
-        <button className="w-full bg-gray-800 text-white rounded-full py-3 flex items-center justify-center">
-          <img 
-            src="https://nocode.meituan.com/photo/search?keyword=chat,icon&width=40&height=40" 
-            alt="聊天"
-            className="w-6 h-6 mr-2"
-          />
-          <span>按住说话</span>
-        </button>
-      </div>
+      {/* 底部聊天输入框 */}
+      <ChatInput />
     </div>
   );
 };
