@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { MessageSquare } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const ChatInput = () => {
   const [inputValue, setInputValue] = useState("");
+  const location = useLocation();
 
   const quickLinks = [
     { id: 1, text: "亲子餐厅", path: "/family-restaurant" },
@@ -25,13 +26,15 @@ const ChatInput = () => {
         <MessageSquare className="absolute left-4 top-3 h-5 w-5 text-green-400" />
       </div>
       
-      <div className="flex justify-between mt-3">
-        {quickLinks.map((link) => (
-          <Link to={link.path} key={link.id} className="text-white text-xs">
-            {link.text}
-          </Link>
-        ))}
-      </div>
+      {location.pathname === "/" && (
+        <div className="flex justify-between mt-3">
+          {quickLinks.map((link) => (
+            <Link to={link.path} key={link.id} className="text-white text-xs">
+              {link.text}
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
