@@ -178,7 +178,7 @@ const RestaurantQueue = () => {
                   </div>
                   
                   <button className="w-full bg-green-500 text-white text-xs px-3 py-1.5 rounded mt-2">
-                    查看详情
+                    查看菜单
                   </button>
                 </div>
               </div>
