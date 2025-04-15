@@ -10,6 +10,7 @@ import ParkingGuide from "./pages/ParkingGuide.jsx";
 import FindStore from "./pages/FindStore.jsx";
 import EntertainmentPackages from "./pages/EntertainmentPackages.jsx";
 import RestaurantDetail from "./pages/RestaurantDetail.jsx";
+import Recommendations from "./pages/Recommendations.jsx";
 
 export const navItems = [
   {
@@ -68,4 +69,9 @@ export const navItems = [
     to: "/restaurant/:id",
     page: <RestaurantDetail />,
   },
+  {
+    title: "网友推荐",
+    to: "/recommendations",
+    page: <Recommendations />,
+  }
 ];
