@@ -7,18 +7,18 @@ import { navItems } from "./nav-items";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
+<QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <HashRouter>
+    <Toaster />
+    <HashRouter>
         <Routes>
-          {navItems.map(({ to, page }) => (
+        {navItems.map(({ to, page }) => (
             <Route key={to} path={to} element={page} />
-          ))}
+        ))}
         </Routes>
-      </HashRouter>
+    </HashRouter>
     </TooltipProvider>
-  </QueryClientProvider>
+</QueryClientProvider>
 );
 
 export default App;

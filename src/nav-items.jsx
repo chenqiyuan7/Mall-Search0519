@@ -9,6 +9,7 @@ import KidsActivities from "./pages/KidsActivities.jsx";
 import ParkingGuide from "./pages/ParkingGuide.jsx";
 import FindStore from "./pages/FindStore.jsx";
 import EntertainmentPackages from "./pages/EntertainmentPackages.jsx";
+import RestaurantDetail from "./pages/RestaurantDetail.jsx";
 
 /**
 * Central place for defining the navigation items. Used for navigation components and routing.
@@ -64,5 +65,10 @@ export const navItems = [
     title: "吃喝玩乐套票",
     to: "/entertainment-packages",
     page: <EntertainmentPackages />,
+  },
+  {
+    title: "餐厅详情",
+    to: "/restaurant/:id",
+    page: <RestaurantDetail />,
   },
 ];
