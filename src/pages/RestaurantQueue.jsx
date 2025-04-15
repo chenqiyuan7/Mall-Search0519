@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, Clock, Users, MapPin, Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import ChatInput from "../components/ChatInput";
 
 const RestaurantQueue = () => {
   const [restaurants, setRestaurants] = useState([]);
