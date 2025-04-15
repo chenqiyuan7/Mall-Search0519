@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, Car, MapPin, Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import ChatInput from "../components/ChatInput";
 
 const ParkingGuide = () => {
   const [parkingAreas, setParkingAreas] = useState([]);
@@ -204,6 +205,9 @@ const ParkingGuide = () => {
       <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-lg text-center">
         <p className="text-sm text-gray-600">停车位信息实时更新，请以实际情况为准</p>
       </div>
+
+      {/* 底部聊天输入框 */}
+      <ChatInput />
     </div>
   );
 };

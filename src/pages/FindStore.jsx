@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronLeft, MapPin, Phone, Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import ChatInput from "../components/ChatInput";
 
 const FindStore = () => {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -165,6 +166,9 @@ const FindStore = () => {
       <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-lg text-center">
         <p className="text-sm text-gray-600">店铺信息可能会有变动，请以实际情况为准</p>
       </div>
+
+      {/* 底部聊天输入框 */}
+      <ChatInput />
     </div>
   );
 };
