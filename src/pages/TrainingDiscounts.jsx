@@ -83,13 +83,7 @@ const TrainingDiscounts = () => {
                 <h3 className="font-bold text-sm line-clamp-1">{program.name}</h3>
                 <p className="text-red-500 text-xs my-1 line-clamp-2">{program.discount}</p>
                 <p className="text-gray-500 text-xs mb-2">位置: {program.location}</p>
-                <div className="flex justify-between items-center">
-                  <button 
-                    className="bg-blue-500 text-white px-3 py-1 rounded text-xs"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    查看详情
-                  </button>
+                <div className="flex justify-end items-center">
                   <button 
                     className="bg-green-500 text-white px-3 py-1 rounded text-xs"
                     onClick={(e) => handleBooking(e, program)}
