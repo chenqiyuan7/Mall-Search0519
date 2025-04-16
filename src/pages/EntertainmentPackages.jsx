@@ -91,93 +91,93 @@ const EntertainmentPackages = () => {
     <div className="min-h-screen bg-[#292929] flex justify-center items-start">
       {/* 固定宽度内容容器 */}
       <div className="w-[375px] h-[812px] relative bg-white overflow-y-auto overflow-x-hidden">
-        {/* 顶部导航栏 */}
-        <div className="bg-white p-4 flex items-center shadow-sm">
-          <Link to="/">
-            <ChevronLeft className="h-6 w-6 mr-2" />
-          </Link>
-          <h1 className="text-lg font-bold">吃喝玩乐套票</h1>
-        </div>
+      {/* 顶部导航栏 */}
+      <div className="bg-white p-4 flex items-center shadow-sm">
+        <Link to="/">
+          <ChevronLeft className="h-6 w-6 mr-2" />
+        </Link>
+        <h1 className="text-lg font-bold">吃喝玩乐套票</h1>
+      </div>
 
-        {/* 筛选选项 */}
-        <div className="p-4 bg-white mb-2">
-          <div className="flex space-x-2 overflow-x-auto pb-2">
-            {filters.map((filter) => (
-              <button 
-                key={filter.id}
-                className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${activeFilter === filter.id ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
-                onClick={() => setActiveFilter(filter.id)}
-              >
-                {filter.name}
-              </button>
-            ))}
-          </div>
+      {/* 筛选选项 */}
+      <div className="p-4 bg-white mb-2">
+        <div className="flex space-x-2 overflow-x-auto pb-2">
+          {filters.map((filter) => (
+            <button 
+              key={filter.id}
+              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${activeFilter === filter.id ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
+              onClick={() => setActiveFilter(filter.id)}
+            >
+              {filter.name}
+            </button>
+          ))}
         </div>
+      </div>
 
-        {/* 套票列表 */}
-        <div className="p-4">
-          <div className="space-y-4">
-            {filteredPackages.map((pkg) => (
-              <div key={pkg.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
-                <div className="relative">
-                  <img 
-                    src={pkg.image} 
-                    alt={pkg.name} 
-                    className="mx-auto object-cover w-full h-48"
-                  />
-                  <div className="absolute top-0 right-0 bg-red-500 text-white px-3 py-1 rounded-bl-lg">
-                    {Math.round((1 - pkg.discountPrice / pkg.originalPrice) * 100)}% OFF
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="font-bold text-lg">{pkg.name}</h3>
-                  <p className="text-gray-600 mt-1">{pkg.description}</p>
-                  
-                  <div className="mt-3 flex items-center">
-                    <Tag className="h-4 w-4 mr-1" />
-                    <div className="flex items-center">
-                      <span className="text-gray-500 line-through mr-2">¥{pkg.originalPrice}</span>
-                      <span className="text-red-500 font-bold text-lg">¥{pkg.discountPrice}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center mt-2">
-                    <Calendar className="h-4 w-4 mr-1" />
-                    <span className="text-gray-600 text-sm">有效期: {pkg.validPeriod}</span>
-                  </div>
-                  
-                  <div className="flex items-center mt-2">
-                    <Users className="h-4 w-4 mr-1" />
-                    <span className="text-gray-600 text-sm">适用人数: {pkg.peopleCount}</span>
-                  </div>
-                  
-                  <div className="mt-4 flex justify-between">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm">
-                      查看详情
-                    </button>
-                    <button className="bg-red-500 text-white px-4 py-2 rounded-lg text-sm">
-                      立即购买
-                    </button>
-                  </div>
+      {/* 套票列表 */}
+      <div className="p-4">
+        <div className="space-y-4">
+          {filteredPackages.map((pkg) => (
+            <div key={pkg.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
+              <div className="relative">
+                <img 
+                  src={pkg.image} 
+                  alt={pkg.name} 
+                  className="mx-auto object-cover w-full h-48"
+                />
+                <div className="absolute top-0 right-0 bg-red-500 text-white px-3 py-1 rounded-bl-lg">
+                  {Math.round((1 - pkg.discountPrice / pkg.originalPrice) * 100)}% OFF
                 </div>
               </div>
-            ))}
-
-            {filteredPackages.length === 0 && (
-              <div className="text-center py-8">
-                <p className="text-gray-500">没有找到匹配的套票</p>
+              <div className="p-4">
+                <h3 className="font-bold text-lg">{pkg.name}</h3>
+                <p className="text-gray-600 mt-1">{pkg.description}</p>
+                
+                <div className="mt-3 flex items-center">
+                  <Tag className="h-4 w-4 mr-1" />
+                  <div className="flex items-center">
+                    <span className="text-gray-500 line-through mr-2">¥{pkg.originalPrice}</span>
+                    <span className="text-red-500 font-bold text-lg">¥{pkg.discountPrice}</span>
+                  </div>
+                </div>
+                
+                <div className="flex items-center mt-2">
+                  <Calendar className="h-4 w-4 mr-1" />
+                  <span className="text-gray-600 text-sm">有效期: {pkg.validPeriod}</span>
+                </div>
+                
+                <div className="flex items-center mt-2">
+                  <Users className="h-4 w-4 mr-1" />
+                  <span className="text-gray-600 text-sm">适用人数: {pkg.peopleCount}</span>
+                </div>
+                
+                <div className="mt-4 flex justify-between">
+                  <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm">
+                    查看详情
+                  </button>
+                  <button className="bg-red-500 text-white px-4 py-2 rounded-lg text-sm">
+                    立即购买
+                  </button>
+                </div>
               </div>
-            )}
-          </div>
-        </div>
+            </div>
+          ))}
 
-        {/* 底部提示 */}
+          {filteredPackages.length === 0 && (
+            <div className="text-center py-8">
+              <p className="text-gray-500">没有找到匹配的套票</p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* 底部提示 */}
         <div className="fixed bottom-16 left-0 right-0 mx-auto max-w-[375px] bg-white p-4 shadow-lg text-center">
-          <p className="text-sm text-gray-600">套票详情请以购买页面为准，部分套票需提前预约</p>
-        </div>
+        <p className="text-sm text-gray-600">套票详情请以购买页面为准，部分套票需提前预约</p>
+      </div>
 
-        {/* 底部聊天输入框 */}
-        <ChatInput />
+      {/* 底部聊天输入框 */}
+      <ChatInput />
       </div>
     </div>
   );

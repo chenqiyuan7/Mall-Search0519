@@ -86,91 +86,91 @@ const FindStore = () => {
     <div className="min-h-screen bg-[#292929] flex justify-center items-start">
       {/* 固定宽度内容容器 */}
       <div className="w-[375px] h-[812px] relative bg-white overflow-y-auto overflow-x-hidden">
-        {/* 顶部导航栏 */}
-        <div className="bg-white p-4 flex items-center shadow-sm">
-          <Link to="/">
-            <ChevronLeft className="h-6 w-6 mr-2" />
-          </Link>
-          <h1 className="text-lg font-bold">找店铺</h1>
-        </div>
+      {/* 顶部导航栏 */}
+      <div className="bg-white p-4 flex items-center shadow-sm">
+        <Link to="/">
+          <ChevronLeft className="h-6 w-6 mr-2" />
+        </Link>
+        <h1 className="text-lg font-bold">找店铺</h1>
+      </div>
 
-        {/* 分类选项 */}
-        <div className="p-4 bg-white mb-2">
-          <div className="flex space-x-2 overflow-x-auto pb-2">
-            {categories.map((category) => (
-              <button 
-                key={category.id}
-                className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${activeCategory === category.id ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
-                onClick={() => setActiveCategory(category.id)}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
+      {/* 分类选项 */}
+      <div className="p-4 bg-white mb-2">
+        <div className="flex space-x-2 overflow-x-auto pb-2">
+          {categories.map((category) => (
+            <button 
+              key={category.id}
+              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${activeCategory === category.id ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
+              onClick={() => setActiveCategory(category.id)}
+            >
+              {category.name}
+            </button>
+          ))}
         </div>
+      </div>
 
-        {/* 店铺列表 */}
-        <div className="p-4">
-          <div className="space-y-4">
-            {filteredStores.map((store) => (
-              <div key={store.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
-                <img 
-                  src={store.image} 
-                  alt={store.name} 
-                  className="mx-auto object-cover w-full h-40"
-                />
-                <div className="p-4">
-                  <div className="flex justify-between items-start">
-                    <h3 className="font-bold text-lg">{store.name}</h3>
-                    <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
-                      {categories.find(c => c.id === store.category)?.name}
-                    </span>
-                  </div>
-                  
-                  <p className="text-gray-600 mt-1">{store.description}</p>
-                  
-                  <div className="flex items-center mt-3">
-                    <MapPin className="h-4 w-4 mr-1" />
-                    <span className="text-gray-600 text-sm">位置: {store.location}</span>
-                  </div>
-                  
-                  <div className="flex items-center mt-2">
-                    <Phone className="h-4 w-4 mr-1" />
-                    <span className="text-gray-600 text-sm">电话: {store.phone}</span>
-                  </div>
-                  
-                  <div className="flex items-center mt-2">
-                    <Clock className="h-4 w-4 mr-1" />
-                    <span className="text-gray-600 text-sm">营业时间: {store.openHours}</span>
-                  </div>
-                  
-                  <div className="mt-4 flex justify-between">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm flex items-center">
-                      查看详情 <ArrowRight className="h-4 w-4 ml-1" />
-                    </button>
-                    <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
-                      导航前往
-                    </button>
-                  </div>
+      {/* 店铺列表 */}
+      <div className="p-4">
+        <div className="space-y-4">
+          {filteredStores.map((store) => (
+            <div key={store.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
+              <img 
+                src={store.image} 
+                alt={store.name} 
+                className="mx-auto object-cover w-full h-40"
+              />
+              <div className="p-4">
+                <div className="flex justify-between items-start">
+                  <h3 className="font-bold text-lg">{store.name}</h3>
+                  <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+                    {categories.find(c => c.id === store.category)?.name}
+                  </span>
+                </div>
+                
+                <p className="text-gray-600 mt-1">{store.description}</p>
+                
+                <div className="flex items-center mt-3">
+                  <MapPin className="h-4 w-4 mr-1" />
+                  <span className="text-gray-600 text-sm">位置: {store.location}</span>
+                </div>
+                
+                <div className="flex items-center mt-2">
+                  <Phone className="h-4 w-4 mr-1" />
+                  <span className="text-gray-600 text-sm">电话: {store.phone}</span>
+                </div>
+                
+                <div className="flex items-center mt-2">
+                  <Clock className="h-4 w-4 mr-1" />
+                  <span className="text-gray-600 text-sm">营业时间: {store.openHours}</span>
+                </div>
+                
+                <div className="mt-4 flex justify-between">
+                  <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm flex items-center">
+                    查看详情 <ArrowRight className="h-4 w-4 ml-1" />
+                  </button>
+                  <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
+                    导航前往
+                  </button>
                 </div>
               </div>
-            ))}
+            </div>
+          ))}
 
-            {filteredStores.length === 0 && (
-              <div className="text-center py-8">
-                <p className="text-gray-500">没有找到匹配的店铺</p>
-              </div>
-            )}
-          </div>
+          {filteredStores.length === 0 && (
+            <div className="text-center py-8">
+              <p className="text-gray-500">没有找到匹配的店铺</p>
+            </div>
+          )}
         </div>
+      </div>
 
-        {/* 底部提示 */}
+      {/* 底部提示 */}
         <div className="fixed bottom-16 left-0 right-0 mx-auto max-w-[375px] bg-white p-4 shadow-lg text-center">
-          <p className="text-sm text-gray-600">店铺信息可能会有变动，请以实际情况为准</p>
-        </div>
+        <p className="text-sm text-gray-600">店铺信息可能会有变动，请以实际情况为准</p>
+      </div>
 
-        {/* 底部聊天输入框 */}
-        <ChatInput />
+      {/* 底部聊天输入框 */}
+      <ChatInput />
       </div>
     </div>
   );

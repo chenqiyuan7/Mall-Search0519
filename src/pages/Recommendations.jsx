@@ -75,46 +75,46 @@ const Recommendations = () => {
     <div className="min-h-screen bg-[#292929] flex justify-center items-start">
       {/* 固定宽度内容容器 */}
       <div className="w-[375px] h-[812px] relative bg-white overflow-y-auto overflow-x-hidden">
-        {/* 顶部导航栏 */}
-        <div className="bg-white p-4 flex items-center shadow-sm sticky top-0 z-10">
-          <Link to="/southern-cuisine-discounts">
-            <ChevronLeft className="h-6 w-6 mr-2" />
-          </Link>
-          <h1 className="text-lg font-bold">网友推荐</h1>
-        </div>
+      {/* 顶部导航栏 */}
+      <div className="bg-white p-4 flex items-center shadow-sm sticky top-0 z-10">
+        <Link to="/southern-cuisine-discounts">
+          <ChevronLeft className="h-6 w-6 mr-2" />
+        </Link>
+        <h1 className="text-lg font-bold">网友推荐</h1>
+      </div>
 
-        {/* 推荐列表 - 双列瀑布流布局 */}
-        <div className="p-4">
-          <div className="grid grid-cols-2 gap-4">
-            {recommendations.map((rec) => (
-              <div 
-                key={rec.id} 
-                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200"
-              >
-                <img 
-                  src={rec.image} 
-                  alt={rec.title} 
-                  className="mx-auto object-cover w-full h-40"
-                />
-                <div className="p-3">
-                  <h3 className="font-bold text-sm line-clamp-2">{rec.title}</h3>
-                  <p className="text-gray-600 mt-1 text-xs line-clamp-2">{rec.description}</p>
-                  
-                  <div className="mt-2 flex justify-between items-center">
-                    <span className="text-gray-500 text-xs">{rec.author}</span>
-                    <div className="flex items-center">
-                      <ThumbsUp className="h-3 w-3 text-pink-500 mr-1" />
-                      <span className="text-gray-500 text-xs">{rec.likes}</span>
-                    </div>
+      {/* 推荐列表 - 双列瀑布流布局 */}
+      <div className="p-4">
+        <div className="grid grid-cols-2 gap-4">
+          {recommendations.map((rec) => (
+            <div 
+              key={rec.id} 
+              className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200"
+            >
+              <img 
+                src={rec.image} 
+                alt={rec.title} 
+                className="mx-auto object-cover w-full h-40"
+              />
+              <div className="p-3">
+                <h3 className="font-bold text-sm line-clamp-2">{rec.title}</h3>
+                <p className="text-gray-600 mt-1 text-xs line-clamp-2">{rec.description}</p>
+                
+                <div className="mt-2 flex justify-between items-center">
+                  <span className="text-gray-500 text-xs">{rec.author}</span>
+                  <div className="flex items-center">
+                    <ThumbsUp className="h-3 w-3 text-pink-500 mr-1" />
+                    <span className="text-gray-500 text-xs">{rec.likes}</span>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
+      </div>
 
-        {/* 底部聊天输入框 */}
-        <ChatInput />
+      {/* 底部聊天输入框 */}
+      <ChatInput />
       </div>
     </div>
   );

@@ -47,74 +47,74 @@ const InteractiveExhibition = () => {
     <div className="min-h-screen bg-[#292929] flex justify-center items-start">
       {/* 固定宽度内容容器 */}
       <div className="w-[375px] h-[812px] relative bg-white overflow-y-auto overflow-x-hidden">
-        {/* 顶部导航栏 */}
-        <div className="bg-white p-4 flex items-center shadow-sm">
-          <Link to="/">
-            <ChevronLeft className="h-6 w-6 mr-2" />
-          </Link>
-          <h1 className="text-lg font-bold">互动展览</h1>
-        </div>
+      {/* 顶部导航栏 */}
+      <div className="bg-white p-4 flex items-center shadow-sm">
+        <Link to="/">
+          <ChevronLeft className="h-6 w-6 mr-2" />
+        </Link>
+        <h1 className="text-lg font-bold">互动展览</h1>
+      </div>
 
-        {/* 筛选选项 */}
-        <div className="p-4 bg-white mb-2">
-          <div className="flex space-x-2 overflow-x-auto pb-2">
-            {filters.map((filter) => (
-              <button 
-                key={filter.id}
-                className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${activeFilter === filter.id ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
-                onClick={() => setActiveFilter(filter.id)}
-              >
-                {filter.name}
-              </button>
-            ))}
-          </div>
+      {/* 筛选选项 */}
+      <div className="p-4 bg-white mb-2">
+        <div className="flex space-x-2 overflow-x-auto pb-2">
+          {filters.map((filter) => (
+            <button 
+              key={filter.id}
+              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${activeFilter === filter.id ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
+              onClick={() => setActiveFilter(filter.id)}
+            >
+              {filter.name}
+            </button>
+          ))}
         </div>
+      </div>
 
-        {/* 展览列表 */}
-        <div className="p-4">
-          <div className="space-y-4">
-            {exhibitions.map((exhibition) => (
-              <div key={exhibition.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
-                <img 
-                  src={exhibition.image} 
-                  alt={exhibition.title} 
-                  className="mx-auto object-cover w-full h-48"
-                />
-                <div className="p-4">
-                  <h3 className="font-bold text-lg">{exhibition.title}</h3>
-                  <p className="text-gray-600 mt-1">{exhibition.description}</p>
-                  
-                  <div className="mt-3 space-y-2">
-                    <div className="flex items-center">
-                      <span className="text-gray-500 w-20">展览地点:</span>
-                      <span>{exhibition.location}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <span className="text-gray-500 w-20">开放时间:</span>
-                      <span>{exhibition.time}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <span className="text-gray-500 w-20">票价:</span>
-                      <span className="text-red-500 font-medium">{exhibition.price}</span>
-                    </div>
+      {/* 展览列表 */}
+      <div className="p-4">
+        <div className="space-y-4">
+          {exhibitions.map((exhibition) => (
+            <div key={exhibition.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
+              <img 
+                src={exhibition.image} 
+                alt={exhibition.title} 
+                className="mx-auto object-cover w-full h-48"
+              />
+              <div className="p-4">
+                <h3 className="font-bold text-lg">{exhibition.title}</h3>
+                <p className="text-gray-600 mt-1">{exhibition.description}</p>
+                
+                <div className="mt-3 space-y-2">
+                  <div className="flex items-center">
+                    <span className="text-gray-500 w-20">展览地点:</span>
+                    <span>{exhibition.location}</span>
                   </div>
-                  
-                  <div className="mt-4 flex justify-between">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm">
-                      展览详情
-                    </button>
-                    <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
-                      立即预约
-                    </button>
+                  <div className="flex items-center">
+                    <span className="text-gray-500 w-20">开放时间:</span>
+                    <span>{exhibition.time}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="text-gray-500 w-20">票价:</span>
+                    <span className="text-red-500 font-medium">{exhibition.price}</span>
                   </div>
                 </div>
+                
+                <div className="mt-4 flex justify-between">
+                  <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm">
+                    展览详情
+                  </button>
+                  <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
+                    立即预约
+                  </button>
+                </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
+      </div>
 
-        {/* 底部聊天输入框 */}
-        <ChatInput />
+      {/* 底部聊天输入框 */}
+      <ChatInput />
       </div>
     </div>
   );

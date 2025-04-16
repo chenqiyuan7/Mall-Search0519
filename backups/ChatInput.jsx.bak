@@ -16,7 +16,7 @@ const ChatInput = () => {
   return (
     <div className="fixed bottom-0 w-full max-w-[375px] p-4 flex flex-col items-center">
       {/* 背景层和选项栏的容器 */}
-      <div className="relative w-full mt-5">
+      <div className="relative w-full">
         {/* 半透明背景 */}
         <div 
           style={{
@@ -33,13 +33,12 @@ const ChatInput = () => {
         ></div>
         
         {/* 选项栏 - 在输入框上方 */}
-        <div className="flex justify-start pl-2 space-x-2 w-full mb-2">
+        <div className="flex justify-center space-x-2 w-full mb-3">
           {quickLinks.map((link) => (
             <Link 
               to={link.path} 
               key={link.id} 
-              className="bg-white text-[#858687] px-3 py-1 rounded-full whitespace-nowrap relative z-10"
-              style={{ fontSize: '11px', lineHeight: '1em' }}
+              className="bg-gray-200 text-black text-xs px-3 py-1 rounded-full whitespace-nowrap relative z-10"
             >
               {link.text}
             </Link>
