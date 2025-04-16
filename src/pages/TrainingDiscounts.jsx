@@ -54,51 +54,54 @@ const TrainingDiscounts = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
-      {/* 顶部导航栏 */}
-      <div className="bg-white p-4 flex items-center shadow-sm">
-        <Link to="/">
-          <ChevronLeft className="h-6 w-6 mr-2" />
-        </Link>
-        <h1 className="text-lg font-bold">儿童培训机构优惠</h1>
-      </div>
+    <div className="min-h-screen bg-[#292929] flex justify-center items-start">
+      {/* 固定宽度内容容器 */}
+      <div className="w-[375px] h-[812px] relative bg-white overflow-y-auto overflow-x-hidden">
+        {/* 顶部导航栏 */}
+        <div className="bg-white p-4 flex items-center shadow-sm">
+          <Link to="/">
+            <ChevronLeft className="h-6 w-6 mr-2" />
+          </Link>
+          <h1 className="text-lg font-bold">儿童培训机构优惠</h1>
+        </div>
 
-      {/* 优惠列表 */}
-      <div className="p-4">
-        <h2 className="text-lg font-bold mb-4">当前优惠活动</h2>
-        
-        <div className="grid grid-cols-2 gap-4">
-          {discountPrograms.map((program) => (
-            <div 
-              key={program.id} 
-              className="bg-white rounded-lg overflow-hidden shadow-sm cursor-pointer transform transition-transform hover:scale-105"
-              onClick={() => handleCardClick(program)}
-            >
-              <img 
-                src={program.image} 
-                alt={program.name} 
-                className="mx-auto object-cover w-full h-32"
-              />
-              <div className="p-3">
-                <h3 className="font-bold text-sm line-clamp-1">{program.name}</h3>
-                <p className="text-red-500 text-xs my-1 line-clamp-2">{program.discount}</p>
-                <p className="text-gray-500 text-xs mb-2">位置: {program.location}</p>
-                <div className="flex justify-end items-center">
-                  <button 
-                    className="bg-green-500 text-white px-3 py-1 rounded text-xs"
-                    onClick={(e) => handleBooking(e, program)}
-                  >
-                    立即预约
-                  </button>
+        {/* 优惠列表 */}
+        <div className="p-4">
+          <h2 className="text-lg font-bold mb-4">当前优惠活动</h2>
+          
+          <div className="grid grid-cols-2 gap-4">
+            {discountPrograms.map((program) => (
+              <div 
+                key={program.id} 
+                className="bg-white rounded-lg overflow-hidden shadow-sm cursor-pointer transform transition-transform hover:scale-105"
+                onClick={() => handleCardClick(program)}
+              >
+                <img 
+                  src={program.image} 
+                  alt={program.name} 
+                  className="mx-auto object-cover w-full h-32"
+                />
+                <div className="p-3">
+                  <h3 className="font-bold text-sm line-clamp-1">{program.name}</h3>
+                  <p className="text-red-500 text-xs my-1 line-clamp-2">{program.discount}</p>
+                  <p className="text-gray-500 text-xs mb-2">位置: {program.location}</p>
+                  <div className="flex justify-end items-center">
+                    <button 
+                      className="bg-green-500 text-white px-3 py-1 rounded text-xs"
+                      onClick={(e) => handleBooking(e, program)}
+                    >
+                      立即预约
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* 底部聊天输入框 */}
-      <ChatInput />
+        {/* 底部聊天输入框 */}
+        <ChatInput />
+      </div>
     </div>
   );
 };

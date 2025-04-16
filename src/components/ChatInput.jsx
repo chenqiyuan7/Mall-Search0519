@@ -14,7 +14,7 @@ const ChatInput = () => {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-black rounded-t-3xl p-4">
+    <div className="fixed bottom-0 w-full max-w-[375px] bg-black rounded-t-3xl p-4">
       <div className="relative">
         <input
           type="text"

@@ -66,85 +66,88 @@ const FamilyRestaurant = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
-      {/* 顶部导航栏 */}
-      <div className="bg-white p-4 flex items-center shadow-sm">
-        <Link to="/">
-          <ChevronLeft className="h-6 w-6 mr-2" />
-        </Link>
-        <h1 className="text-lg font-bold">亲子餐厅</h1>
-      </div>
-
-      {/* 筛选选项 */}
-      <div className="p-4 bg-white mb-2">
-        <div className="flex space-x-2 overflow-x-auto pb-2">
-          {filters.map((filter) => (
-            <button 
-              key={filter.id}
-              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${activeFilter === filter.id ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
-              onClick={() => setActiveFilter(filter.id)}
-            >
-              {filter.name}
-            </button>
-          ))}
+    <div className="min-h-screen bg-[#292929] flex justify-center items-start">
+      {/* 固定宽度内容容器 */}
+      <div className="w-[375px] h-[812px] relative bg-white overflow-y-auto overflow-x-hidden">
+        {/* 顶部导航栏 */}
+        <div className="bg-white p-4 flex items-center shadow-sm">
+          <Link to="/">
+            <ChevronLeft className="h-6 w-6 mr-2" />
+          </Link>
+          <h1 className="text-lg font-bold">亲子餐厅</h1>
         </div>
-      </div>
 
-      {/* 餐厅列表 */}
-      <div className="p-4">
-        <div className="space-y-4">
-          {filteredRestaurants.map((restaurant) => (
-            <div key={restaurant.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
-              <img 
-                src={restaurant.image} 
-                alt={restaurant.name} 
-                className="mx-auto object-cover w-full h-48"
-              />
-              <div className="p-4">
-                <div className="flex justify-between items-start">
-                  <h3 className="font-bold text-lg">{restaurant.name}</h3>
-                  <div className="flex items-center">
-                    <Star className="h-4 w-4 text-yellow-400 mr-1" fill="#FACC15" />
-                    <span>{restaurant.rating}</span>
+        {/* 筛选选项 */}
+        <div className="p-4 bg-white mb-2">
+          <div className="flex space-x-2 overflow-x-auto pb-2">
+            {filters.map((filter) => (
+              <button 
+                key={filter.id}
+                className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${activeFilter === filter.id ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
+                onClick={() => setActiveFilter(filter.id)}
+              >
+                {filter.name}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* 餐厅列表 */}
+        <div className="p-4">
+          <div className="space-y-4">
+            {filteredRestaurants.map((restaurant) => (
+              <div key={restaurant.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
+                <img 
+                  src={restaurant.image} 
+                  alt={restaurant.name} 
+                  className="mx-auto object-cover w-full h-48"
+                />
+                <div className="p-4">
+                  <div className="flex justify-between items-start">
+                    <h3 className="font-bold text-lg">{restaurant.name}</h3>
+                    <div className="flex items-center">
+                      <Star className="h-4 w-4 text-yellow-400 mr-1" fill="#FACC15" />
+                      <span>{restaurant.rating}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-2 flex items-center text-sm text-gray-600">
+                    <span>{restaurant.priceRange}</span>
+                    <span className="mx-2">|</span>
+                    <Clock className="h-4 w-4 mr-1" />
+                    <span>等待{restaurant.waitTime}</span>
+                  </div>
+                  
+                  <div className="mt-2 flex items-center">
+                    <MapPin className="h-4 w-4 mr-1" />
+                    <span className="text-gray-600 text-sm">{restaurant.address}</span>
+                  </div>
+                  
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {restaurant.features.map((feature, index) => (
+                      <span key={index} className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <div className="mt-4 flex justify-between">
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm">
+                      查看菜单
+                    </button>
+                    <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
+                      立即预订
+                    </button>
                   </div>
                 </div>
-                
-                <div className="mt-2 flex items-center text-sm text-gray-600">
-                  <span>{restaurant.priceRange}</span>
-                  <span className="mx-2">|</span>
-                  <Clock className="h-4 w-4 mr-1" />
-                  <span>等待{restaurant.waitTime}</span>
-                </div>
-                
-                <div className="mt-2 flex items-center">
-                  <MapPin className="h-4 w-4 mr-1" />
-                  <span className="text-gray-600 text-sm">{restaurant.address}</span>
-                </div>
-                
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {restaurant.features.map((feature, index) => (
-                    <span key={index} className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
-                      {feature}
-                    </span>
-                  ))}
-                </div>
-                
-                <div className="mt-4 flex justify-between">
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm">
-                    查看菜单
-                  </button>
-                  <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
-                    立即预订
-                  </button>
-                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* 底部聊天输入框 */}
-      <ChatInput />
+        {/* 底部聊天输入框 */}
+        <ChatInput />
+      </div>
     </div>
   );
 };

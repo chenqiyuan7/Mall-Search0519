@@ -66,79 +66,82 @@ const KidsActivities = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
-      {/* 顶部导航栏 */}
-      <div className="bg-white p-4 flex items-center shadow-sm">
-        <Link to="/">
-          <ChevronLeft className="h-6 w-6 mr-2" />
-        </Link>
-        <h1 className="text-lg font-bold">省心遛娃</h1>
-      </div>
-
-      {/* 筛选选项 */}
-      <div className="p-4 bg-white mb-2">
-        <div className="flex space-x-2 overflow-x-auto pb-2">
-          {filters.map((filter) => (
-            <button 
-              key={filter.id}
-              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${activeFilter === filter.id ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
-              onClick={() => setActiveFilter(filter.id)}
-            >
-              {filter.name}
-            </button>
-          ))}
+    <div className="min-h-screen bg-[#292929] flex justify-center items-start">
+      {/* 固定宽度内容容器 */}
+      <div className="w-[375px] h-[812px] relative bg-white overflow-y-auto overflow-x-hidden">
+        {/* 顶部导航栏 */}
+        <div className="bg-white p-4 flex items-center shadow-sm">
+          <Link to="/">
+            <ChevronLeft className="h-6 w-6 mr-2" />
+          </Link>
+          <h1 className="text-lg font-bold">省心遛娃</h1>
         </div>
-      </div>
 
-      {/* 活动列表 */}
-      <div className="p-4">
-        <div className="space-y-4">
-          {filteredActivities.map((activity) => (
-            <div key={activity.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
-              <img 
-                src={activity.image} 
-                alt={activity.name} 
-                className="mx-auto object-cover w-full h-48"
-              />
-              <div className="p-4">
-                <h3 className="font-bold text-lg">{activity.name}</h3>
-                <p className="text-gray-600 mt-1">{activity.description}</p>
-                
-                <div className="mt-3 space-y-2">
-                  <div className="flex items-center">
-                    <span className="text-gray-500 w-20">活动时间:</span>
-                    <span>{activity.time}</span>
+        {/* 筛选选项 */}
+        <div className="p-4 bg-white mb-2">
+          <div className="flex space-x-2 overflow-x-auto pb-2">
+            {filters.map((filter) => (
+              <button 
+                key={filter.id}
+                className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${activeFilter === filter.id ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
+                onClick={() => setActiveFilter(filter.id)}
+              >
+                {filter.name}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* 活动列表 */}
+        <div className="p-4">
+          <div className="space-y-4">
+            {filteredActivities.map((activity) => (
+              <div key={activity.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
+                <img 
+                  src={activity.image} 
+                  alt={activity.name} 
+                  className="mx-auto object-cover w-full h-48"
+                />
+                <div className="p-4">
+                  <h3 className="font-bold text-lg">{activity.name}</h3>
+                  <p className="text-gray-600 mt-1">{activity.description}</p>
+                  
+                  <div className="mt-3 space-y-2">
+                    <div className="flex items-center">
+                      <span className="text-gray-500 w-20">活动时间:</span>
+                      <span>{activity.time}</span>
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-gray-500 w-20">活动地点:</span>
+                      <span>{activity.location}</span>
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-gray-500 w-20">适合年龄:</span>
+                      <span>{activity.ageRange}</span>
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-gray-500 w-20">活动费用:</span>
+                      <span className="text-red-500 font-medium">{activity.price}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center">
-                    <span className="text-gray-500 w-20">活动地点:</span>
-                    <span>{activity.location}</span>
+                  
+                  <div className="mt-4 flex justify-between">
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm">
+                      活动详情
+                    </button>
+                    <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
+                      立即预约
+                    </button>
                   </div>
-                  <div className="flex items-center">
-                    <span className="text-gray-500 w-20">适合年龄:</span>
-                    <span>{activity.ageRange}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="text-gray-500 w-20">活动费用:</span>
-                    <span className="text-red-500 font-medium">{activity.price}</span>
-                  </div>
-                </div>
-                
-                <div className="mt-4 flex justify-between">
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm">
-                    活动详情
-                  </button>
-                  <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
-                    立即预约
-                  </button>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* 底部聊天输入框 */}
-      <ChatInput />
+        {/* 底部聊天输入框 */}
+        <ChatInput />
+      </div>
     </div>
   );
 };
