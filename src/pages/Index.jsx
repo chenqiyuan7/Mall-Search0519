@@ -8,13 +8,13 @@ const Index = () => {
     {
       id: 1,
       question: "哪些儿童培训机构有羊毛可以薅？",
-      count: "928人问过",
+      count: "1890人问过",
       path: "/training-discounts"
     },
     {
       id: 2,
       question: "看看适合儿童的餐厅当前排队情况",
-      count: "928人问过", 
+      count: "679人问过", 
       path: "/restaurant-queue"
     },
     {
@@ -104,8 +104,9 @@ const Index = () => {
 
           {/* 智能助理及以下模块内容区域 - 上移60px */}
           <div className="mt-[-60px] pb-16">
-            {/* 智能助理介绍区域 */}
-            <div className="flex items-center py-4 pl-0 pr-6 mb-[-36px] relative">
+            {/* 智能助理介绍区域 - 包含助理形象和介绍文字 */}
+            <div className="flex items-center py-4 pl-0 pr-6 mb-[-30px] relative">
+              {/* 助理形象容器 - 固定宽高比的图片容器 */}
               <div className="w-[107px] h-[149px] flex items-center justify-center">
                 <img 
                   src="/艾小团x@2x.png" 
@@ -122,21 +123,40 @@ const Index = () => {
             {/* 问题和推荐列表区域 */}
             <div className="px-3 mt-0">
               {/* 大家都在问 */}
-              <div className="bg-white rounded-[12px] p-3 mb-4">
-                {/* 这是一个白色背景的卡片容器,带有圆角和内边距,底部有外边距 */}
-                <div className="inline-block bg-gray-100 px-4 py-1 rounded-full mb-4">
-                  {/* 这是一个灰色背景的标题容器,呈现胶囊形状 */}
-                  <h2 className="text-lg font-bold">大家都在问</h2>
+              <div className="bg-white rounded-[16px] pt-0 pl-0 pr-0 pb-3 mb-2">
+                {/* 使用图片替代文字标题和胶囊背景 */}
+                <div className="flex mb-1.5">
+                  <img 
+                    src="/大家都在问@2x.png" 
+                    alt="大家都在问" 
+                    className="h-[38px] object-contain"
+                  />
                 </div>
                 
-                <div className="space-y-4">
+                {/* 热门问题列表容器 */}
+                <div className="space-y-4 px-3">
+                  {/* 遍历渲染每个热门问题项 */}
                   {popularQuestions.map((item) => (
                     <div key={item.id} className="flex justify-between items-center">
+                      {/* 问题标题和提问数量 */}
                       <div>
                         <p className="text-[16px] font-medium">{item.question}</p>
-                        <p className="text-sm text-gray-500">{item.count}</p>
+                        <p style={{ color: '#858687', fontSize: '11px' }}>{item.count}</p>
                       </div>
-                      <Link to={item.path} className="bg-green-400 text-white px-4 py-2 rounded-full">
+                      {/* "问问"按钮,点击跳转到对应页面 */}
+                      <Link 
+                        to={item.path} 
+                        className="relative flex items-center justify-center px-4 rounded-full"
+                        style={{
+                          backgroundImage: 'url(/butn.png)',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          color: '#000000',
+                          fontSize: '14px',
+                          height: '28px',
+                          fontWeight: '500'
+                        }}
+                      >
                         问问
                       </Link>
                     </div>
@@ -145,24 +165,31 @@ const Index = () => {
               </div>
 
               {/* 热门问题 */}
-              <div className="bg-white rounded-[12px] p-3">
-                <div className="inline-block bg-gray-100 px-4 py-1 rounded-full mb-4">
-                  <h2 className="text-lg font-bold">热门问题</h2>
+              <div className="bg-white rounded-[16px] pt-0 pl-0 pr-0 pb-3 mb-4">
+                {/* 使用图片替代文字标题和胶囊背景 */}
+                <div className="flex mb-1.5">
+                  <img 
+                    src="/热门问题@2x.png" 
+                    alt="热门问题" 
+                    className="h-[38px] object-contain"
+                  />
                 </div>
                 
-                <div className="grid grid-cols-3 gap-4">
-                  {hotTopics.map((topic) => (
-                    <Link to={topic.path} key={topic.id} className="text-center">
-                      <div className="bg-gray-50 p-2 rounded-lg">
-                        <div className="flex justify-center">
+                <div className="grid grid-cols-3 gap-1.5 px-3">
+                  {hotTopics.map((topic, index) => (
+                    <Link to={topic.path} key={topic.id} className="text-left">
+                      <div className="bg-gray-50 p-2 rounded-lg h-[86px] flex flex-col relative overflow-visible">
+                        <h3 className="font-medium text-left">{topic.title}</h3>
+                        <p style={{ color: '#858687', fontSize: '11px' }} className="text-left mb-1">{topic.count}</p>
+                        <div className="absolute top-0 right-0 h-full">
                           <img 
-                            src={topic.icon} 
+                            src={index === 0 ? "/互动展览ICON@2x.png" : 
+                                 index === 1 ? "/亲子餐厅@2x.png" : 
+                                              "/省心遛娃@2x.png"} 
                             alt={topic.title} 
-                            className="mx-auto object-cover w-16 h-16"
+                            className="h-[91px] w-auto object-contain"
                           />
                         </div>
-                        <h3 className="font-medium mt-2">{topic.title}</h3>
-                        <p className="text-xs text-gray-500">{topic.count}</p>
                       </div>
                     </Link>
                   ))}

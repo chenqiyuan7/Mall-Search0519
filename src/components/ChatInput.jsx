@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { MessageSquare } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const ChatInput = () => {
@@ -38,7 +37,7 @@ const ChatInput = () => {
             <Link 
               to={link.path} 
               key={link.id} 
-              className="bg-white text-[#858687] px-3 py-1 rounded-full whitespace-nowrap relative z-10"
+              className="bg-white text-[#858687] px-1.5 py-1 rounded-full whitespace-nowrap relative z-10"
               style={{ fontSize: '11px', lineHeight: '1em' }}
             >
               {link.text}
@@ -50,16 +49,22 @@ const ChatInput = () => {
       {/* 悬浮输入框 */}
       <div className="relative w-full">
         <div className="relative w-full">
-          <div className="bg-black rounded-full flex items-center px-3 py-3 shadow-lg w-full">
-            <div className="bg-green-400 rounded-full p-2 mr-3">
-              <MessageSquare className="h-5 w-5 text-black" />
+          <div className="bg-black rounded-full flex items-center px-0.5 py-0.5 shadow-lg w-full">
+            <div className="flex items-center justify-center ml-[3px]" style={{ padding: '0' }}>
+              <img 
+                src="/音频圈@2x.png" 
+                alt="音频图标" 
+                className="h-[52px] w-[52px] object-contain"
+                style={{ margin: '2px 5px 2px 5px' }}
+              />
             </div>
             <input
               type="text"
               placeholder="逛商场就问艾小团"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              className="bg-transparent text-white w-full focus:outline-none"
+              className="bg-transparent w-full focus:outline-none ml-[10px]"
+              style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '16px' }}
             />
           </div>
         </div>
