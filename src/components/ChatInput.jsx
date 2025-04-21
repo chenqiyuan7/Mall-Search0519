@@ -13,7 +13,7 @@ const ChatInput = () => {
   ];
 
   return (
-    <div className="fixed bottom-0 w-full max-w-[375px] p-4 flex flex-col items-center">
+    <div className="fixed bottom-0 left-0 right-0 p-4 flex flex-col items-center" style={{ maxWidth: "inherit" }}>
       {/* 背景层和选项栏的容器 */}
       <div className="relative w-full mt-5">
         {/* 半透明背景 */}
@@ -32,7 +32,7 @@ const ChatInput = () => {
         ></div>
         
         {/* 选项栏 - 在输入框上方 */}
-        <div className="flex justify-start pl-2 space-x-2 w-full mb-2">
+        <div className="flex justify-start pl-2 space-x-2 w-full mb-2 overflow-x-auto">
           {quickLinks.map((link) => (
             <Link 
               to={link.path} 

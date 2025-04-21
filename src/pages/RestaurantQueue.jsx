@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, Clock, Users, MapPin, Star } from "lucide-react";
+import { ChevronLeft, Clock, Users, MapPin, Star, User, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
@@ -86,21 +86,43 @@ const RestaurantQueue = () => {
     return false;
   });
 
+  // 定义隐藏滚动条的样式
+  const noScrollbarStyle = {
+    scrollbarWidth: 'none',  /* Firefox */
+    msOverflowStyle: 'none',  /* IE and Edge */
+  };
+
+  // 创建隐藏Webkit滚动条的CSS样式
+  const hideScrollbarCSS = `
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+  `;
+
   return (
     <div className="min-h-screen bg-[#292929] flex justify-center items-start">
+      {/* 添加隐藏滚动条的CSS */}
+      <style>{hideScrollbarCSS}</style>
+      
       {/* 固定宽度内容容器 */}
-      <div className="w-[375px] h-[812px] relative bg-white overflow-y-auto overflow-x-hidden">
-      {/* 顶部导航栏 */}
-      <div className="bg-white p-4 flex items-center shadow-sm">
+      <div 
+        className="w-[375px] h-[812px] relative bg-[#F5F5F5] overflow-y-auto overflow-x-hidden no-scrollbar" 
+        style={noScrollbarStyle}
+      >
+      {/* 顶部导航栏 - 固定在顶部 */}
+      <div className="bg-white p-4 flex items-center shadow-sm fixed top-0 w-[375px] z-10">
         <Link to="/">
           <ChevronLeft className="h-6 w-6 mr-2" />
         </Link>
         <h1 className="text-lg font-bold">儿童餐厅排队情况</h1>
       </div>
+      
+      {/* 为固定导航栏添加空白填充，防止内容被遮挡 */}
+      <div className="h-[60px]"></div>
 
       {/* 筛选选项 */}
       <div className="p-4 bg-white mb-2">
-        <div className="flex space-x-2 overflow-x-auto pb-2">
+        <div className="flex space-x-2 overflow-x-auto no-scrollbar">
           <button 
             className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${filter === 'all' ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
             onClick={() => setFilter('all')}
@@ -123,19 +145,19 @@ const RestaurantQueue = () => {
             className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${filter === 'long' ? 'bg-red-500 text-white' : 'bg-gray-100'}`}
             onClick={() => setFilter('long')}
           >
-            等待时间 > 30分钟
+            等待时间 &gt; 30分钟
           </button>
         </div>
       </div>
 
       {/* 餐厅列表 - 双列瀑布流布局 */}
-      <div className="p-4">
+      <div className="px-3 py-4">
         {loading ? (
           <div className="flex justify-center items-center h-40">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-2">
             {filteredRestaurants.map((restaurant) => (
               <div key={restaurant.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
                 <img 

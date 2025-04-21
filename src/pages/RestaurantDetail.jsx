@@ -84,13 +84,16 @@ const RestaurantDetail = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* 顶部导航栏 */}
-      <div className="bg-white p-4 flex items-center">
+      {/* 顶部导航栏 - 固定在顶部 */}
+      <div className="bg-white p-4 flex items-center fixed top-0 w-full z-10 shadow-sm">
         <button onClick={handleBack}>
           <ChevronLeft className="h-6 w-6 mr-2" />
         </button>
         <h1 className="text-lg">AI帮你找</h1>
       </div>
+      
+      {/* 为固定导航栏添加空白填充 */}
+      <div className="h-[60px]"></div>
 
       {/* 店铺信息 */}
       <div className="relative">

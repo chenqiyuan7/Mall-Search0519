@@ -65,21 +65,43 @@ const FamilyRestaurant = () => {
     return activeFilter === "all" || restaurant.cuisine === activeFilter;
   });
 
+  // 定义隐藏滚动条的样式
+  const noScrollbarStyle = {
+    scrollbarWidth: 'none',  /* Firefox */
+    msOverflowStyle: 'none',  /* IE and Edge */
+  };
+
+  // 创建隐藏Webkit滚动条的CSS样式
+  const hideScrollbarCSS = `
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+  `;
+
   return (
     <div className="min-h-screen bg-[#292929] flex justify-center items-start">
+      {/* 添加隐藏滚动条的CSS */}
+      <style>{hideScrollbarCSS}</style>
+      
       {/* 固定宽度内容容器 */}
-      <div className="w-[375px] h-[812px] relative bg-white overflow-y-auto overflow-x-hidden">
-        {/* 顶部导航栏 */}
-        <div className="bg-white p-4 flex items-center shadow-sm">
+      <div 
+        className="w-[375px] h-[812px] relative bg-[#F5F5F5] overflow-y-auto overflow-x-hidden no-scrollbar" 
+        style={noScrollbarStyle}
+      >
+        {/* 顶部导航栏 - 固定在顶部 */}
+        <div className="bg-white p-4 flex items-center shadow-sm fixed top-0 w-[375px] z-10">
           <Link to="/">
             <ChevronLeft className="h-6 w-6 mr-2" />
           </Link>
           <h1 className="text-lg font-bold">亲子餐厅</h1>
         </div>
+        
+        {/* 为固定导航栏添加空白填充 */}
+        <div className="h-[60px]"></div>
 
         {/* 筛选选项 */}
         <div className="p-4 bg-white mb-2">
-          <div className="flex space-x-2 overflow-x-auto pb-2">
+          <div className="flex space-x-2 overflow-x-auto no-scrollbar" style={noScrollbarStyle}>
             {filters.map((filter) => (
               <button 
                 key={filter.id}

@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -65,21 +66,43 @@ const KidsActivities = () => {
     return activeFilter === "all" || activity.type === activeFilter;
   });
 
+  // 定义隐藏滚动条的样式
+  const noScrollbarStyle = {
+    scrollbarWidth: 'none',  /* Firefox */
+    msOverflowStyle: 'none',  /* IE and Edge */
+  };
+
+  // 创建隐藏Webkit滚动条的CSS样式
+  const hideScrollbarCSS = `
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+  `;
+
   return (
     <div className="min-h-screen bg-[#292929] flex justify-center items-start">
+      {/* 添加隐藏滚动条的CSS */}
+      <style>{hideScrollbarCSS}</style>
+      
       {/* 固定宽度内容容器 */}
-      <div className="w-[375px] h-[812px] relative bg-white overflow-y-auto overflow-x-hidden">
-      {/* 顶部导航栏 */}
-      <div className="bg-white p-4 flex items-center shadow-sm">
+      <div 
+        className="w-[375px] h-[812px] relative bg-[#F5F5F5] overflow-y-auto overflow-x-hidden no-scrollbar" 
+        style={noScrollbarStyle}
+      >
+      {/* 顶部导航栏 - 固定在顶部 */}
+      <div className="bg-white p-4 flex items-center shadow-sm fixed top-0 w-[375px] z-10">
         <Link to="/">
           <ChevronLeft className="h-6 w-6 mr-2" />
         </Link>
         <h1 className="text-lg font-bold">省心遛娃</h1>
       </div>
+      
+      {/* 为固定导航栏添加空白填充 */}
+      <div className="h-[60px]"></div>
 
       {/* 筛选选项 */}
       <div className="p-4 bg-white mb-2">
-        <div className="flex space-x-2 overflow-x-auto pb-2">
+        <div className="flex space-x-2 overflow-x-auto no-scrollbar" style={noScrollbarStyle}>
           {filters.map((filter) => (
             <button 
               key={filter.id}
@@ -96,7 +119,7 @@ const KidsActivities = () => {
       <div className="p-4">
         <div className="space-y-4">
           {filteredActivities.map((activity) => (
-            <div key={activity.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
+            <div key={activity.id} className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-sm hover:bg-white hover:opacity-100 cursor-default">
               <img 
                 src={activity.image} 
                 alt={activity.name} 
@@ -126,10 +149,10 @@ const KidsActivities = () => {
                 </div>
                 
                 <div className="mt-4 flex justify-between">
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm">
+                  <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-500">
                     活动详情
                   </button>
-                  <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
+                  <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-500">
                     立即预约
                   </button>
                 </div>

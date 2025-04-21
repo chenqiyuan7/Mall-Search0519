@@ -71,10 +71,29 @@ const Recommendations = () => {
     }
   ];
 
+  // 定义隐藏滚动条的样式
+  const noScrollbarStyle = {
+    scrollbarWidth: 'none',  /* Firefox */
+    msOverflowStyle: 'none',  /* IE and Edge */
+  };
+
+  // 创建隐藏Webkit滚动条的CSS样式
+  const hideScrollbarCSS = `
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+  `;
+
   return (
     <div className="min-h-screen bg-[#292929] flex justify-center items-start">
+      {/* 添加隐藏滚动条的CSS */}
+      <style>{hideScrollbarCSS}</style>
+      
       {/* 固定宽度内容容器 */}
-      <div className="w-[375px] h-[812px] relative bg-white overflow-y-auto overflow-x-hidden">
+      <div 
+        className="w-[375px] h-[812px] relative bg-[#F5F5F5] overflow-y-auto overflow-x-hidden no-scrollbar" 
+        style={noScrollbarStyle}
+      >
       {/* 顶部导航栏 */}
       <div className="bg-white p-4 flex items-center shadow-sm sticky top-0 z-10">
         <Link to="/southern-cuisine-discounts">
@@ -84,8 +103,8 @@ const Recommendations = () => {
       </div>
 
       {/* 推荐列表 - 双列瀑布流布局 */}
-      <div className="p-4">
-        <div className="grid grid-cols-2 gap-4">
+      <div className="px-3 py-4">
+        <div className="grid grid-cols-2 gap-2">
           {recommendations.map((rec) => (
             <div 
               key={rec.id} 
