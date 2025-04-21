@@ -1,5 +1,6 @@
 import { HomeIcon } from "lucide-react";
 import Index from "./pages/Index.jsx";
+import EntryPage from "./pages/EntryPage.jsx";
 import TrainingDiscounts from "./pages/TrainingDiscounts.jsx";
 import RestaurantQueue from "./pages/RestaurantQueue.jsx";
 import SouthernCuisineDiscounts from "./pages/SouthernCuisineDiscounts.jsx";
@@ -16,8 +17,13 @@ import PutianRestaurant from "./pages/PutianRestaurant.jsx";
 
 export const navItems = [
   {
-    title: "Home",
+    title: "Entry",
     to: "/",
+    page: <EntryPage />,
+  },
+  {
+    title: "Home",
+    to: "/home",
     icon: <HomeIcon className="h-4 w-4" />,
     page: <Index />,
   },

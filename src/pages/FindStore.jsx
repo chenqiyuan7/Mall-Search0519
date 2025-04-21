@@ -107,7 +107,7 @@ const FindStore = () => {
       >
       {/* 顶部导航栏 - 固定在顶部 */}
       <div className="bg-white p-4 flex items-center shadow-sm fixed top-0 w-[375px] z-10">
-        <Link to="/">
+        <Link to="/home">
           <ChevronLeft className="h-6 w-6 mr-2" />
         </Link>
         <h1 className="text-lg font-bold">找店铺</h1>

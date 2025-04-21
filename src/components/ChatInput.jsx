@@ -52,7 +52,7 @@ const ChatInput = () => {
           <div className="bg-black rounded-full flex items-center px-0.5 py-0.5 shadow-lg w-full">
             <div className="flex items-center justify-center ml-[3px]" style={{ padding: '0' }}>
               <img 
-                src="/音频圈@2x.png" 
+                src="./音频圈@2x.png" 
                 alt="音频图标" 
                 className="h-[52px] w-[52px] object-contain"
                 style={{ margin: '2px 5px 2px 5px' }}
