@@ -63,6 +63,16 @@ const RestaurantQueue = () => {
             rating: 4.9,
             tags: ["公主主题", "下午茶", "生日派对"],
             image: "https://nocode.meituan.com/photo/search?keyword=princess,restaurant&width=300&height=200"
+          },
+          {
+            id: 6,
+            name: "动物农场餐厅",
+            waitTime: 20,
+            waitCount: 8,
+            location: "2楼 F区 218",
+            rating: 4.7,
+            tags: ["农场主题", "亲子互动", "有机食材"],
+            image: "https://nocode.meituan.com/photo/search?keyword=farm,animals,restaurant&width=300&height=300"
           }
         ]);
         setLoading(false);
@@ -124,25 +134,25 @@ const RestaurantQueue = () => {
       <div className="p-4 bg-white mb-2">
         <div className="flex space-x-2 overflow-x-auto no-scrollbar">
           <button 
-            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${filter === 'all' ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
+            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${filter === 'all' ? 'bg-[#FFDD00] text-[#111111] font-bold' : 'bg-gray-100 text-[#555555]'}`}
             onClick={() => setFilter('all')}
           >
             全部餐厅
           </button>
           <button 
-            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${filter === 'short' ? 'bg-green-500 text-white' : 'bg-gray-100'}`}
+            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${filter === 'short' ? 'bg-[#FFDD00] text-[#111111] font-bold' : 'bg-gray-100 text-[#555555]'}`}
             onClick={() => setFilter('short')}
           >
             等待时间 ≤ 15分钟
           </button>
           <button 
-            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${filter === 'medium' ? 'bg-yellow-500 text-white' : 'bg-gray-100'}`}
+            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${filter === 'medium' ? 'bg-[#FFDD00] text-[#111111] font-bold' : 'bg-gray-100 text-[#555555]'}`}
             onClick={() => setFilter('medium')}
           >
             等待时间 15-30分钟
           </button>
           <button 
-            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${filter === 'long' ? 'bg-red-500 text-white' : 'bg-gray-100'}`}
+            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${filter === 'long' ? 'bg-[#FFDD00] text-[#111111] font-bold' : 'bg-gray-100 text-[#555555]'}`}
             onClick={() => setFilter('long')}
           >
             等待时间 &gt; 30分钟
@@ -151,7 +161,7 @@ const RestaurantQueue = () => {
       </div>
 
       {/* 餐厅列表 - 双列瀑布流布局 */}
-      <div className="px-3 py-4">
+      <div className="px-3 pt-2 pb-4">
         {loading ? (
           <div className="flex justify-center items-center h-40">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
@@ -160,11 +170,13 @@ const RestaurantQueue = () => {
           <div className="grid grid-cols-2 gap-2">
             {filteredRestaurants.map((restaurant) => (
               <div key={restaurant.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
-                <img 
-                  src={restaurant.image} 
-                  alt={restaurant.name} 
-                  className="mx-auto object-cover w-full h-32"
-                />
+                <div className="aspect-square w-full">
+                  <img 
+                    src={restaurant.image} 
+                    alt={restaurant.name} 
+                    className="mx-auto object-cover w-full h-full"
+                  />
+                </div>
                 <div className="p-3">
                   <div className="flex justify-between items-start">
                     <h3 className="font-bold text-sm line-clamp-1">{restaurant.name}</h3>
@@ -200,10 +212,6 @@ const RestaurantQueue = () => {
                       </span>
                     ))}
                   </div>
-                  
-                  <button className="w-full bg-green-500 text-white text-xs px-3 py-1.5 rounded mt-2">
-                    查看菜单
-                  </button>
                 </div>
               </div>
             ))}
