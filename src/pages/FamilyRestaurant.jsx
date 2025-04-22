@@ -100,12 +100,12 @@ const FamilyRestaurant = () => {
         <div className="h-[60px]"></div>
 
         {/* 筛选选项 */}
-        <div className="p-4 bg-white mb-2">
+        <div className="p-4 bg-white mb-[8px]">
           <div className="flex space-x-2 overflow-x-auto no-scrollbar" style={noScrollbarStyle}>
             {filters.map((filter) => (
               <button 
                 key={filter.id}
-                className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${activeFilter === filter.id ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
+                className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${activeFilter === filter.id ? 'bg-[#FFDD00] text-[#111111] font-bold' : 'bg-gray-100 text-[#555555]'}`}
                 onClick={() => setActiveFilter(filter.id)}
               >
                 {filter.name}
@@ -115,49 +115,54 @@ const FamilyRestaurant = () => {
         </div>
 
         {/* 餐厅列表 */}
-        <div className="p-4">
-          <div className="space-y-4">
+        <div className="px-3 pt-2 pb-3">
+          <div className="space-y-2">
             {filteredRestaurants.map((restaurant) => (
-              <div key={restaurant.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
-                <img 
-                  src={restaurant.image} 
-                  alt={restaurant.name} 
-                  className="mx-auto object-cover w-full h-48"
-                />
-                <div className="p-4">
+              <div key={restaurant.id} className="bg-white rounded-lg overflow-hidden shadow-sm flex p-3">
+                <div className="w-1/3 flex flex-col">
+                  <div className="aspect-square w-full">
+                    <img 
+                      src={restaurant.image} 
+                      alt={restaurant.name} 
+                      className="object-cover w-full h-full rounded-lg"
+                    />
+                  </div>
+                  <div className="flex-grow"></div>
+                </div>
+                <div className="ml-3 flex-1 flex flex-col">
                   <div className="flex justify-between items-start">
-                    <h3 className="font-bold text-lg">{restaurant.name}</h3>
+                    <h3 className="font-bold text-base text-left">{restaurant.name}</h3>
                     <div className="flex items-center">
-                      <Star className="h-4 w-4 text-yellow-400 mr-1" fill="#FACC15" />
-                      <span>{restaurant.rating}</span>
+                      <Star className="h-3 w-3 text-yellow-400 mr-1" fill="#FACC15" />
+                      <span className="text-xs">{restaurant.rating}</span>
                     </div>
                   </div>
                   
-                  <div className="mt-2 flex items-center text-sm text-gray-600">
+                  <div className="mt-1 flex items-center text-xs text-gray-600">
                     <span>{restaurant.priceRange}</span>
                     <span className="mx-2">|</span>
-                    <Clock className="h-4 w-4 mr-1" />
+                    <Clock className="h-3 w-3 mr-1" />
                     <span>等待{restaurant.waitTime}</span>
                   </div>
                   
-                  <div className="mt-2 flex items-center">
-                    <MapPin className="h-4 w-4 mr-1" />
-                    <span className="text-gray-600 text-sm">{restaurant.address}</span>
+                  <div className="mt-1 flex items-center">
+                    <span className="text-gray-500 text-xs text-left">地址:</span>
+                    <span className="text-xs text-left ml-[6px]">{restaurant.address}</span>
                   </div>
                   
-                  <div className="mt-3 flex flex-wrap gap-2">
+                  <div className="mt-2 flex flex-wrap gap-1">
                     {restaurant.features.map((feature, index) => (
-                      <span key={index} className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
+                      <span key={index} className="bg-gray-100 text-gray-800 text-xs px-1.5 py-0.5 rounded">
                         {feature}
                       </span>
                     ))}
                   </div>
                   
-                  <div className="mt-4 flex justify-between">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm">
+                  <div className="mt-2 flex space-x-2">
+                    <button className="bg-blue-500 text-white px-2 py-1 rounded text-xs">
                       查看菜单
                     </button>
-                    <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
+                    <button className="bg-green-500 text-white px-2 py-1 rounded text-xs">
                       立即预订
                     </button>
                   </div>

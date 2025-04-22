@@ -33,6 +33,24 @@ const InteractiveExhibition = () => {
       time: "10:00-19:00",
       price: "78元/人",
       image: "https://nocode.meituan.com/photo/search?keyword=dinosaur,exhibition&width=300&height=200"
+    },
+    {
+      id: 4,
+      title: "艺术光影馆",
+      description: "沉浸式数字艺术光影体验",
+      location: "2楼 展厅D",
+      time: "10:30-20:30",
+      price: "108元/人",
+      image: "https://nocode.meituan.com/photo/search?keyword=digital,art,exhibition&width=300&height=300"
+    },
+    {
+      id: 5,
+      title: "科技未来馆",
+      description: "前沿科技互动体验展",
+      location: "6楼 展厅E",
+      time: "09:00-18:00",
+      price: "128元/人",
+      image: "https://nocode.meituan.com/photo/search?keyword=future,technology,exhibition&width=300&height=300"
     }
   ];
 
@@ -78,12 +96,12 @@ const InteractiveExhibition = () => {
       <div className="h-[60px]"></div>
 
       {/* 筛选选项 */}
-      <div className="p-4 bg-white mb-2">
+      <div className="p-4 bg-white mb-[8px]">
         <div className="flex space-x-2 overflow-x-auto no-scrollbar" style={noScrollbarStyle}>
           {filters.map((filter) => (
             <button 
               key={filter.id}
-              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${activeFilter === filter.id ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
+              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${activeFilter === filter.id ? 'bg-[#FFDD00] text-[#111111] font-bold' : 'bg-gray-100 text-[#555555]'}`}
               onClick={() => setActiveFilter(filter.id)}
             >
               {filter.name}
@@ -93,39 +111,44 @@ const InteractiveExhibition = () => {
       </div>
 
       {/* 展览列表 */}
-      <div className="p-4">
-        <div className="space-y-4">
+      <div className="px-3 pt-2 pb-3">
+        <div className="space-y-2">
           {exhibitions.map((exhibition) => (
-            <div key={exhibition.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
-              <img 
-                src={exhibition.image} 
-                alt={exhibition.title} 
-                className="mx-auto object-cover w-full h-48"
-              />
-              <div className="p-4">
-                <h3 className="font-bold text-lg">{exhibition.title}</h3>
-                <p className="text-gray-600 mt-1">{exhibition.description}</p>
+            <div key={exhibition.id} className="bg-white rounded-lg overflow-hidden shadow-sm flex p-3">
+              <div className="w-1/3 flex flex-col">
+                <div className="aspect-square w-full">
+                  <img 
+                    src={exhibition.image} 
+                    alt={exhibition.title} 
+                    className="object-cover w-full h-full rounded-lg"
+                  />
+                </div>
+                <div className="flex-grow"></div>
+              </div>
+              <div className="ml-3 flex-1 flex flex-col">
+                <h3 className="font-bold text-base text-left">{exhibition.title}</h3>
+                <p className="text-gray-600 text-xs mt-1 text-left">{exhibition.description}</p>
                 
-                <div className="mt-3 space-y-2">
+                <div className="mt-2 space-y-1">
                   <div className="flex items-center">
-                    <span className="text-gray-500 w-20">展览地点:</span>
-                    <span>{exhibition.location}</span>
+                    <span className="text-gray-500 text-xs text-left">展览地点:</span>
+                    <span className="text-xs text-left ml-[6px]">{exhibition.location}</span>
                   </div>
                   <div className="flex items-center">
-                    <span className="text-gray-500 w-20">开放时间:</span>
-                    <span>{exhibition.time}</span>
+                    <span className="text-gray-500 text-xs text-left">开放时间:</span>
+                    <span className="text-xs text-left ml-[6px]">{exhibition.time}</span>
                   </div>
                   <div className="flex items-center">
-                    <span className="text-gray-500 w-20">票价:</span>
-                    <span className="text-red-500 font-medium">{exhibition.price}</span>
+                    <span className="text-gray-500 text-xs text-left">票价:</span>
+                    <span className="text-red-500 font-medium text-xs text-left ml-[6px]">{exhibition.price}</span>
                   </div>
                 </div>
                 
-                <div className="mt-4 flex justify-between">
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm">
+                <div className="mt-2 flex space-x-2">
+                  <button className="bg-blue-500 text-white px-2 py-1 rounded text-xs">
                     展览详情
                   </button>
-                  <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
+                  <button className="bg-green-500 text-white px-2 py-1 rounded text-xs">
                     立即预约
                   </button>
                 </div>

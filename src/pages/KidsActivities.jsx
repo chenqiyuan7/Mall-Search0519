@@ -106,7 +106,7 @@ const KidsActivities = () => {
           {filters.map((filter) => (
             <button 
               key={filter.id}
-              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${activeFilter === filter.id ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
+              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${activeFilter === filter.id ? 'bg-[#FFDD00] text-[#111111] font-bold' : 'bg-gray-100 text-[#555555]'}`}
               onClick={() => setActiveFilter(filter.id)}
             >
               {filter.name}
