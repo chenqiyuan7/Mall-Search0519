@@ -1,16 +1,36 @@
-import { useState } from "react";
-import { ChevronLeft, MessageSquare, User } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ChevronLeft, MessageSquare, User, X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
+import SouthernCuisineDiscountsDrawer from "./SouthernCuisineDiscountsDrawer";
 
 const Index = () => {
   const navigate = useNavigate();
+  const [isOpenSouthernDiscountsDrawer, setIsOpenSouthernDiscountsDrawer] = useState(false);
   
   // 处理返回按钮点击事件
   const handleBackClick = () => {
     console.log("返回按钮被点击");
     navigate('/');
   };
+
+  // 处理南方菜系优惠点击事件
+  const handleSouthernCuisineClick = (e) => {
+    e.preventDefault();
+    setIsOpenSouthernDiscountsDrawer(true);
+  };
+
+  // 当弹层打开时，禁止背景滚动
+  useEffect(() => {
+    if (isOpenSouthernDiscountsDrawer) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpenSouthernDiscountsDrawer]);
 
   const popularQuestions = [
     {
@@ -70,11 +90,11 @@ const Index = () => {
         />
         
         {/* 内容层 - 确保在背景之上 */}
-        <div className="relative z-10">
+        <div className="relative z-1">
           {/* 顶部导航栏 */}
           <div className="flex justify-between items-center p-4">
             <div 
-              className="w-8 h-8 flex items-center justify-center cursor-pointer z-20"
+              className="w-8 h-8 flex items-center justify-center cursor-pointer z-2"
               onClick={handleBackClick}
             >
               <ChevronLeft className="h-6 w-6 text-black" />
@@ -87,7 +107,7 @@ const Index = () => {
                    }}>
               </div>
               {/* 内容层 - 添加左边距 */}
-              <div className="flex items-center relative z-10 pl-[4px]">
+              <div className="flex items-center relative z-2 pl-[4px]">
                 <div className="flex -space-x-2 mr-2">
                   <div className="w-6 h-6 rounded-full border-0.5 border-white overflow-hidden">
                     <img src="./IndexAvatar1.png" alt="avatar1" className="w-full h-full object-cover" />
@@ -156,22 +176,40 @@ const Index = () => {
                         <p className="text-[16px] font-medium">{item.question}</p>
                         <p style={{ color: '#858687', fontSize: '11px' }}>{item.count}</p>
                       </div>
-                      {/* "问问"按钮,点击跳转到对应页面 */}
-                      <Link 
-                        to={item.path} 
-                        className="relative flex items-center justify-center px-4 rounded-full"
-                        style={{
-                          backgroundImage: 'url(./butn.png)',
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          color: '#000000',
-                          fontSize: '14px',
-                          height: '28px',
-                          fontWeight: '500'
-                        }}
-                      >
-                        问问
-                      </Link>
+                      {/* "问问"按钮,点击跳转到对应页面或打开底部弹层 */}
+                      {item.id === 3 ? (
+                        <div 
+                          onClick={handleSouthernCuisineClick}
+                          className="relative flex items-center justify-center px-4 rounded-full cursor-pointer"
+                          style={{
+                            backgroundImage: 'url(./butn.png)',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            color: '#000000',
+                            fontSize: '14px',
+                            height: '28px',
+                            fontWeight: '500'
+                          }}
+                        >
+                          问问
+                        </div>
+                      ) : (
+                        <Link 
+                          to={item.path} 
+                          className="relative flex items-center justify-center px-4 rounded-full"
+                          style={{
+                            backgroundImage: 'url(./butn.png)',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            color: '#000000',
+                            fontSize: '14px',
+                            height: '28px',
+                            fontWeight: '500'
+                          }}
+                        >
+                          问问
+                        </Link>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -215,6 +253,42 @@ const Index = () => {
           <ChatInput />
         </div>
       </div>
+
+      {/* 自定义底部弹层 - 南方菜系优惠 */}
+      {isOpenSouthernDiscountsDrawer && (
+        <>
+          {/* 遮罩层 */}
+          <div 
+            className="fixed inset-0 bg-black/70" 
+            style={{ zIndex: 30 }}
+            onClick={() => setIsOpenSouthernDiscountsDrawer(false)}
+          />
+          
+          {/* 弹层内容 */}
+          <div 
+            className="fixed inset-x-0 bottom-0 bg-black rounded-t-[20px] overflow-hidden max-h-[calc(100vh-110px)]" 
+            style={{ zIndex: 40 }}
+          >
+            {/* 关闭按钮和标题 */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-800">
+              <h1 className="text-lg font-bold text-white">南方菜系优惠</h1>
+              <button 
+                onClick={() => setIsOpenSouthernDiscountsDrawer(false)}
+                className="h-8 w-8 flex items-center justify-center rounded-full hover:bg-gray-800"
+              >
+                <X className="h-5 w-5 text-white" />
+              </button>
+            </div>
+            
+            {/* 内容区域 - 添加负margin使网友推荐背景图向上40px，覆盖黑背景 */}
+            <div className="overflow-y-auto" style={{ maxHeight: 'calc(100vh - 170px)' }}>
+              <div className="mt-[-40px] pt-[40px]">
+                <SouthernCuisineDiscountsDrawer onClose={() => setIsOpenSouthernDiscountsDrawer(false)} />
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

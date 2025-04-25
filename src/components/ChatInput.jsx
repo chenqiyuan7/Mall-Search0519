@@ -13,7 +13,7 @@ const ChatInput = () => {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 p-4 flex flex-col items-center" style={{ maxWidth: "inherit" }}>
+    <div className="fixed bottom-0 left-0 right-0 p-4 flex flex-col items-center" style={{ maxWidth: "inherit", zIndex: 45 }}>
       {/* 背景层和选项栏的容器 */}
       <div className="relative w-full mt-5">
         {/* 半透明背景 */}

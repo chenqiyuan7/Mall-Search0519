@@ -3,7 +3,6 @@ import Index from "./pages/Index.jsx";
 import EntryPage from "./pages/EntryPage.jsx";
 import TrainingDiscounts from "./pages/TrainingDiscounts.jsx";
 import RestaurantQueue from "./pages/RestaurantQueue.jsx";
-import SouthernCuisineDiscounts from "./pages/SouthernCuisineDiscounts.jsx";
 import InteractiveExhibition from "./pages/InteractiveExhibition.jsx";
 import FamilyRestaurant from "./pages/FamilyRestaurant.jsx";
 import KidsActivities from "./pages/KidsActivities.jsx";
@@ -36,11 +35,6 @@ export const navItems = [
     title: "餐厅排队",
     to: "/restaurant-queue",
     page: <RestaurantQueue />,
-  },
-  {
-    title: "南方菜优惠",
-    to: "/southern-cuisine-discounts",
-    page: <SouthernCuisineDiscounts />,
   },
   {
     title: "互动展览",
