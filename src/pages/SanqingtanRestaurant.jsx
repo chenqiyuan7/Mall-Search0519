@@ -94,17 +94,19 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
       {/* 店铺信息 */}
       <div className="relative">
         <img 
-          src={store.image}
+          src="./店铺详情头图@2x.png"
           alt={store.name}
-          className="w-full h-48 object-cover"/>
-        <div className="p-4 bg-white">
+          className="w-full h-[220px] object-cover"/>
+        
+        {/* 店铺内容覆盖在右侧 */}
+        <div className="absolute top-0 right-0 p-4 bg-white/80 backdrop-blur-sm h-[220px] w-[65%] rounded-bl-2xl">
           <h2 className="text-xl font-bold">{store.name}</h2>
           <div className="mt-2 flex items-center text-green-500">
             <span>营业中</span>
             <span className="ml-2">{store.openHours}</span>
           </div>
           <p className="mt-1 text-gray-600">{store.address}</p>
-          <div className="mt-2 flex gap-2">
+          <div className="mt-2 flex gap-2 flex-wrap">
             {store.tags.map((tag, index) => (
               <span key={index} className="px-2 py-1 bg-gray-100 text-sm rounded-full">
                 {tag}
