@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, MessageSquare, User, X } from "lucide-react";
+import { ChevronLeft, MessageSquare, User, X, ChevronDown, Clock } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 import SouthernCuisineDiscountsDrawer from "./SouthernCuisineDiscountsDrawer";
+import SanqingtanRestaurantDrawer from "./SanqingtanRestaurant";
 
 const Index = () => {
   const navigate = useNavigate();
   const [isOpenSouthernDiscountsDrawer, setIsOpenSouthernDiscountsDrawer] = useState(false);
+  const [isOpenSanqingtanDrawer, setIsOpenSanqingtanDrawer] = useState(false);
+  const [showHistoryBar, setShowHistoryBar] = useState(false);
+  const [lastViewedTime, setLastViewedTime] = useState("刚刚");
+  const [showSanqingtanHistoryBar, setShowSanqingtanHistoryBar] = useState(false);
+  const [sanqingtanLastViewedTime, setSanqingtanLastViewedTime] = useState("刚刚");
+  const [hasOpenedSouthernDrawer, setHasOpenedSouthernDrawer] = useState(false);
+  const [hasOpenedSanqingtanDrawer, setHasOpenedSanqingtanDrawer] = useState(false);
   
   // 处理返回按钮点击事件
   const handleBackClick = () => {
@@ -16,21 +24,56 @@ const Index = () => {
 
   // 处理南方菜系优惠点击事件
   const handleSouthernCuisineClick = (e) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     setIsOpenSouthernDiscountsDrawer(true);
+    setHasOpenedSouthernDrawer(true);
   };
 
-  // 当弹层打开时，禁止背景滚动
+  // 处理三清潭店铺点击事件
+  const handleSanqingtanClick = () => {
+    setIsOpenSanqingtanDrawer(true);
+    setHasOpenedSanqingtanDrawer(true);
+  };
+
+  // 关闭三清潭店铺弹层
+  const handleCloseSanqingtan = () => {
+    setIsOpenSanqingtanDrawer(false);
+    if (hasOpenedSanqingtanDrawer) {
+      setSanqingtanLastViewedTime("刚刚");
+      setShowSanqingtanHistoryBar(true);
+    }
+  };
+
+  // 关闭南方菜系弹层
+  const handleCloseSouthernCuisine = () => {
+    setIsOpenSouthernDiscountsDrawer(false);
+    if (hasOpenedSouthernDrawer) {
+      setLastViewedTime("刚刚");
+      setShowHistoryBar(true);
+    }
+  };
+
+  // 当弹层打开时，临时隐藏历史记录栏，但不重置历史状态
   useEffect(() => {
-    if (isOpenSouthernDiscountsDrawer) {
+    if (isOpenSouthernDiscountsDrawer || isOpenSanqingtanDrawer) {
+      // 仅在弹层打开时暂时隐藏，但不重置showHistoryBar和showSanqingtanHistoryBar的值
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
+      // 弹层关闭时，如果之前已经设置了hasOpened状态，则显示历史记录
+      if (hasOpenedSouthernDrawer) {
+        setShowHistoryBar(true);
+      }
+      if (hasOpenedSanqingtanDrawer) {
+        setShowSanqingtanHistoryBar(true);
+      }
     }
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isOpenSouthernDiscountsDrawer]);
+  }, [isOpenSouthernDiscountsDrawer, isOpenSanqingtanDrawer, hasOpenedSouthernDrawer, hasOpenedSanqingtanDrawer]);
 
   const popularQuestions = [
     {
@@ -216,7 +259,7 @@ const Index = () => {
               </div>
 
               {/* 热门问题 */}
-              <div className="bg-white rounded-[16px] pt-0 pl-0 pr-0 pb-3 mb-4">
+              <div className="bg-white rounded-[16px] pt-0 pl-0 pr-0 pb-3 mb-2">
                 {/* 使用图片替代文字标题和胶囊背景 */}
                 <div className="flex mb-1.5">
                   <img 
@@ -246,11 +289,43 @@ const Index = () => {
                   ))}
                 </div>
               </div>
+
+              {/* 历史记录栏 - 南方菜系 */}
+              {showHistoryBar && !isOpenSouthernDiscountsDrawer && !isOpenSanqingtanDrawer && (
+                <div 
+                  className="h-11 bg-white flex items-center justify-between px-4 rounded-[22px] cursor-pointer shadow-sm mb-2"
+                  onClick={handleSouthernCuisineClick}
+                >
+                  <div>
+                    <span className="text-sm font-medium">南方菜系优惠</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Clock className="h-3 w-3 text-gray-400 mr-1" />
+                    <span className="text-xs text-gray-400">{lastViewedTime}</span>
+                  </div>
+                </div>
+              )}
+
+              {/* 三清潭烧鹅历史记录栏 */}
+              {showSanqingtanHistoryBar && !isOpenSouthernDiscountsDrawer && !isOpenSanqingtanDrawer && (
+                <div 
+                  className="h-11 bg-white flex items-center justify-between px-4 rounded-[22px] cursor-pointer shadow-sm mb-4"
+                  onClick={handleSanqingtanClick}
+                >
+                  <div>
+                    <span className="text-sm font-medium">三清潭烧鹅</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Clock className="h-3 w-3 text-gray-400 mr-1" />
+                    <span className="text-xs text-gray-400">{sanqingtanLastViewedTime}</span>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
           {/* 底部聊天输入框 */}
-          <ChatInput />
+          <ChatInput hasDrawerOpen={isOpenSouthernDiscountsDrawer} hasSanqingtanDrawerOpen={isOpenSanqingtanDrawer} />
         </div>
       </div>
 
@@ -261,19 +336,19 @@ const Index = () => {
           <div 
             className="fixed inset-0 bg-black/70" 
             style={{ zIndex: 30 }}
-            onClick={() => setIsOpenSouthernDiscountsDrawer(false)}
+            onClick={handleCloseSouthernCuisine}
           />
           
           {/* 弹层内容 */}
           <div 
-            className="fixed inset-x-0 bottom-0 bg-black rounded-t-[20px] overflow-hidden max-h-[calc(100vh-110px)]" 
+            className="fixed inset-x-0 bottom-0 bg-black rounded-t-[20px] overflow-hidden max-h-[calc(100vh-60px)]" 
             style={{ zIndex: 40 }}
           >
             {/* 关闭按钮和标题 */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-gray-800">
               <h1 className="text-lg font-bold text-white">南方菜系优惠</h1>
               <button 
-                onClick={() => setIsOpenSouthernDiscountsDrawer(false)}
+                onClick={handleCloseSouthernCuisine}
                 className="h-8 w-8 flex items-center justify-center rounded-full hover:bg-gray-800"
               >
                 <X className="h-5 w-5 text-white" />
@@ -281,10 +356,50 @@ const Index = () => {
             </div>
             
             {/* 内容区域 - 添加负margin使网友推荐背景图向上40px，覆盖黑背景 */}
-            <div className="overflow-y-auto" style={{ maxHeight: 'calc(100vh - 170px)' }}>
+            <div className="overflow-y-auto" style={{ maxHeight: 'calc(100vh - 120px)' }}>
               <div className="mt-[-40px] pt-[40px]">
-                <SouthernCuisineDiscountsDrawer onClose={() => setIsOpenSouthernDiscountsDrawer(false)} />
+                <SouthernCuisineDiscountsDrawer 
+                  onClose={handleCloseSouthernCuisine}
+                  onOpenSanqingtan={() => {
+                    setIsOpenSanqingtanDrawer(true);
+                    setHasOpenedSanqingtanDrawer(true);
+                  }}
+                />
               </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* 三清潭烧鹅店铺弹层 */}
+      {isOpenSanqingtanDrawer && (
+        <>
+          {/* 遮罩层 */}
+          <div 
+            className="fixed inset-0 bg-black/70" 
+            style={{ zIndex: 30 }}
+            onClick={handleCloseSanqingtan}
+          />
+          
+          {/* 弹层内容 */}
+          <div 
+            className="fixed inset-x-0 bottom-0 bg-black rounded-t-[20px] overflow-hidden max-h-[calc(100vh-60px)]" 
+            style={{ zIndex: 40 }}
+          >
+            {/* 关闭按钮和标题 */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-800">
+              <h1 className="text-lg font-bold text-white">三清潭烧鹅</h1>
+              <button 
+                onClick={handleCloseSanqingtan}
+                className="h-8 w-8 flex items-center justify-center rounded-full hover:bg-gray-800"
+              >
+                <X className="h-5 w-5 text-white" />
+              </button>
+            </div>
+            
+            {/* 内容区域 */}
+            <div className="overflow-y-auto" style={{ maxHeight: 'calc(100vh - 120px)' }}>
+              <SanqingtanRestaurantDrawer onClose={handleCloseSanqingtan} />
             </div>
           </div>
         </>

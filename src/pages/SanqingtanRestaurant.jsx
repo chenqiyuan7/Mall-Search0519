@@ -3,7 +3,7 @@ import { ChevronLeft, MapPin, Clock, Users } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
-const SanqingtanRestaurant = () => {
+const SanqingtanRestaurantDrawer = ({ onClose }) => {
   const navigate = useNavigate();
   
   const store = {
@@ -65,7 +65,7 @@ const SanqingtanRestaurant = () => {
   ];
 
   const handleBack = () => {
-    navigate('/southern-cuisine-discounts');
+    if (onClose) onClose();
   };
 
   // 定义隐藏滚动条的样式
@@ -82,26 +82,15 @@ const SanqingtanRestaurant = () => {
   `;
 
   return (
-    <div className="min-h-screen bg-[#292929] flex justify-center items-start">
+    <div className="w-full h-full overflow-hidden">
       {/* 添加隐藏滚动条的CSS */}
       <style>{hideScrollbarCSS}</style>
       
-      {/* 固定宽度内容容器 */}
+      {/* 内容容器 */}
       <div 
-        className="w-[375px] h-[812px] relative bg-[#F5F5F5] overflow-y-auto overflow-x-hidden no-scrollbar" 
+        className="w-full h-full overflow-y-auto overflow-x-hidden no-scrollbar" 
         style={noScrollbarStyle}
       >
-      {/* 顶部导航栏 - 固定在顶部 */}
-      <div className="bg-white p-4 flex items-center fixed top-0 w-[375px] z-10 shadow-sm">
-        <button onClick={handleBack}>
-          <ChevronLeft className="h-6 w-6 mr-2" />
-        </button>
-        <h1 className="text-lg">AI帮你找</h1>
-      </div>
-      
-      {/* 为固定导航栏添加空白填充 */}
-      <div className="h-[60px]"></div>
-
       {/* 店铺信息 */}
       <div className="relative">
         <img 
@@ -226,7 +215,7 @@ const SanqingtanRestaurant = () => {
       </div>
 
       {/* 网友推荐菜 */}
-      <div className="bg-white mt-2 p-4">
+      <div className="bg-white mt-2 p-4 pb-20">
         <div className="flex justify-between items-center mb-4">
           <h3 className="font-medium">网友推荐菜</h3>
           <span className="text-sm text-gray-500">查看全部&gt;</span>
@@ -246,12 +235,9 @@ const SanqingtanRestaurant = () => {
           ))}
         </div>
       </div>
-
-      {/* 底部聊天输入框 */}
-      <ChatInput />
       </div>
     </div>
   );
 };
 
-export default SanqingtanRestaurant;
+export default SanqingtanRestaurantDrawer;

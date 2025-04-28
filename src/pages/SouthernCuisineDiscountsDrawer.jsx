@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ChevronLeft, MapPin, Phone, Clock, ArrowRight, ThumbsUp, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const SouthernCuisineDiscountsDrawer = ({ onClose }) => {
+const SouthernCuisineDiscountsDrawer = ({ onClose, onOpenSanqingtan }) => {
   const navigate = useNavigate();
   
   const restaurants = [
@@ -68,6 +68,48 @@ const SouthernCuisineDiscountsDrawer = ({ onClose }) => {
         }
       ],
       image: "https://nocode.meituan.com/photo/search?keyword=putien,restaurant&width=300&height=200"
+    },
+    {
+      id: 4,
+      name: "三清潭烧鹅(2号店)",
+      rating: 4.9,
+      pricePerPerson: "165/人",
+      location: "L3",
+      tag: "酒仙桥风味地方菜人气榜第1名",
+      deals: [
+        {
+          price: 28.9,
+          discount: "7.5折",
+          name: "三清潭经典烧鹅套餐"
+        },
+        {
+          price: 80,
+          discount: "8折",
+          name: "80代100代金券"
+        }
+      ],
+      image: "https://nocode.meituan.com/photo/search?keyword=roasted,goose,cantonese&width=300&height=200"
+    },
+    {
+      id: 5,
+      name: "三清潭烧鹅(3号店)",
+      rating: 4.9,
+      pricePerPerson: "165/人",
+      location: "L3",
+      tag: "酒仙桥风味地方菜人气榜第1名",
+      deals: [
+        {
+          price: 28.9,
+          discount: "7.5折",
+          name: "三清潭经典烧鹅套餐"
+        },
+        {
+          price: 80,
+          discount: "8折",
+          name: "80代100代金券"
+        }
+      ],
+      image: "https://nocode.meituan.com/photo/search?keyword=roasted,goose,cantonese&width=300&height=200"
     }
   ];
 
@@ -88,8 +130,12 @@ const SouthernCuisineDiscountsDrawer = ({ onClose }) => {
   ];
 
   const handleRestaurantClick = (restaurant) => {
-    if (restaurant.id === 1) {
-      navigate('/sanqingtan-restaurant', { state: { restaurant } });
+    if (restaurant.id === 1 || restaurant.id === 4 || restaurant.id === 5) {
+      if (onOpenSanqingtan) {
+        onOpenSanqingtan(); // 触发父组件的回调打开三清潭弹层
+      } else {
+        navigate('/sanqingtan-restaurant', { state: { restaurant } });
+      }
     } else if (restaurant.id === 2) {
       navigate('/restaurant/2', { state: { restaurant } });
     } else if (restaurant.id === 3) {
@@ -129,14 +175,14 @@ const SouthernCuisineDiscountsDrawer = ({ onClose }) => {
           </div>
           
           {/* 内容 - 放在背景上层 */}
-          <div className="relative px-3 py-3">
+          <div className="relative mx-[24px] py-3">
             <div className="flex justify-between items-center mb-3">
               <h2 className="text-lg font-bold text-black">网友推荐</h2>
               <span className="text-black text-sm cursor-pointer">
                 更多 &gt;
               </span>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-3 px-0">
               {recommendations.map((rec) => (
                 <div key={rec.id} className="bg-white rounded-lg overflow-hidden flex-1">
                   <div className="flex items-start py-0 px-0">
@@ -163,65 +209,77 @@ const SouthernCuisineDiscountsDrawer = ({ onClose }) => {
           </div>
         </div>
 
-        {/* 店铺对比 - 确保背景为浅灰色 */}
-        <div className="px-3 pb-4 bg-[#F5F5F5] text-black">
-          <h2 className="text-lg font-bold mb-4">店铺对比</h2>
-          <div className="space-y-4">
-            {restaurants.map((restaurant) => (
-              <div 
-                key={restaurant.id} 
-                className="bg-white rounded-lg overflow-hidden shadow-sm cursor-pointer"
-                onClick={() => handleRestaurantClick(restaurant)}
-              >
-                <div className="flex px-3 pt-4 pb-[6px]">
-                  <img 
-                    src={restaurant.image} 
-                    alt={restaurant.name} 
-                    className="w-20 h-20 rounded-lg object-cover"
-                  />
-                  <div className="ml-1.5 flex-1">
-                    <div className="flex justify-between">
-                      <h3 className="font-bold text-black">{restaurant.name}</h3>
-                      <span className="text-gray-500">{restaurant.location}</span>
-                    </div>
-                    <div className="flex items-center mt-1">
-                      <span className="text-orange-500 font-medium">{restaurant.rating}分</span>
-                      <span className="text-gray-500 ml-2">￥{restaurant.pricePerPerson}</span>
-                    </div>
-                    {restaurant.tag && (
-                      <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded mt-1">
-                        {restaurant.tag}
-                      </span>
-                    )}
-                    {restaurant.features && (
-                      <div className="flex flex-wrap gap-1 mt-1">
-                        {restaurant.features.map((feature, index) => (
-                          <span key={index} className="text-xs text-gray-500">
-                            {feature}
-                          </span>
-                        ))}
+        {/* 店铺对比 - 带背景图 */}
+        <div className="pb-4 text-black relative bg-[#F5F5F5]">
+          {/* 背景图 */}
+          <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
+            <img 
+              src="/店铺对比背景图@2x.png" 
+              alt="店铺对比背景" 
+              className="w-full h-auto object-cover mx-[12px] max-w-[calc(100%-24px)]"
+            />
+          </div>
+          
+          {/* 内容 - 放在背景上层 */}
+          <div className="relative z-10 px-3">
+            <h2 className="text-lg font-bold mb-2 pl-[12px] pt-[12px]">店铺对比</h2>
+            <div>
+              {restaurants.map((restaurant) => (
+                <div 
+                  key={restaurant.id} 
+                  className="bg-white rounded-lg overflow-hidden cursor-pointer"
+                  onClick={() => handleRestaurantClick(restaurant)}
+                >
+                  <div className="flex px-3 pt-0 pb-[6px]">
+                    <img 
+                      src={restaurant.image} 
+                      alt={restaurant.name} 
+                      className="w-20 h-20 rounded-lg object-cover"
+                    />
+                    <div className="ml-1.5 flex-1">
+                      <div className="flex justify-between">
+                        <h3 className="font-bold text-black">{restaurant.name}</h3>
+                        <span className="text-gray-500">{restaurant.location}</span>
                       </div>
-                    )}
-                  </div>
-                </div>
-                <div className="flex">
-                  <div className="w-20 ml-3"></div>
-                  <div className="border-t border-gray-200 flex-1 pl-0 pr-3 pt-[6px] pb-3">
-                    {restaurant.deals.map((deal, index) => (
-                      <div key={index} className="flex justify-between items-center mb-2 last:mb-0">
-                        <div className="flex items-center">
-                          <span className="text-red-500 text-lg font-bold">￥{deal.price}</span>
-                          <span className="ml-1 text-xs bg-red-100 text-red-500 px-1 rounded flex items-center">
-                            {deal.discount}
-                          </span>
+                      <div className="flex items-center mt-1">
+                        <span className="text-orange-500 font-medium">{restaurant.rating}分</span>
+                        <span className="text-gray-500 ml-2">￥{restaurant.pricePerPerson}</span>
+                      </div>
+                      {restaurant.tag && (
+                        <span className="inline-block text-[#004B48] text-xs px-2 py-0.5 rounded mt-1" style={{ background: 'linear-gradient(111deg, #C9FFD7 2%, #98FFF3 50%)' }}>
+                          {restaurant.tag}
+                        </span>
+                      )}
+                      {restaurant.features && (
+                        <div className="flex flex-wrap gap-1 mt-1">
+                          {restaurant.features.map((feature, index) => (
+                            <span key={index} className="text-xs text-gray-500">
+                              {feature}
+                            </span>
+                          ))}
                         </div>
-                        <span className="text-sm text-gray-600">{deal.name}</span>
-                      </div>
-                    ))}
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex">
+                    <div className="w-20 ml-3"></div>
+                    <div className="border-t border-[#F6F6F6] border-[0.5px] flex-1 pl-0 pr-3 pt-[6px] pb-3">
+                      {restaurant.deals.map((deal, index) => (
+                        <div key={index} className="flex justify-between items-center mb-0 last:mb-0">
+                          <div className="flex items-center">
+                            <span className="text-[#FF195F] text-lg font-bold">￥{deal.price}</span>
+                            <span className="ml-1 text-xs bg-red-100 text-[#FF195F] px-1 rounded flex items-center">
+                              {deal.discount}
+                            </span>
+                          </div>
+                          <span className="text-sm text-gray-600">{deal.name}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
