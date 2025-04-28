@@ -117,30 +117,26 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
       </div>
 
       {/* 功能按钮 */}
-      <div className="grid grid-cols-4 bg-white mt-0 p-4">
+      <div className="grid grid-cols-4 mt-0 p-4" style={{ 
+        backgroundImage: 'url(/ICON背景@2x.png)', 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center'
+      }}>
         <button className="flex flex-col items-center">
-          <div className="w-12 h-12 rounded-full flex items-center justify-center mb-1" style={{ backgroundImage: 'url(/ICON背景@2x.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-            <img src="/预定.png" alt="预定" className="w-10 h-10" />
-          </div>
-          <span className="text-sm">预定</span>
+          <img src="/预定.png" alt="预定" className="w-10 h-10 mb-1" />
+          <span className="text-sm text-white">预定</span>
         </button>
         <button className="flex flex-col items-center">
-          <div className="w-12 h-12 rounded-full flex items-center justify-center mb-1" style={{ backgroundImage: 'url(/ICON背景@2x.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-            <img src="/排队.png" alt="排队" className="w-10 h-10" />
-          </div>
-          <span className="text-sm">排队</span>
+          <img src="/排队.png" alt="排队" className="w-10 h-10 mb-1" />
+          <span className="text-sm text-white">排队</span>
         </button>
         <button className="flex flex-col items-center">
-          <div className="w-12 h-12 rounded-full flex items-center justify-center mb-1" style={{ backgroundImage: 'url(/ICON背景@2x.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-            <img src="/外卖.png" alt="外卖" className="w-10 h-10" />
-          </div>
-          <span className="text-sm">外卖</span>
+          <img src="/外卖.png" alt="外卖" className="w-10 h-10 mb-1" />
+          <span className="text-sm text-white">外卖</span>
         </button>
         <button className="flex flex-col items-center">
-          <div className="w-12 h-12 rounded-full flex items-center justify-center mb-1" style={{ backgroundImage: 'url(/ICON背景@2x.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-            <img src="/电话.png" alt="电话" className="w-10 h-10" />
-          </div>
-          <span className="text-sm">电话</span>
+          <img src="/电话.png" alt="电话" className="w-10 h-10 mb-1" style={{ objectFit: 'contain' }} />
+          <span className="text-sm text-white">电话</span>
         </button>
       </div>
 
