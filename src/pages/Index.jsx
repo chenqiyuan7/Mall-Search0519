@@ -389,12 +389,14 @@ const Index = () => {
       {/* 三清潭烧鹅店铺弹层 */}
       {isOpenSanqingtanDrawer && (
         <>
-          {/* 遮罩层 */}
-          <div 
-            className="fixed inset-0 bg-black/70" 
-            style={{ zIndex: 30 }}
-            onClick={handleCloseSanqingtan}
-          />
+          {/* 只有在南方菜系弹层未打开时才显示遮罩层 */}
+          {!isOpenSouthernDiscountsDrawer && (
+            <div 
+              className="fixed inset-0 bg-black/70" 
+              style={{ zIndex: 30 }}
+              onClick={handleCloseSanqingtan}
+            />
+          )}
           
           {/* 弹层内容 */}
           <div 
@@ -406,19 +408,16 @@ const Index = () => {
                 : 'slideUp 0.3s ease-out'
             }}
           >
-            {/* 关闭按钮和标题 */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-800">
-              <h1 className="text-lg font-bold text-white">三清潭烧鹅</h1>
+            {/* 内容区域 */}
+            <div className="overflow-y-auto relative" style={{ maxHeight: 'calc(100vh - 60px)' }}>
+              {/* 关闭按钮 */}
               <button 
                 onClick={handleCloseSanqingtan}
-                className="h-8 w-8 flex items-center justify-center rounded-full hover:bg-gray-800"
+                className="absolute right-4 top-4 z-10 h-8 w-8 flex items-center justify-center rounded-full bg-black/50 hover:bg-black/70"
               >
                 <X className="h-5 w-5 text-white" />
               </button>
-            </div>
-            
-            {/* 内容区域 */}
-            <div className="overflow-y-auto" style={{ maxHeight: 'calc(100vh - 120px)' }}>
+              
               <SanqingtanRestaurantDrawer onClose={handleCloseSanqingtan} />
             </div>
           </div>
