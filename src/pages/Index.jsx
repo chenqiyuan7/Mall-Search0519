@@ -15,6 +15,8 @@ const Index = () => {
   const [sanqingtanLastViewedTime, setSanqingtanLastViewedTime] = useState("刚刚");
   const [hasOpenedSouthernDrawer, setHasOpenedSouthernDrawer] = useState(false);
   const [hasOpenedSanqingtanDrawer, setHasOpenedSanqingtanDrawer] = useState(false);
+  const [isSouthernClosing, setIsSouthernClosing] = useState(false);
+  const [isSanqingtanClosing, setIsSanqingtanClosing] = useState(false);
   
   // 处理返回按钮点击事件
   const handleBackClick = () => {
@@ -39,20 +41,28 @@ const Index = () => {
 
   // 关闭三清潭店铺弹层
   const handleCloseSanqingtan = () => {
-    setIsOpenSanqingtanDrawer(false);
-    if (hasOpenedSanqingtanDrawer) {
-      setSanqingtanLastViewedTime("刚刚");
-      setShowSanqingtanHistoryBar(true);
-    }
+    setIsSanqingtanClosing(true);
+    setTimeout(() => {
+      setIsOpenSanqingtanDrawer(false);
+      setIsSanqingtanClosing(false);
+      if (hasOpenedSanqingtanDrawer) {
+        setSanqingtanLastViewedTime("刚刚");
+        setShowSanqingtanHistoryBar(true);
+      }
+    }, 300); // 等待动画完成
   };
 
   // 关闭南方菜系弹层
   const handleCloseSouthernCuisine = () => {
-    setIsOpenSouthernDiscountsDrawer(false);
-    if (hasOpenedSouthernDrawer) {
-      setLastViewedTime("刚刚");
-      setShowHistoryBar(true);
-    }
+    setIsSouthernClosing(true);
+    setTimeout(() => {
+      setIsOpenSouthernDiscountsDrawer(false);
+      setIsSouthernClosing(false);
+      if (hasOpenedSouthernDrawer) {
+        setLastViewedTime("刚刚");
+        setShowHistoryBar(true);
+      }
+    }, 300); // 等待动画完成
   };
 
   // 当弹层打开时，临时隐藏历史记录栏，但不重置历史状态
@@ -342,7 +352,12 @@ const Index = () => {
           {/* 弹层内容 */}
           <div 
             className="fixed inset-x-0 bottom-0 bg-black rounded-t-[20px] overflow-hidden max-h-[calc(100vh-60px)]" 
-            style={{ zIndex: 40 }}
+            style={{ 
+              zIndex: 40,
+              animation: isSouthernClosing 
+                ? 'slideDown 0.3s ease-in forwards' 
+                : 'slideUp 0.3s ease-out'
+            }}
           >
             {/* 关闭按钮和标题 */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-gray-800">
@@ -384,7 +399,12 @@ const Index = () => {
           {/* 弹层内容 */}
           <div 
             className="fixed inset-x-0 bottom-0 bg-black rounded-t-[20px] overflow-hidden max-h-[calc(100vh-60px)]" 
-            style={{ zIndex: 40 }}
+            style={{ 
+              zIndex: 40,
+              animation: isSanqingtanClosing 
+                ? 'slideDown 0.3s ease-in forwards' 
+                : 'slideUp 0.3s ease-out'
+            }}
           >
             {/* 关闭按钮和标题 */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-gray-800">
@@ -404,6 +424,26 @@ const Index = () => {
           </div>
         </>
       )}
+
+      {/* 添加动画关键帧 */}
+      <style jsx global>{`
+        @keyframes slideUp {
+          from {
+            transform: translateY(100%);
+          }
+          to {
+            transform: translateY(0);
+          }
+        }
+        @keyframes slideDown {
+          from {
+            transform: translateY(0);
+          }
+          to {
+            transform: translateY(100%);
+          }
+        }
+      `}</style>
     </div>
   );
 };
