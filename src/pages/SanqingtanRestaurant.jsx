@@ -124,42 +124,33 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
       }}>
         <button className="flex flex-col items-center">
           <img src="/预定.png" alt="预定" className="w-10 h-10 mb-1" />
-          <span className="text-sm text-white">预定</span>
+          <span className="text-sm text-black">预定</span>
         </button>
         <button className="flex flex-col items-center">
           <img src="/排队.png" alt="排队" className="w-10 h-10 mb-1" />
-          <span className="text-sm text-white">排队</span>
+          <span className="text-sm text-black">排队</span>
         </button>
         <button className="flex flex-col items-center">
           <img src="/外卖.png" alt="外卖" className="w-10 h-10 mb-1" />
-          <span className="text-sm text-white">外卖</span>
+          <span className="text-sm text-black">外卖</span>
         </button>
         <button className="flex flex-col items-center">
           <img src="/电话.png" alt="电话" className="w-10 h-10 mb-1" style={{ objectFit: 'contain' }} />
-          <span className="text-sm text-white">电话</span>
+          <span className="text-sm text-black">电话</span>
         </button>
       </div>
 
       {/* 导航区域 */}
-      <div className="bg-white mt-2 p-4">
-        <div className="flex items-center justify-between bg-cyan-50 p-4 rounded-lg">
-          <div>
-            <h3 className="font-medium">找店路线规划</h3>
-            <p className="text-sm text-gray-500 mt-1">为你提供AR路线导航</p>
-          </div>
-          <div className="flex-1 ml-4">
-            <img 
-              src="https://nocode.meituan.com/photo/search?keyword=map,route&width=200&height=100" 
-              alt="路线图"
-              className="w-full h-12 object-cover rounded"
-            />
-          </div>
-          <span className="text-cyan-500 ml-2">导航&gt;</span>
-        </div>
+      <div className="bg-white px-3">
+        <img 
+          src="/路线规划@2x.png" 
+          alt="路线规划"
+          className="w-full"
+        />
       </div>
 
       {/* 套餐和代金券 */}
-      <div className="bg-white mt-2 p-4">
+      <div className="bg-white mt-0 px-3 py-3">
         <div className="grid grid-cols-2 gap-4">
           {/* 到店套餐 */}
           <div className="bg-cyan-50 p-4 rounded-lg">
@@ -213,7 +204,7 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
       </div>
 
       {/* 网友推荐菜 */}
-      <div className="bg-white mt-2 p-4 pb-20">
+      <div className="bg-white mt-2 px-3 py-4 pb-20">
         <div className="flex justify-between items-center mb-4">
           <h3 className="font-medium">网友推荐菜</h3>
           <span className="text-sm text-gray-500">查看全部&gt;</span>
