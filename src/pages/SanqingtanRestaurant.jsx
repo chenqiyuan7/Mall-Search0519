@@ -108,7 +108,7 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
           <p className="mt-1 text-white/80 text-xs">{store.address}</p>
           <div className="mt-2 flex gap-2 flex-wrap">
             {store.tags.map((tag, index) => (
-              <span key={index} className="px-2 py-1 bg-white/20 text-[10px] rounded-[4px]">
+              <span key={index} className="px-1 py-0.5 bg-white/20 text-[10px] rounded-[4px]">
                 {tag}
               </span>
             ))}
@@ -117,28 +117,28 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
       </div>
 
       {/* 功能按钮 */}
-      <div className="grid grid-cols-4 bg-white mt-2 p-4">
+      <div className="grid grid-cols-4 bg-white mt-0 p-4">
         <button className="flex flex-col items-center">
-          <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-1">
-            <img src="https://nocode.meituan.com/photo/search?keyword=booking,icon&width=40&height=40" alt="预定" className="w-6 h-6" />
+          <div className="w-12 h-12 rounded-full flex items-center justify-center mb-1" style={{ backgroundImage: 'url(/ICON背景@2x.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <img src="/预定.png" alt="预定" className="w-10 h-10" />
           </div>
           <span className="text-sm">预定</span>
         </button>
         <button className="flex flex-col items-center">
-          <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-1">
-            <img src="https://nocode.meituan.com/photo/search?keyword=queue,icon&width=40&height=40" alt="排队" className="w-6 h-6" />
+          <div className="w-12 h-12 rounded-full flex items-center justify-center mb-1" style={{ backgroundImage: 'url(/ICON背景@2x.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <img src="/排队.png" alt="排队" className="w-10 h-10" />
           </div>
           <span className="text-sm">排队</span>
         </button>
         <button className="flex flex-col items-center">
-          <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-1">
-            <img src="https://nocode.meituan.com/photo/search?keyword=delivery,icon&width=40&height=40" alt="外卖" className="w-6 h-6" />
+          <div className="w-12 h-12 rounded-full flex items-center justify-center mb-1" style={{ backgroundImage: 'url(/ICON背景@2x.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <img src="/外卖.png" alt="外卖" className="w-10 h-10" />
           </div>
           <span className="text-sm">外卖</span>
         </button>
         <button className="flex flex-col items-center">
-          <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-1">
-            <img src="https://nocode.meituan.com/photo/search?keyword=phone,icon&width=40&height=40" alt="电话" className="w-6 h-6" />
+          <div className="w-12 h-12 rounded-full flex items-center justify-center mb-1" style={{ backgroundImage: 'url(/ICON背景@2x.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <img src="/电话.png" alt="电话" className="w-10 h-10" />
           </div>
           <span className="text-sm">电话</span>
         </button>
