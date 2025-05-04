@@ -131,7 +131,7 @@ const RestaurantQueue = () => {
       <div className="h-[60px]"></div>
 
       {/* 筛选选项 */}
-      <div className="p-4 bg-white mb-4">
+      <div className="py-2 px-4 bg-white mb-4">
         <div className="flex space-x-2 overflow-x-auto no-scrollbar">
           <button 
             className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${filter === 'all' ? 'bg-[#FFDD00] text-[#111111] font-bold' : 'bg-gray-100 text-[#555555]'}`}

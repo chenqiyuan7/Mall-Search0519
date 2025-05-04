@@ -96,7 +96,7 @@ const InteractiveExhibition = () => {
       <div className="h-[60px]"></div>
 
       {/* 筛选选项 */}
-      <div className="p-4 bg-white mb-4">
+      <div className="py-2 px-4 bg-white mb-4">
         <div className="flex space-x-2 overflow-x-auto no-scrollbar" style={noScrollbarStyle}>
           {filters.map((filter) => (
             <button 
