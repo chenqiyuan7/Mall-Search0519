@@ -24,7 +24,7 @@ const FamilyRestaurant = () => {
       waitTime: "约15分钟",
       features: ["儿童游乐区", "主题派对", "儿童餐具"],
       address: "4楼 B区 412",
-      image: "https://nocode.meituan.com/photo/search?keyword=kids,theme,restaurant&width=300&height=200"
+      image: "https://nocode.meituan.com/photo/search?keyword=kids,theme,restaurant&width=300&height=300"
     },
     {
       id: 2,
@@ -35,7 +35,7 @@ const FamilyRestaurant = () => {
       waitTime: "约30分钟",
       features: ["海洋主题", "互动体验", "寿司体验"],
       address: "3楼 A区 305",
-      image: "https://nocode.meituan.com/photo/search?keyword=ocean,theme,restaurant&width=300&height=200"
+      image: "https://nocode.meituan.com/photo/search?keyword=ocean,theme,restaurant&width=300&height=300"
     },
     {
       id: 3,
@@ -46,7 +46,7 @@ const FamilyRestaurant = () => {
       waitTime: "约20分钟",
       features: ["DIY美食", "厨艺课堂", "亲子互动"],
       address: "5楼 C区 508",
-      image: "https://nocode.meituan.com/photo/search?keyword=kids,cooking,restaurant&width=300&height=200"
+      image: "https://nocode.meituan.com/photo/search?keyword=kids,cooking,restaurant&width=300&height=300"
     },
     {
       id: 4,
@@ -57,7 +57,29 @@ const FamilyRestaurant = () => {
       waitTime: "约10分钟",
       features: ["甜品DIY", "生日派对", "下午茶"],
       address: "2楼 D区 203",
-      image: "https://nocode.meituan.com/photo/search?keyword=candy,dessert,cafe&width=300&height=200"
+      image: "https://nocode.meituan.com/photo/search?keyword=candy,dessert,cafe&width=300&height=300"
+    },
+    {
+      id: 5,
+      name: "农场体验餐厅",
+      cuisine: "western",
+      rating: 4.5,
+      priceRange: "¥118/人",
+      waitTime: "约25分钟",
+      features: ["农场体验", "有机食材", "亲子互动"],
+      address: "1楼 G区 108",
+      image: "https://nocode.meituan.com/photo/search?keyword=farm,restaurant&width=300&height=300"
+    },
+    {
+      id: 6,
+      name: "恐龙世界餐厅",
+      cuisine: "chinese",
+      rating: 4.7,
+      priceRange: "¥138/人",
+      waitTime: "约20分钟",
+      features: ["恐龙主题", "科普教育", "儿童套餐"],
+      address: "3楼 H区 325",
+      image: "https://nocode.meituan.com/photo/search?keyword=dinosaur,restaurant&width=300&height=300"
     }
   ];
 
@@ -100,7 +122,7 @@ const FamilyRestaurant = () => {
         <div className="h-[60px]"></div>
 
         {/* 筛选选项 */}
-        <div className="p-4 bg-white mb-[8px]">
+        <div className="p-4 bg-white mb-4">
           <div className="flex space-x-2 overflow-x-auto no-scrollbar" style={noScrollbarStyle}>
             {filters.map((filter) => (
               <button 
@@ -116,10 +138,10 @@ const FamilyRestaurant = () => {
 
         {/* 餐厅列表 */}
         <div className="px-3 pt-2 pb-3">
-          <div className="space-y-2">
+          <div className="space-y-3">
             {filteredRestaurants.map((restaurant) => (
               <div key={restaurant.id} className="bg-white rounded-lg overflow-hidden shadow-sm flex p-3">
-                <div className="w-1/3 flex flex-col">
+                <div className="w-1/3">
                   <div className="aspect-square w-full">
                     <img 
                       src={restaurant.image} 
@@ -127,9 +149,8 @@ const FamilyRestaurant = () => {
                       className="object-cover w-full h-full rounded-lg"
                     />
                   </div>
-                  <div className="flex-grow"></div>
                 </div>
-                <div className="ml-3 flex-1 flex flex-col">
+                <div className="ml-3 flex-1">
                   <div className="flex justify-between items-start">
                     <h3 className="font-bold text-base text-left">{restaurant.name}</h3>
                     <div className="flex items-center">
@@ -158,10 +179,7 @@ const FamilyRestaurant = () => {
                     ))}
                   </div>
                   
-                  <div className="mt-2 flex space-x-2">
-                    <button className="bg-blue-500 text-white px-2 py-1 rounded text-xs">
-                      查看菜单
-                    </button>
+                  <div className="mt-2">
                     <button className="bg-green-500 text-white px-2 py-1 rounded text-xs">
                       立即预订
                     </button>

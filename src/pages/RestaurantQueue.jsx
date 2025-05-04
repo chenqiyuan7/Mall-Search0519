@@ -22,7 +22,7 @@ const RestaurantQueue = () => {
             location: "4楼 B区 412",
             rating: 4.8,
             tags: ["儿童套餐", "游乐区", "主题派对"],
-            image: "https://nocode.meituan.com/photo/search?keyword=kids,theme,restaurant&width=300&height=200"
+            image: "https://nocode.meituan.com/photo/search?keyword=kids,theme,restaurant&width=300&height=300"
           },
           {
             id: 2,
@@ -32,7 +32,7 @@ const RestaurantQueue = () => {
             location: "3楼 A区 305",
             rating: 4.6,
             tags: ["海洋主题", "互动体验", "儿童餐具"],
-            image: "https://nocode.meituan.com/photo/search?keyword=underwater,restaurant&width=300&height=200"
+            image: "https://nocode.meituan.com/photo/search?keyword=underwater,restaurant&width=300&height=300"
           },
           {
             id: 3,
@@ -42,7 +42,7 @@ const RestaurantQueue = () => {
             location: "5楼 C区 508",
             rating: 4.7,
             tags: ["森林主题", "亲子互动", "健康餐饮"],
-            image: "https://nocode.meituan.com/photo/search?keyword=forest,restaurant&width=300&height=200"
+            image: "https://nocode.meituan.com/photo/search?keyword=forest,restaurant&width=300&height=300"
           },
           {
             id: 4,
@@ -52,7 +52,7 @@ const RestaurantQueue = () => {
             location: "6楼 D区 602",
             rating: 4.5,
             tags: ["科技互动", "太空主题", "创意美食"],
-            image: "https://nocode.meituan.com/photo/search?keyword=space,restaurant&width=300&height=200"
+            image: "https://nocode.meituan.com/photo/search?keyword=space,restaurant&width=300&height=300"
           },
           {
             id: 5,
@@ -62,7 +62,7 @@ const RestaurantQueue = () => {
             location: "4楼 E区 423",
             rating: 4.9,
             tags: ["公主主题", "下午茶", "生日派对"],
-            image: "https://nocode.meituan.com/photo/search?keyword=princess,restaurant&width=300&height=200"
+            image: "https://nocode.meituan.com/photo/search?keyword=princess,restaurant&width=300&height=300"
           },
           {
             id: 6,
@@ -131,7 +131,7 @@ const RestaurantQueue = () => {
       <div className="h-[60px]"></div>
 
       {/* 筛选选项 */}
-      <div className="p-4 bg-white mb-2">
+      <div className="p-4 bg-white mb-4">
         <div className="flex space-x-2 overflow-x-auto no-scrollbar">
           <button 
             className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${filter === 'all' ? 'bg-[#FFDD00] text-[#111111] font-bold' : 'bg-gray-100 text-[#555555]'}`}

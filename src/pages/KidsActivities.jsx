@@ -25,7 +25,7 @@ const KidsActivities = () => {
       location: "4楼 科教中心",
       ageRange: "6-12岁",
       price: "98元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=science,kids,experiment&width=300&height=200"
+      image: "https://nocode.meituan.com/photo/search?keyword=science,kids,experiment&width=300&height=300"
     },
     {
       id: 2,
@@ -36,7 +36,7 @@ const KidsActivities = () => {
       location: "6楼 空中花园",
       ageRange: "4-12岁",
       price: "68元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=outdoor,adventure,kids&width=300&height=200"
+      image: "https://nocode.meituan.com/photo/search?keyword=outdoor,adventure,kids&width=300&height=300"
     },
     {
       id: 3,
@@ -47,7 +47,7 @@ const KidsActivities = () => {
       location: "3楼 艺术中心",
       ageRange: "3-15岁",
       price: "128元/课时",
-      image: "https://nocode.meituan.com/photo/search?keyword=art,studio,kids&width=300&height=200"
+      image: "https://nocode.meituan.com/photo/search?keyword=art,studio,kids&width=300&height=300"
     },
     {
       id: 4,
@@ -58,7 +58,18 @@ const KidsActivities = () => {
       location: "5楼 教育中心",
       ageRange: "7-14岁",
       price: "158元/课时",
-      image: "https://nocode.meituan.com/photo/search?keyword=coding,kids,education&width=300&height=200"
+      image: "https://nocode.meituan.com/photo/search?keyword=coding,kids,education&width=300&height=300"
+    },
+    {
+      id: 5,
+      name: "亲子运动馆",
+      type: "indoor",
+      description: "促进亲子关系的互动体育活动",
+      time: "每天 09:30-20:30",
+      location: "2楼 运动中心",
+      ageRange: "3-10岁",
+      price: "88元/人",
+      image: "https://nocode.meituan.com/photo/search?keyword=sports,kids,interactive&width=300&height=300"
     }
   ];
 
@@ -101,7 +112,7 @@ const KidsActivities = () => {
       <div className="h-[60px]"></div>
 
       {/* 筛选选项 */}
-      <div className="p-4 bg-white mb-2">
+      <div className="p-4 bg-white mb-4">
         <div className="flex space-x-2 overflow-x-auto no-scrollbar" style={noScrollbarStyle}>
           {filters.map((filter) => (
             <button 
@@ -116,43 +127,47 @@ const KidsActivities = () => {
       </div>
 
       {/* 活动列表 */}
-      <div className="p-4">
-        <div className="space-y-4">
+      <div className="px-3 pt-2 pb-3">
+        <div className="space-y-3">
           {filteredActivities.map((activity) => (
-            <div key={activity.id} className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-sm hover:bg-white hover:opacity-100 cursor-default">
-              <img 
-                src={activity.image} 
-                alt={activity.name} 
-                className="mx-auto object-cover w-full h-48"
-              />
-              <div className="p-4">
-                <h3 className="font-bold text-lg">{activity.name}</h3>
-                <p className="text-gray-600 mt-1">{activity.description}</p>
+            <div key={activity.id} className="bg-white rounded-lg overflow-hidden shadow-sm flex p-3">
+              <div className="w-1/3">
+                <div className="aspect-square w-full">
+                  <img 
+                    src={activity.image} 
+                    alt={activity.name} 
+                    className="object-cover w-full h-full rounded-lg"
+                  />
+                </div>
+              </div>
+              <div className="ml-3 flex-1">
+                <h3 className="font-bold text-base text-left">{activity.name}</h3>
+                <p className="text-gray-600 text-xs mt-1 text-left">{activity.description}</p>
                 
-                <div className="mt-3 space-y-2">
+                <div className="mt-2 space-y-1">
                   <div className="flex items-center">
-                    <span className="text-gray-500 w-20">活动时间:</span>
-                    <span>{activity.time}</span>
+                    <span className="text-gray-500 text-xs text-left">活动时间:</span>
+                    <span className="text-xs text-left ml-[6px]">{activity.time}</span>
                   </div>
                   <div className="flex items-center">
-                    <span className="text-gray-500 w-20">活动地点:</span>
-                    <span>{activity.location}</span>
+                    <span className="text-gray-500 text-xs text-left">活动地点:</span>
+                    <span className="text-xs text-left ml-[6px]">{activity.location}</span>
                   </div>
                   <div className="flex items-center">
-                    <span className="text-gray-500 w-20">适合年龄:</span>
-                    <span>{activity.ageRange}</span>
+                    <span className="text-gray-500 text-xs text-left">适合年龄:</span>
+                    <span className="text-xs text-left ml-[6px]">{activity.ageRange}</span>
                   </div>
                   <div className="flex items-center">
-                    <span className="text-gray-500 w-20">活动费用:</span>
-                    <span className="text-red-500 font-medium">{activity.price}</span>
+                    <span className="text-gray-500 text-xs text-left">活动费用:</span>
+                    <span className="text-red-500 font-medium text-xs text-left ml-[6px]">{activity.price}</span>
                   </div>
                 </div>
                 
-                <div className="mt-4 flex justify-between">
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-500">
+                <div className="mt-2 flex space-x-2">
+                  <button className="bg-blue-500 text-white px-2 py-1 rounded text-xs">
                     活动详情
                   </button>
-                  <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-500">
+                  <button className="bg-green-500 text-white px-2 py-1 rounded text-xs">
                     立即预约
                   </button>
                 </div>

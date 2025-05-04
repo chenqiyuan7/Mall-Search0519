@@ -14,7 +14,7 @@ const InteractiveExhibition = () => {
       location: "4楼 展厅A",
       time: "10:00-20:00",
       price: "88元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=ocean,exhibition,interactive&width=300&height=200"
+      image: "https://nocode.meituan.com/photo/search?keyword=ocean,exhibition,interactive&width=300&height=300"
     },
     {
       id: 2,
@@ -23,7 +23,7 @@ const InteractiveExhibition = () => {
       location: "5楼 展厅B",
       time: "09:30-19:30",
       price: "98元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=space,exhibition,interactive&width=300&height=200"
+      image: "https://nocode.meituan.com/photo/search?keyword=space,exhibition,interactive&width=300&height=300"
     },
     {
       id: 3,
@@ -32,7 +32,7 @@ const InteractiveExhibition = () => {
       location: "3楼 展厅C",
       time: "10:00-19:00",
       price: "78元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=dinosaur,exhibition&width=300&height=200"
+      image: "https://nocode.meituan.com/photo/search?keyword=dinosaur,exhibition&width=300&height=300"
     },
     {
       id: 4,
@@ -96,7 +96,7 @@ const InteractiveExhibition = () => {
       <div className="h-[60px]"></div>
 
       {/* 筛选选项 */}
-      <div className="p-4 bg-white mb-[8px]">
+      <div className="p-4 bg-white mb-4">
         <div className="flex space-x-2 overflow-x-auto no-scrollbar" style={noScrollbarStyle}>
           {filters.map((filter) => (
             <button 
@@ -112,10 +112,10 @@ const InteractiveExhibition = () => {
 
       {/* 展览列表 */}
       <div className="px-3 pt-2 pb-3">
-        <div className="space-y-2">
+        <div className="space-y-3">
           {exhibitions.map((exhibition) => (
             <div key={exhibition.id} className="bg-white rounded-lg overflow-hidden shadow-sm flex p-3">
-              <div className="w-1/3 flex flex-col">
+              <div className="w-1/3">
                 <div className="aspect-square w-full">
                   <img 
                     src={exhibition.image} 
@@ -123,9 +123,8 @@ const InteractiveExhibition = () => {
                     className="object-cover w-full h-full rounded-lg"
                   />
                 </div>
-                <div className="flex-grow"></div>
               </div>
-              <div className="ml-3 flex-1 flex flex-col">
+              <div className="ml-3 flex-1">
                 <h3 className="font-bold text-base text-left">{exhibition.title}</h3>
                 <p className="text-gray-600 text-xs mt-1 text-left">{exhibition.description}</p>
                 
