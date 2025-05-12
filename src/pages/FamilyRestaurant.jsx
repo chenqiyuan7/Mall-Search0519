@@ -21,10 +21,11 @@ const FamilyRestaurant = () => {
       cuisine: "western",
       rating: 4.8,
       priceRange: "¥128/人",
-      waitTime: "约15分钟",
+      waitTime: "15分钟",
       features: ["儿童游乐区", "主题派对", "儿童餐具"],
       address: "4楼 B区 412",
-      image: "https://nocode.meituan.com/photo/search?keyword=kids,theme,restaurant&width=300&height=300"
+      image: "https://nocode.meituan.com/photo/search?keyword=kids,theme,restaurant&width=300&height=300",
+      packages: ["¥198 <s>¥238</s> 亲子双人套餐", "¥288 <s>¥328</s> 生日派对套餐"]
     },
     {
       id: 2,
@@ -32,10 +33,11 @@ const FamilyRestaurant = () => {
       cuisine: "japanese",
       rating: 4.6,
       priceRange: "¥168/人",
-      waitTime: "约30分钟",
+      waitTime: "30分钟",
       features: ["海洋主题", "互动体验", "寿司体验"],
       address: "3楼 A区 305",
-      image: "https://nocode.meituan.com/photo/search?keyword=ocean,theme,restaurant&width=300&height=300"
+      image: "https://nocode.meituan.com/photo/search?keyword=ocean,theme,restaurant&width=300&height=300",
+      packages: ["¥258 <s>¥298</s> 海鲜双人套餐", "¥88 <s>¥108</s> 儿童套餐"]
     },
     {
       id: 3,
@@ -43,10 +45,11 @@ const FamilyRestaurant = () => {
       cuisine: "chinese",
       rating: 4.7,
       priceRange: "¥98/人",
-      waitTime: "约20分钟",
+      waitTime: "20分钟",
       features: ["DIY美食", "厨艺课堂", "亲子互动"],
       address: "5楼 C区 508",
-      image: "https://nocode.meituan.com/photo/search?keyword=kids,cooking,restaurant&width=300&height=300"
+      image: "https://nocode.meituan.com/photo/search?keyword=kids,cooking,restaurant&width=300&height=300",
+      packages: ["¥168 <s>¥198</s> 小厨师体验套餐", "¥328 <s>¥398</s> 家庭聚餐套餐"]
     },
     {
       id: 4,
@@ -54,10 +57,11 @@ const FamilyRestaurant = () => {
       cuisine: "dessert",
       rating: 4.9,
       priceRange: "¥68/人",
-      waitTime: "约10分钟",
+      waitTime: "10分钟",
       features: ["甜品DIY", "生日派对", "下午茶"],
       address: "2楼 D区 203",
-      image: "https://nocode.meituan.com/photo/search?keyword=candy,dessert,cafe&width=300&height=300"
+      image: "https://nocode.meituan.com/photo/search?keyword=candy,dessert,cafe&width=300&height=300",
+      packages: ["¥138 <s>¥158</s> 下午茶套餐", "¥168 <s>¥188</s> 甜品DIY套餐"]
     },
     {
       id: 5,
@@ -65,10 +69,11 @@ const FamilyRestaurant = () => {
       cuisine: "western",
       rating: 4.5,
       priceRange: "¥118/人",
-      waitTime: "约25分钟",
+      waitTime: "25分钟",
       features: ["农场体验", "有机食材", "亲子互动"],
       address: "1楼 G区 108",
-      image: "https://nocode.meituan.com/photo/search?keyword=farm,restaurant&width=300&height=300"
+      image: "https://nocode.meituan.com/photo/search?keyword=farm,restaurant&width=300&height=300",
+      packages: ["¥198 <s>¥228</s> 田园亲子套餐", "¥238 <s>¥268</s> 农场采摘套餐"]
     },
     {
       id: 6,
@@ -76,10 +81,11 @@ const FamilyRestaurant = () => {
       cuisine: "chinese",
       rating: 4.7,
       priceRange: "¥138/人",
-      waitTime: "约20分钟",
+      waitTime: "20分钟",
       features: ["恐龙主题", "科普教育", "儿童套餐"],
       address: "3楼 H区 325",
-      image: "https://nocode.meituan.com/photo/search?keyword=dinosaur,restaurant&width=300&height=300"
+      image: "https://nocode.meituan.com/photo/search?keyword=dinosaur,restaurant&width=300&height=300",
+      packages: ["¥188 <s>¥218</s> 探索者套餐", "¥268 <s>¥298</s> 恐龙主题套餐"]
     }
   ];
 
@@ -97,6 +103,12 @@ const FamilyRestaurant = () => {
   const hideScrollbarCSS = `
     .no-scrollbar::-webkit-scrollbar {
       display: none;
+    }
+    
+    .discount-price {
+      color: #999999;
+      text-decoration: line-through;
+      text-decoration-color: #999999;
     }
   `;
 
@@ -122,7 +134,7 @@ const FamilyRestaurant = () => {
         <div className="h-[60px]"></div>
 
         {/* 筛选选项 */}
-        <div className="py-3 px-4 bg-white mb-4">
+        <div className="py-3 px-4 bg-white mb-2">
           <div className="flex space-x-2 overflow-x-auto no-scrollbar" style={noScrollbarStyle}>
             {filters.map((filter) => (
               <button 
@@ -137,12 +149,12 @@ const FamilyRestaurant = () => {
         </div>
 
         {/* 餐厅列表 */}
-        <div className="px-3 pt-2 pb-3">
-          <div className="space-y-3">
+        <div className="px-3 pt-0 pb-3">
+          <div className="space-y-2">
             {filteredRestaurants.map((restaurant) => (
               <div key={restaurant.id} className="bg-white rounded-lg overflow-hidden shadow-sm flex p-3">
-                <div className="w-1/3">
-                  <div className="aspect-square w-full">
+                <div className="w-[88px]">
+                  <div className="h-[88px] w-[88px]">
                     <img 
                       src={restaurant.image} 
                       alt={restaurant.name} 
@@ -153,17 +165,37 @@ const FamilyRestaurant = () => {
                 <div className="ml-3 flex-1">
                   <div className="flex justify-between items-start">
                     <h3 className="font-bold text-base text-left">{restaurant.name}</h3>
-                    <div className="flex items-center">
-                      <Star className="h-3 w-3 text-yellow-400 mr-1" fill="#FACC15" />
-                      <span className="text-xs">{restaurant.rating}</span>
+                    <div className="text-xs text-orange-500 flex items-center">
+                      <Clock className="h-3 w-3 mr-1" />
+                      <span>等待{restaurant.waitTime}</span>
                     </div>
                   </div>
                   
                   <div className="mt-1 flex items-center text-xs text-gray-600">
+                    <div className="flex items-center">
+                      <Star className="h-3 w-3 mr-0.5" fill={restaurant.rating >= 1 ? "#FF7700" : "none"} stroke={restaurant.rating >= 1 ? "#FF7700" : "#f5f5f5"} />
+                      <Star className="h-3 w-3 mr-0.5" fill={restaurant.rating >= 2 ? "#FF7700" : "none"} stroke={restaurant.rating >= 2 ? "#FF7700" : "#f5f5f5"} />
+                      <Star className="h-3 w-3 mr-0.5" fill={restaurant.rating >= 3 ? "#FF7700" : "none"} stroke={restaurant.rating >= 3 ? "#FF7700" : "#f5f5f5"} />
+                      <Star className="h-3 w-3 mr-0.5" fill={restaurant.rating >= 4 ? "#FF7700" : "none"} stroke={restaurant.rating >= 4 ? "#FF7700" : "#f5f5f5"} />
+                      <div className="relative h-3 w-3 mr-1">
+                        {/* 基础灰色星星 */}
+                        <Star className="h-3 w-3 absolute top-0 left-0" fill="#f5f5f5" stroke="none" />
+                        
+                        {/* 满星 */}
+                        {restaurant.rating >= 5 && (
+                          <Star className="h-3 w-3 absolute top-0 left-0" fill="#FF7700" stroke="none" />
+                        )}
+                        
+                        {/* 半星 */}
+                        {restaurant.rating >= 4.5 && restaurant.rating < 5 && (
+                          <div className="h-3 w-1.5 absolute top-0 left-0 overflow-hidden">
+                            <Star className="h-3 w-3" fill="#FF7700" stroke="none" />
+                          </div>
+                        )}
+                      </div>
+                      <span className="text-xs text-[#FF7700] font-bold mr-2">{restaurant.rating}</span>
+                    </div>
                     <span>{restaurant.priceRange}</span>
-                    <span className="mx-2">|</span>
-                    <Clock className="h-3 w-3 mr-1" />
-                    <span>等待{restaurant.waitTime}</span>
                   </div>
                   
                   <div className="mt-1 flex items-center">
@@ -173,16 +205,47 @@ const FamilyRestaurant = () => {
                   
                   <div className="mt-2 flex flex-wrap gap-1">
                     {restaurant.features.map((feature, index) => (
-                      <span key={index} className="bg-gray-100 text-gray-800 text-xs px-1.5 py-0.5 rounded">
+                      <span key={index} className="bg-[#FFF8F0] text-[#FF7700] text-xs px-1.5 py-0.5 rounded">
                         {feature}
                       </span>
                     ))}
                   </div>
                   
                   <div className="mt-2">
-                    <button className="bg-green-500 text-white px-2 py-1 rounded text-xs">
-                      立即预订
-                    </button>
+                    <div className="border-t border-gray-100 pt-2">
+                      <p className="text-xs flex items-center">
+                        <img src="/优惠logo@2x.png" alt="优惠" className="w-4 h-4 mr-1" />
+                        {restaurant.packages[0].split(' ').map((part, index) => {
+                          if (index === 0) {
+                            // 第一部分是价格
+                            return <span key={index} className="text-[#FF2D19] font-bold">{part}</span>;
+                          } else if (part.startsWith('<s>') && part.endsWith('</s>')) {
+                            // 第二部分是划线价格
+                            const price = part.replace('<s>', '').replace('</s>', '');
+                            return <span key={index} className="text-[#999999] font-normal mx-1" style={{ textDecoration: 'line-through' }}>{price}</span>;
+                          } else {
+                            // 第三部分是套餐名称
+                            return <span key={index} className="text-[#111111] ml-1">{part}</span>;
+                          }
+                        })}
+                      </p>
+                      <p className="text-xs flex items-center mt-2">
+                        <img src="/优惠logo@2x.png" alt="优惠" className="w-4 h-4 mr-1" />
+                        {restaurant.packages[1].split(' ').map((part, index) => {
+                          if (index === 0) {
+                            // 第一部分是价格
+                            return <span key={index} className="text-[#FF2D19] font-bold">{part}</span>;
+                          } else if (part.startsWith('<s>') && part.endsWith('</s>')) {
+                            // 第二部分是划线价格
+                            const price = part.replace('<s>', '').replace('</s>', '');
+                            return <span key={index} className="text-[#999999] font-normal mx-1" style={{ textDecoration: 'line-through' }}>{price}</span>;
+                          } else {
+                            // 第三部分是套餐名称
+                            return <span key={index} className="text-[#111111] ml-1">{part}</span>;
+                          }
+                        })}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

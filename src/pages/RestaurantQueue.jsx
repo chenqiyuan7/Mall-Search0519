@@ -107,6 +107,12 @@ const RestaurantQueue = () => {
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
+    
+    .discount-price {
+      color: #999999;
+      text-decoration: line-through;
+      text-decoration-color: #999999;
+    }
   `;
 
   return (
@@ -131,8 +137,8 @@ const RestaurantQueue = () => {
       <div className="h-[60px]"></div>
 
       {/* 筛选选项 */}
-      <div className="py-3 px-4 bg-white mb-4">
-        <div className="flex space-x-2 overflow-x-auto no-scrollbar">
+      <div className="py-3 px-4 bg-white mb-2">
+        <div className="flex space-x-2 overflow-x-auto no-scrollbar" style={noScrollbarStyle}>
           <button 
             className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${filter === 'all' ? 'bg-[#FFDD00] text-[#111111] font-bold' : 'bg-gray-100 text-[#555555]'}`}
             onClick={() => setFilter('all')}
@@ -160,54 +166,73 @@ const RestaurantQueue = () => {
         </div>
       </div>
 
-      {/* 餐厅列表 - 双列瀑布流布局 */}
-      <div className="px-3 pt-2 pb-4">
+      {/* 餐厅列表 */}
+      <div className="px-3 pt-0 pb-3">
         {loading ? (
           <div className="flex justify-center items-center h-40">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-2">
+          <div className="space-y-2">
             {filteredRestaurants.map((restaurant) => (
-              <div key={restaurant.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
-                <div className="aspect-square w-full">
-                  <img 
-                    src={restaurant.image} 
-                    alt={restaurant.name} 
-                    className="mx-auto object-cover w-full h-full"
-                  />
+              <div key={restaurant.id} className="bg-white rounded-lg overflow-hidden shadow-sm flex p-3">
+                <div className="w-[88px]">
+                  <div className="h-[88px] w-[88px]">
+                    <img 
+                      src={restaurant.image} 
+                      alt={restaurant.name} 
+                      className="object-cover w-full h-full rounded-lg"
+                    />
+                  </div>
                 </div>
-                <div className="p-3">
+                <div className="ml-3 flex-1">
                   <div className="flex justify-between items-start">
-                    <h3 className="font-bold text-sm line-clamp-1">{restaurant.name}</h3>
-                    <div className="flex items-center">
-                      <Star className="h-3 w-3 text-yellow-400 mr-1" fill="#FACC15" />
-                      <span className="text-xs">{restaurant.rating}</span>
+                    <h3 className="font-bold text-base text-left">{restaurant.name}</h3>
+                    <div className="text-xs text-orange-500 flex items-center">
+                      <Clock className="h-3 w-3 mr-1" />
+                      <span>等待{restaurant.waitTime}分钟</span>
                     </div>
                   </div>
                   
-                  <div className="mt-2">
+                  <div className="mt-1 flex items-center text-xs text-gray-600">
                     <div className="flex items-center">
-                      <Clock className="h-3 w-3 mr-1" />
-                      <span className={`text-xs font-medium ${getWaitTimeColor(restaurant.waitTime)}`}>
-                        等待时间: {restaurant.waitTime} 分钟
-                      </span>
+                      <Star className="h-3 w-3 mr-0.5" fill={restaurant.rating >= 1 ? "#FF7700" : "none"} stroke={restaurant.rating >= 1 ? "#FF7700" : "#f5f5f5"} />
+                      <Star className="h-3 w-3 mr-0.5" fill={restaurant.rating >= 2 ? "#FF7700" : "none"} stroke={restaurant.rating >= 2 ? "#FF7700" : "#f5f5f5"} />
+                      <Star className="h-3 w-3 mr-0.5" fill={restaurant.rating >= 3 ? "#FF7700" : "none"} stroke={restaurant.rating >= 3 ? "#FF7700" : "#f5f5f5"} />
+                      <Star className="h-3 w-3 mr-0.5" fill={restaurant.rating >= 4 ? "#FF7700" : "none"} stroke={restaurant.rating >= 4 ? "#FF7700" : "#f5f5f5"} />
+                      <div className="relative h-3 w-3 mr-1">
+                        {/* 基础灰色星星 */}
+                        <Star className="h-3 w-3 absolute top-0 left-0" fill="#f5f5f5" stroke="none" />
+                        
+                        {/* 满星 */}
+                        {restaurant.rating >= 5 && (
+                          <Star className="h-3 w-3 absolute top-0 left-0" fill="#FF7700" stroke="none" />
+                        )}
+                        
+                        {/* 半星 */}
+                        {restaurant.rating >= 4.5 && restaurant.rating < 5 && (
+                          <div className="h-3 w-1.5 absolute top-0 left-0 overflow-hidden">
+                            <Star className="h-3 w-3" fill="#FF7700" stroke="none" />
+                          </div>
+                        )}
+                      </div>
+                      <span className="text-xs text-[#FF7700] font-bold mr-2">{restaurant.rating}</span>
                     </div>
-                    
-                    <div className="flex items-center mt-1">
-                      <Users className="h-3 w-3 mr-1" />
-                      <span className="text-xs">排队人数: {restaurant.waitCount} 组</span>
-                    </div>
-                    
-                    <div className="flex items-center mt-1">
-                      <MapPin className="h-3 w-3 mr-1" />
-                      <span className="text-xs text-gray-500">{restaurant.location}</span>
-                    </div>
+                  </div>
+                  
+                  <div className="mt-1 flex items-center">
+                    <span className="text-gray-500 text-xs text-left">地址:</span>
+                    <span className="text-xs text-left ml-[6px]">{restaurant.location}</span>
+                  </div>
+                  
+                  <div className="flex items-center mt-1">
+                    <Users className="h-3 w-3 mr-1 text-gray-500" />
+                    <span className="text-xs">排队人数: {restaurant.waitCount} 组</span>
                   </div>
                   
                   <div className="mt-2 flex flex-wrap gap-1">
                     {restaurant.tags.map((tag, index) => (
-                      <span key={index} className="bg-gray-100 text-gray-800 text-xs px-1.5 py-0.5 rounded">
+                      <span key={index} className="bg-[#FFF8F0] text-[#FF7700] text-xs px-1.5 py-0.5 rounded">
                         {tag}
                       </span>
                     ))}

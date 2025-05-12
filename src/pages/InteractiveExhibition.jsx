@@ -96,7 +96,7 @@ const InteractiveExhibition = () => {
       <div className="h-[60px]"></div>
 
       {/* 筛选选项 */}
-      <div className="py-3 px-4 bg-white mb-4">
+      <div className="py-3 px-4 bg-white mb-2">
         <div className="flex space-x-2 overflow-x-auto no-scrollbar" style={noScrollbarStyle}>
           {filters.map((filter) => (
             <button 
@@ -111,12 +111,12 @@ const InteractiveExhibition = () => {
       </div>
 
       {/* 展览列表 */}
-      <div className="px-3 pt-2 pb-3">
-        <div className="space-y-3">
+      <div className="px-3 pt-0 pb-3">
+        <div className="space-y-2">
           {exhibitions.map((exhibition) => (
             <div key={exhibition.id} className="bg-white rounded-lg overflow-hidden shadow-sm flex p-3">
-              <div className="w-1/3">
-                <div className="aspect-square w-full">
+              <div className="w-[88px]">
+                <div className="h-[88px] w-[88px]">
                   <img 
                     src={exhibition.image} 
                     alt={exhibition.title} 
