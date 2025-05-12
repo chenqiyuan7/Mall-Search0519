@@ -158,18 +158,18 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
               <h3 className="font-medium">到店套餐</h3>
               <span className="text-sm text-gray-500">共6款&gt;</span>
             </div>
-            <div className="space-y-3">
+            <div>
               {packages.map((pkg) => (
-                <div key={pkg.id} className="flex items-center bg-white p-2 rounded">
+                <div key={pkg.id} className="flex items-center bg-white rounded">
                   <img 
                     src={pkg.image}
                     alt={pkg.name}
                     className="w-16 h-16 rounded object-cover"
                   />
-                  <div className="ml-2 flex-1">
-                    <h4 className="text-sm">{pkg.name}</h4>
-                    <div className="mt-1">
-                      <span className="text-red-500">¥{pkg.price}</span>
+                  <div className="flex-1 ml-[5px]">
+                    <h4 className="text-xs">{pkg.name}</h4>
+                    <div>
+                      <span className="text-red-500 text-xs">¥{pkg.price}</span>
                       <span className="text-gray-400 text-xs line-through ml-2">¥{pkg.originalPrice}</span>
                     </div>
                   </div>
