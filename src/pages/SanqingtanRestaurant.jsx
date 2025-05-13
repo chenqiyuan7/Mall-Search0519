@@ -153,7 +153,7 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
       <div className="bg-white mt-0 px-3 py-3">
         <div className="grid grid-cols-2 gap-2">
           {/* 到店套餐 */}
-          <div className="bg-cyan-50 p-4 rounded-lg">
+          <div className="bg-cyan-50 p-3 rounded-lg">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-medium">到店套餐</h3>
               <span className="text-sm text-gray-500">共6款&gt;</span>
@@ -179,7 +179,7 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
           </div>
 
           {/* 超值代金券 */}
-          <div className="bg-pink-50 p-4 rounded-lg">
+          <div className="bg-pink-50 p-3 rounded-lg">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-medium">超值代金券</h3>
               <span className="text-sm text-gray-500">共4款&gt;</span>
