@@ -154,14 +154,14 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
         <div className="grid grid-cols-2 gap-2">
           {/* 到店套餐 */}
           <div className="bg-cyan-50 p-3 rounded-lg">
-            <div className="relative">
+            <div className="relative w-[171.5px] -mx-3 -mt-3">
               <img 
                 src="/到店套餐备份 2@2x.png"
                 alt="到店套餐"
-                className="w-[171.5px] object-cover -mx-3 -mt-3"
+                className="w-full h-full object-cover"
               />
               <div className="absolute bottom-2 left-2">
-                <h3 className="font-medium text-black">到店套餐</h3>
+                <h3 className="font-medium" style={{ color: '#000000' }}>到店套餐</h3>
               </div>
             </div>
             <div className="mt-4">
