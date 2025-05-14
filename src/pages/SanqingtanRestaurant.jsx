@@ -158,10 +158,10 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
               <img 
                 src="/到店套餐备份 2@2x.png"
                 alt="到店套餐"
-                className="w-full object-cover -mx-3 -mt-3"
+                className="w-[171.5px] object-cover -mx-3 -mt-3"
               />
               <div className="absolute bottom-2 left-2">
-                <h3 className="font-medium text-white">到店套餐</h3>
+                <h3 className="font-medium text-black">到店套餐</h3>
               </div>
             </div>
             <div className="mt-4">
