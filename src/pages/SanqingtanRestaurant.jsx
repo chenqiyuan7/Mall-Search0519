@@ -154,6 +154,11 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
         <div className="grid grid-cols-2 gap-2">
           {/* 到店套餐 */}
           <div className="bg-cyan-50 p-3 rounded-lg">
+            <img 
+              src="/到店套餐备份 2@2x.png"
+              alt="到店套餐"
+              className="w-full object-contain -mt-3 -mx-3"
+            />
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-medium">到店套餐</h3>
               <span className="text-sm text-gray-500">共6款&gt;</span>
