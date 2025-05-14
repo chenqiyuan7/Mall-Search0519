@@ -17,17 +17,24 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
   const packages = [
     {
       id: 1,
-      name: "经典烧鹅双人餐",
+      name: "人气爆款经典烧鹅双人配米饭",
       price: 28.9,
       originalPrice: 50,
       image: "https://nocode.meituan.com/photo/search?keyword=roasted,goose,meal&width=200&height=200"
     },
     {
       id: 2,
-      name: "潮州卤水拼盘三人餐",
+      name: "超值潮州卤水拼盘配时蔬",
       price: 49.9,
       originalPrice: 50,
       image: "https://nocode.meituan.com/photo/search?keyword=chaozhou,food&width=200&height=200"
+    },
+    {
+      id: 3,
+      name: "店长推荐秘制烧鹅配靓汤",
+      price: 39.9,
+      originalPrice: 68,
+      image: "https://nocode.meituan.com/photo/search?keyword=roasted,goose,rice&width=200&height=200"
     }
   ];
 
@@ -42,6 +49,12 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
       id: 2,
       price: 129,
       value: 350,
+      description: "周一至周日全天可用"
+    },
+    {
+      id: 3,
+      price: 99,
+      value: 200,
       description: "周一至周日全天可用"
     }
   ];
@@ -149,85 +162,117 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
         />
       </div>
 
-      {/* 套餐和代金券 */}
-      <div className="bg-white mt-0 px-3 py-3">
-        <div className="grid grid-cols-2 gap-2">
-          {/* 到店套餐 */}
-          <div className="bg-cyan-50 p-3 rounded-lg">
-            <div className="relative w-[171.5px] -mx-3 -mt-3">
-              <img 
-                src="/到店套餐备份 2@2x.png"
-                alt="到店套餐"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute bottom-2 left-2">
-                <h3 className="font-medium" style={{ color: '#000000' }}>到店套餐</h3>
-              </div>
-            </div>
-            <div className="mt-4">
-              {packages.map((pkg) => (
-                <div key={pkg.id} className="flex items-center bg-white rounded">
+      {/* 从这里开始添加灰色背景 */}
+      <div className="relative">
+        {/* 渐变背景层 */}
+        <div 
+          className="absolute w-full h-[26px]" 
+          style={{ 
+            background: 'linear-gradient(to bottom, #FFFFFF 0%, #F5F5F5 100%)',
+            top: 0
+          }}
+        />
+        {/* 灰色背景层 */}
+        <div className="absolute w-full bg-[#F5F5F5]" style={{ top: '26px', bottom: 0 }} />
+        
+        {/* 内容层 */}
+        <div className="relative">
+          {/* 套餐和代金券 */}
+          <div className="px-3 py-3">
+            <div className="grid grid-cols-2 gap-2">
+              {/* 到店套餐 */}
+              <div className="bg-white p-3 rounded-2xl">
+                <div className="relative w-[171.5px] -mx-3 -mt-3">
                   <img 
-                    src={pkg.image}
-                    alt={pkg.name}
-                    className="w-16 h-16 rounded object-cover"
+                    src="/到店套餐备份 2@2x.png"
+                    alt="到店套餐"
+                    className="w-full h-full object-cover"
                   />
-                  <div className="flex-1 ml-[5px]">
-                    <h4 className="text-xs">{pkg.name}</h4>
-                    <div>
-                      <span className="text-red-500 text-xs">¥{pkg.price}</span>
-                      <span className="text-gray-400 text-xs line-through ml-2">¥{pkg.originalPrice}</span>
-                    </div>
+                  <div className="absolute top-3 left-3">
+                    <h3 className="font-medium" style={{ color: '#000000' }}>到店套餐</h3>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* 超值代金券 */}
-          <div className="bg-pink-50 p-3 rounded-lg">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="font-medium">超值代金券</h3>
-              <span className="text-sm text-gray-500">共4款&gt;</span>
-            </div>
-            <div className="space-y-3">
-              {vouchers.map((voucher) => (
-                <div key={voucher.id} className="bg-white p-2 rounded">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <div className="flex items-baseline">
-                        <span className="text-red-500 text-lg">¥{voucher.price}</span>
-                        <span className="text-gray-500 text-xs ml-1">代{voucher.value}</span>
+                <div className="space-y-[5px]">
+                  {packages.map((pkg) => (
+                    <div key={pkg.id} className="flex items-center bg-white rounded">
+                      <img 
+                        src={pkg.image}
+                        alt={pkg.name}
+                        className="w-[53px] h-[53px] rounded-xl object-cover"
+                      />
+                      <div className="flex-1 ml-[5px]">
+                        <h4 className="text-xs">{pkg.name}</h4>
+                        <div>
+                          <span className="text-red-500 text-xs">¥{pkg.price}</span>
+                          <span className="text-gray-400 text-xs line-through ml-2">¥{pkg.originalPrice}</span>
+                        </div>
                       </div>
-                      <p className="text-gray-500 text-xs mt-1">{voucher.description}</p>
                     </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 超值代金券 */}
+              <div className="bg-white p-3 rounded-2xl">
+                <div className="relative w-[171.5px] -mx-3 -mt-3">
+                  <img 
+                    src="/超值代金券备份 2@2x.png"
+                    alt="超值代金券"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute top-3 left-3">
+                    <h3 className="font-medium" style={{ color: '#000000' }}>超值代金券</h3>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 网友推荐菜 */}
-      <div className="bg-white mt-2 px-3 py-4 pb-20">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="font-medium">网友推荐菜</h3>
-          <span className="text-sm text-gray-500">查看全部&gt;</span>
-        </div>
-        <div className="grid grid-cols-3 gap-4">
-          {recommendedDishes.map((dish) => (
-            <div key={dish.id} className="relative">
-              <img 
-                src={dish.image}
-                alt={dish.name}
-                className="w-full h-24 rounded object-cover"
-              />
-              <div className="absolute top-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded">
-                {dish.name}
+                <div className="flex flex-col gap-[5px]">
+                  {vouchers.map((voucher, index) => (
+                    <div 
+                      key={voucher.id} 
+                      className={`h-[53px] p-2 rounded-xl flex items-center ${index !== vouchers.length - 1 ? 'mb-[5px]' : ''}`}
+                      style={{
+                        background: 'linear-gradient(270deg, #FFFBFE 44%, #FFF1F8 99%)',
+                        border: '0.5px solid #FFF1F8',
+                        opacity: 1,
+                        boxSizing: 'border-box'
+                      }}
+                    >
+                      <div className="flex justify-between items-center w-full">
+                        <div>
+                          <div className="flex items-baseline">
+                            <span className="text-red-500 text-lg">¥{voucher.price}</span>
+                            <span className="text-gray-500 text-xs ml-1">代{voucher.value}</span>
+                          </div>
+                          <p className="text-gray-500 text-xs mt-1">{voucher.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* 网友推荐菜 */}
+          <div className="bg-white mt-2 px-3 py-4 pb-20">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="font-medium">网友推荐菜</h3>
+              <span className="text-sm text-gray-500">查看全部&gt;</span>
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              {recommendedDishes.map((dish) => (
+                <div key={dish.id} className="relative">
+                  <img 
+                    src={dish.image}
+                    alt={dish.name}
+                    className="w-full h-24 rounded object-cover"
+                  />
+                  <div className="absolute top-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded">
+                    {dish.name}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
       </div>
