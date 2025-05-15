@@ -155,7 +155,7 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
       </div>
 
       {/* 导航区域 */}
-      <div className="bg-white px-3" style={{ borderTop: 'none' }}>  {/* 确保没有顶部边框 */}
+      <div className="bg-white px-3" style={{ borderTop: 'none', marginTop: '-1px' }}>  {/* 添加负margin消除可能的间隙 */}
         <img 
           src="/路线规划@2x.png" 
           alt="路线规划"
