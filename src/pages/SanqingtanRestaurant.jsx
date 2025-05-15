@@ -133,7 +133,8 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
       <div className="grid grid-cols-4 mt-0 p-4" style={{ 
         backgroundImage: 'url(/ICON背景@2x.png)', 
         backgroundSize: 'cover', 
-        backgroundPosition: 'center'
+        backgroundPosition: 'center',
+        borderBottom: 'none'  // 确保没有底部边框
       }}>
         <button className="flex flex-col items-center">
           <img src="/预定.png" alt="预定" className="w-10 h-10 mb-1" />
@@ -154,7 +155,7 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
       </div>
 
       {/* 导航区域 */}
-      <div className="bg-white px-3">
+      <div className="bg-white px-3" style={{ borderTop: 'none' }}>  {/* 确保没有顶部边框 */}
         <img 
           src="/路线规划@2x.png" 
           alt="路线规划"
