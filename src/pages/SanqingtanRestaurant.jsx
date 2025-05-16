@@ -107,7 +107,7 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
       {/* 店铺信息 */}
       <div className="relative">
         <img 
-          src="./店铺详情头图@2x.png"
+          src="/店铺详情头图@2x.png"
           alt={store.name}
           className="w-full object-cover"/>
         
@@ -195,7 +195,7 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
                 </div>
                 <div className="space-y-[5px]">
                   {packages.map((pkg) => (
-                    <div key={pkg.id} className="flex items-center bg-white rounded">
+                    <div key={pkg.id} className="flex items-center bg-white rounded h-[53px]">
                       <img 
                         src={pkg.image}
                         alt={pkg.name}
@@ -225,11 +225,11 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
                     <h3 className="font-medium" style={{ color: '#000000' }}>超值代金券</h3>
                   </div>
                 </div>
-                <div className="flex flex-col gap-[5px]">
+                <div className="flex flex-col gap-[6px]">
                   {vouchers.map((voucher, index) => (
                     <div 
                       key={voucher.id} 
-                      className={`h-[53px] p-2 rounded-xl flex items-center ${index !== vouchers.length - 1 ? 'mb-[5px]' : ''}`}
+                      className="min-h-[53px] p-1 rounded-xl flex items-center"
                       style={{
                         background: 'linear-gradient(270deg, #FFFBFE 44%, #FFF1F8 99%)',
                         border: '0.5px solid #FFF1F8',
@@ -238,12 +238,15 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
                       }}
                     >
                       <div className="flex justify-between items-center w-full">
-                        <div>
-                          <div className="flex items-baseline">
-                            <span className="text-red-500 text-lg">¥{voucher.price}</span>
-                            <span className="text-gray-500 text-xs ml-1">代{voucher.value}</span>
+                        <div className="flex flex-col">
+                          <div className="text-xs font-medium" style={{ color: '#000000', fontSize: '12px' }}>
+                            {`${voucher.price}代${voucher.value}代金券`}
                           </div>
-                          <p className="text-gray-500 text-xs mt-1">{voucher.description}</p>
+                          <p className="text-gray-500" style={{ fontSize: '10px' }}>{voucher.description}</p>
+                        </div>
+                        <div className="flex items-baseline">
+                          <span className="text-red-500">¥</span>
+                          <span className="text-red-500 text-lg">{voucher.price}</span>
                         </div>
                       </div>
                     </div>
@@ -254,21 +257,28 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
           </div>
 
           {/* 网友推荐菜 */}
-          <div className="bg-white mt-2 px-3 py-4 pb-20">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="font-medium">网友推荐菜</h3>
-              <span className="text-sm text-gray-500">查看全部&gt;</span>
+          <div className="bg-white mx-3 rounded-2xl">
+            <div className="relative w-[351px] mx-auto">
+              <img 
+                src="/网友推荐菜@2x.png"
+                alt="网友推荐菜"
+                className="w-full h-full object-contain"
+              />
             </div>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-[6px] px-3 pb-20">
               {recommendedDishes.map((dish) => (
-                <div key={dish.id} className="relative">
+                <div key={dish.id} className="relative aspect-square">
                   <img 
                     src={dish.image}
                     alt={dish.name}
-                    className="w-full h-24 rounded object-cover"
+                    className="w-full h-full rounded-lg object-cover"
                   />
-                  <div className="absolute top-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded">
-                    {dish.name}
+                  <div className="absolute left-[5px] -top-[3px]">
+                    <img 
+                      src={`/TOP${dish.id}.png`}
+                      alt={dish.name}
+                      className="w-12 h-6 object-contain"
+                    />
                   </div>
                 </div>
               ))}
