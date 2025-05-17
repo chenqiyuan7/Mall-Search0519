@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Clock, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
@@ -25,7 +25,14 @@ const KidsActivities = () => {
       location: "4楼 科教中心",
       ageRange: "6-12岁",
       price: "98元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=science,kids,experiment&width=300&height=300"
+      image: "https://nocode.meituan.com/photo/search?keyword=science,kids,experiment&width=300&height=300",
+      waitTime: "5分钟",
+      rating: 4.8,
+      features: ["科学实验", "互动教学", "适合亲子"],
+      packages: [
+        "98元 <s>128元</s> 单人票",
+        "178元 <s>228元</s> 亲子票"
+      ]
     },
     {
       id: 2,
@@ -36,7 +43,14 @@ const KidsActivities = () => {
       location: "6楼 空中花园",
       ageRange: "4-12岁",
       price: "68元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=outdoor,adventure,kids&width=300&height=300"
+      image: "https://nocode.meituan.com/photo/search?keyword=outdoor,adventure,kids&width=300&height=300",
+      waitTime: "10分钟",
+      rating: 4.7,
+      features: ["户外活动", "探险体验", "适合亲子"],
+      packages: [
+        "68元 <s>88元</s> 单人票",
+        "128元 <s>168元</s> 亲子票"
+      ]
     },
     {
       id: 3,
@@ -47,7 +61,14 @@ const KidsActivities = () => {
       location: "3楼 艺术中心",
       ageRange: "3-15岁",
       price: "128元/课时",
-      image: "https://nocode.meituan.com/photo/search?keyword=art,studio,kids&width=300&height=300"
+      image: "https://nocode.meituan.com/photo/search?keyword=art,studio,kids&width=300&height=300",
+      waitTime: "15分钟",
+      rating: 4.9,
+      features: ["艺术创作", "创意体验", "适合亲子"],
+      packages: [
+        "128元 <s>158元</s> 单人票",
+        "228元 <s>298元</s> 亲子票"
+      ]
     },
     {
       id: 4,
@@ -58,7 +79,14 @@ const KidsActivities = () => {
       location: "5楼 教育中心",
       ageRange: "7-14岁",
       price: "158元/课时",
-      image: "https://nocode.meituan.com/photo/search?keyword=coding,kids,education&width=300&height=300"
+      image: "https://nocode.meituan.com/photo/search?keyword=coding,kids,education&width=300&height=300",
+      waitTime: "20分钟",
+      rating: 4.8,
+      features: ["编程教育", "互动教学", "适合亲子"],
+      packages: [
+        "158元 <s>198元</s> 单人票",
+        "288元 <s>368元</s> 亲子票"
+      ]
     },
     {
       id: 5,
@@ -69,7 +97,14 @@ const KidsActivities = () => {
       location: "2楼 运动中心",
       ageRange: "3-10岁",
       price: "88元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=sports,kids,interactive&width=300&height=300"
+      image: "https://nocode.meituan.com/photo/search?keyword=sports,kids,interactive&width=300&height=300",
+      waitTime: "8分钟",
+      rating: 4.7,
+      features: ["运动健身", "亲子互动", "适合亲子"],
+      packages: [
+        "88元 <s>108元</s> 单人票",
+        "158元 <s>198元</s> 亲子票"
+      ]
     }
   ];
 
@@ -141,35 +176,78 @@ const KidsActivities = () => {
                 </div>
               </div>
               <div className="ml-3 flex-1">
-                <h3 className="font-bold text-base text-left">{activity.name}</h3>
-                <p className="text-gray-600 text-xs mt-1 text-left">{activity.description}</p>
-                
-                <div className="mt-2 space-y-1">
-                  <div className="flex items-center">
-                    <span className="text-gray-500 text-xs text-left">活动时间:</span>
-                    <span className="text-xs text-left ml-[6px]">{activity.time}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="text-gray-500 text-xs text-left">活动地点:</span>
-                    <span className="text-xs text-left ml-[6px]">{activity.location}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="text-gray-500 text-xs text-left">适合年龄:</span>
-                    <span className="text-xs text-left ml-[6px]">{activity.ageRange}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="text-gray-500 text-xs text-left">活动费用:</span>
-                    <span className="text-red-500 font-medium text-xs text-left ml-[6px]">{activity.price}</span>
+                <div className="flex justify-between items-start">
+                  <h3 className="font-bold text-base text-left">{activity.name}</h3>
+                  <div className="text-xs text-orange-500 flex items-center">
+                    <Clock className="h-3 w-3 mr-1" />
+                    <span>等待{activity.waitTime}</span>
                   </div>
                 </div>
                 
-                <div className="mt-2 flex space-x-2">
-                  <button className="bg-blue-500 text-white px-2 py-1 rounded text-xs">
-                    活动详情
-                  </button>
-                  <button className="bg-green-500 text-white px-2 py-1 rounded text-xs">
-                    立即预约
-                  </button>
+                <div className="mt-1 flex items-center text-xs text-gray-600">
+                  <div className="flex items-center">
+                    <Star className="h-3 w-3 mr-0.5" fill={activity.rating >= 1 ? "#FF7700" : "none"} stroke={activity.rating >= 1 ? "#FF7700" : "#f5f5f5"} />
+                    <Star className="h-3 w-3 mr-0.5" fill={activity.rating >= 2 ? "#FF7700" : "none"} stroke={activity.rating >= 2 ? "#FF7700" : "#f5f5f5"} />
+                    <Star className="h-3 w-3 mr-0.5" fill={activity.rating >= 3 ? "#FF7700" : "none"} stroke={activity.rating >= 3 ? "#FF7700" : "#f5f5f5"} />
+                    <Star className="h-3 w-3 mr-0.5" fill={activity.rating >= 4 ? "#FF7700" : "none"} stroke={activity.rating >= 4 ? "#FF7700" : "#f5f5f5"} />
+                    <div className="relative h-3 w-3 mr-1">
+                      <Star className="h-3 w-3 absolute top-0 left-0" fill="#f5f5f5" stroke="none" />
+                      {activity.rating >= 5 && (
+                        <Star className="h-3 w-3 absolute top-0 left-0" fill="#FF7700" stroke="none" />
+                      )}
+                      {activity.rating >= 4.5 && activity.rating < 5 && (
+                        <div className="h-3 w-1.5 absolute top-0 left-0 overflow-hidden">
+                          <Star className="h-3 w-3" fill="#FF7700" stroke="none" />
+                        </div>
+                      )}
+                    </div>
+                    <span className="text-xs text-[#FF7700] font-bold mr-2">{activity.rating}</span>
+                  </div>
+                  <span>{activity.price}</span>
+                </div>
+                
+                <div className="mt-1 flex items-center">
+                  <span className="text-gray-500 text-xs text-left">地址:</span>
+                  <span className="text-xs text-left ml-[6px]">{activity.location}</span>
+                </div>
+                
+                <div className="mt-2 flex flex-wrap gap-1">
+                  {activity.features.map((feature, index) => (
+                    <span key={index} className="bg-[#FFF8F0] text-[#FF7700] text-xs px-1.5 py-0.5 rounded">
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+                
+                <div className="mt-2">
+                  <div className="border-t border-gray-100 pt-2">
+                    <p className="text-xs flex items-center">
+                      <img src="/优惠logo@2x.png" alt="优惠" className="w-4 h-4 mr-1" />
+                      {activity.packages[0].split(' ').map((part, index) => {
+                        if (index === 0) {
+                          return <span key={index} className="text-[#FF2D19] font-bold">{part}</span>;
+                        } else if (part.startsWith('<s>') && part.endsWith('</s>')) {
+                          const price = part.replace('<s>', '').replace('</s>', '');
+                          return <span key={index} className="text-[#999999] font-normal mx-1" style={{ textDecoration: 'line-through' }}>{price}</span>;
+                        } else {
+                          return <span key={index} className="text-[#111111] ml-1">{part}</span>;
+                        }
+                      })}
+                    </p>
+                    <p className="text-xs flex items-center mt-2">
+                      <img src="/优惠logo@2x.png" alt="优惠" className="w-4 h-4 mr-1" />
+                      {activity.packages[1].split(' ').map((part, index) => {
+                        if (index === 0) {
+                          return <span key={index} className="text-[#FF2D19] font-bold">{part}</span>;
+                        } else if (part.startsWith('<s>') && part.endsWith('</s>')) {
+                          const price = part.replace('<s>', '').replace('</s>', '');
+                          return <span key={index} className="text-[#999999] font-normal mx-1" style={{ textDecoration: 'line-through' }}>{price}</span>;
+                        } else {
+                          return <span key={index} className="text-[#111111] ml-1">{part}</span>;
+                        }
+                      })}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

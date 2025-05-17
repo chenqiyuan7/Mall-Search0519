@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Clock, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
@@ -14,7 +14,14 @@ const InteractiveExhibition = () => {
       location: "4楼 展厅A",
       time: "10:00-20:00",
       price: "88元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=ocean,exhibition,interactive&width=300&height=300"
+      image: "https://nocode.meituan.com/photo/search?keyword=ocean,exhibition,interactive&width=300&height=300",
+      waitTime: "15分钟",
+      rating: 4.8,
+      features: ["互动体验", "科普教育", "适合亲子"],
+      packages: [
+        "88元 <s>108元</s> 单人票",
+        "158元 <s>198元</s> 亲子票"
+      ]
     },
     {
       id: 2,
@@ -23,7 +30,14 @@ const InteractiveExhibition = () => {
       location: "5楼 展厅B",
       time: "09:30-19:30",
       price: "98元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=space,exhibition,interactive&width=300&height=300"
+      image: "https://nocode.meituan.com/photo/search?keyword=space,exhibition,interactive&width=300&height=300",
+      waitTime: "20分钟",
+      rating: 4.9,
+      features: ["VR体验", "科技互动", "科普教育"],
+      packages: [
+        "98元 <s>128元</s> 单人票",
+        "178元 <s>228元</s> 亲子票"
+      ]
     },
     {
       id: 3,
@@ -32,7 +46,14 @@ const InteractiveExhibition = () => {
       location: "3楼 展厅C",
       time: "10:00-19:00",
       price: "78元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=dinosaur,exhibition&width=300&height=300"
+      image: "https://nocode.meituan.com/photo/search?keyword=dinosaur,exhibition&width=300&height=300",
+      waitTime: "10分钟",
+      rating: 4.7,
+      features: ["AR互动", "科普教育", "适合亲子"],
+      packages: [
+        "78元 <s>98元</s> 单人票",
+        "138元 <s>178元</s> 亲子票"
+      ]
     },
     {
       id: 4,
@@ -41,7 +62,14 @@ const InteractiveExhibition = () => {
       location: "2楼 展厅D",
       time: "10:30-20:30",
       price: "108元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=digital,art,exhibition&width=300&height=300"
+      image: "https://nocode.meituan.com/photo/search?keyword=digital,art,exhibition&width=300&height=300",
+      waitTime: "25分钟",
+      rating: 4.6,
+      features: ["光影艺术", "沉浸体验", "适合拍照"],
+      packages: [
+        "108元 <s>138元</s> 单人票",
+        "198元 <s>258元</s> 亲子票"
+      ]
     },
     {
       id: 5,
@@ -50,7 +78,14 @@ const InteractiveExhibition = () => {
       location: "6楼 展厅E",
       time: "09:00-18:00",
       price: "128元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=future,technology,exhibition&width=300&height=300"
+      image: "https://nocode.meituan.com/photo/search?keyword=future,technology,exhibition&width=300&height=300",
+      waitTime: "30分钟",
+      rating: 4.9,
+      features: ["科技互动", "未来体验", "适合亲子"],
+      packages: [
+        "128元 <s>158元</s> 单人票",
+        "228元 <s>298元</s> 亲子票"
+      ]
     }
   ];
 
@@ -125,31 +160,78 @@ const InteractiveExhibition = () => {
                 </div>
               </div>
               <div className="ml-3 flex-1">
-                <h3 className="font-bold text-base text-left">{exhibition.title}</h3>
-                <p className="text-gray-600 text-xs mt-1 text-left">{exhibition.description}</p>
-                
-                <div className="mt-2 space-y-1">
-                  <div className="flex items-center">
-                    <span className="text-gray-500 text-xs text-left">展览地点:</span>
-                    <span className="text-xs text-left ml-[6px]">{exhibition.location}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="text-gray-500 text-xs text-left">开放时间:</span>
-                    <span className="text-xs text-left ml-[6px]">{exhibition.time}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="text-gray-500 text-xs text-left">票价:</span>
-                    <span className="text-red-500 font-medium text-xs text-left ml-[6px]">{exhibition.price}</span>
+                <div className="flex justify-between items-start">
+                  <h3 className="font-bold text-base text-left">{exhibition.title}</h3>
+                  <div className="text-xs text-orange-500 flex items-center">
+                    <Clock className="h-3 w-3 mr-1" />
+                    <span>等待{exhibition.waitTime}</span>
                   </div>
                 </div>
                 
-                <div className="mt-2 flex space-x-2">
-                  <button className="bg-blue-500 text-white px-2 py-1 rounded text-xs">
-                    展览详情
-                  </button>
-                  <button className="bg-green-500 text-white px-2 py-1 rounded text-xs">
-                    立即预约
-                  </button>
+                <div className="mt-1 flex items-center text-xs text-gray-600">
+                  <div className="flex items-center">
+                    <Star className="h-3 w-3 mr-0.5" fill={exhibition.rating >= 1 ? "#FF7700" : "none"} stroke={exhibition.rating >= 1 ? "#FF7700" : "#f5f5f5"} />
+                    <Star className="h-3 w-3 mr-0.5" fill={exhibition.rating >= 2 ? "#FF7700" : "none"} stroke={exhibition.rating >= 2 ? "#FF7700" : "#f5f5f5"} />
+                    <Star className="h-3 w-3 mr-0.5" fill={exhibition.rating >= 3 ? "#FF7700" : "none"} stroke={exhibition.rating >= 3 ? "#FF7700" : "#f5f5f5"} />
+                    <Star className="h-3 w-3 mr-0.5" fill={exhibition.rating >= 4 ? "#FF7700" : "none"} stroke={exhibition.rating >= 4 ? "#FF7700" : "#f5f5f5"} />
+                    <div className="relative h-3 w-3 mr-1">
+                      <Star className="h-3 w-3 absolute top-0 left-0" fill="#f5f5f5" stroke="none" />
+                      {exhibition.rating >= 5 && (
+                        <Star className="h-3 w-3 absolute top-0 left-0" fill="#FF7700" stroke="none" />
+                      )}
+                      {exhibition.rating >= 4.5 && exhibition.rating < 5 && (
+                        <div className="h-3 w-1.5 absolute top-0 left-0 overflow-hidden">
+                          <Star className="h-3 w-3" fill="#FF7700" stroke="none" />
+                        </div>
+                      )}
+                    </div>
+                    <span className="text-xs text-[#FF7700] font-bold mr-2">{exhibition.rating}</span>
+                  </div>
+                  <span>{exhibition.price}</span>
+                </div>
+                
+                <div className="mt-1 flex items-center">
+                  <span className="text-gray-500 text-xs text-left">地址:</span>
+                  <span className="text-xs text-left ml-[6px]">{exhibition.location}</span>
+                </div>
+                
+                <div className="mt-2 flex flex-wrap gap-1">
+                  {exhibition.features.map((feature, index) => (
+                    <span key={index} className="bg-[#FFF8F0] text-[#FF7700] text-xs px-1.5 py-0.5 rounded">
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+                
+                <div className="mt-2">
+                  <div className="border-t border-gray-100 pt-2">
+                    <p className="text-xs flex items-center">
+                      <img src="/优惠logo@2x.png" alt="优惠" className="w-4 h-4 mr-1" />
+                      {exhibition.packages[0].split(' ').map((part, index) => {
+                        if (index === 0) {
+                          return <span key={index} className="text-[#FF2D19] font-bold">{part}</span>;
+                        } else if (part.startsWith('<s>') && part.endsWith('</s>')) {
+                          const price = part.replace('<s>', '').replace('</s>', '');
+                          return <span key={index} className="text-[#999999] font-normal mx-1" style={{ textDecoration: 'line-through' }}>{price}</span>;
+                        } else {
+                          return <span key={index} className="text-[#111111] ml-1">{part}</span>;
+                        }
+                      })}
+                    </p>
+                    <p className="text-xs flex items-center mt-2">
+                      <img src="/优惠logo@2x.png" alt="优惠" className="w-4 h-4 mr-1" />
+                      {exhibition.packages[1].split(' ').map((part, index) => {
+                        if (index === 0) {
+                          return <span key={index} className="text-[#FF2D19] font-bold">{part}</span>;
+                        } else if (part.startsWith('<s>') && part.endsWith('</s>')) {
+                          const price = part.replace('<s>', '').replace('</s>', '');
+                          return <span key={index} className="text-[#999999] font-normal mx-1" style={{ textDecoration: 'line-through' }}>{price}</span>;
+                        } else {
+                          return <span key={index} className="text-[#111111] ml-1">{part}</span>;
+                        }
+                      })}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
