@@ -7,6 +7,8 @@ import SanqingtanRestaurantDrawer from "./SanqingtanRestaurant";
 
 const Index = () => {
   const navigate = useNavigate();
+  // 获取基础路径
+  const BASE_URL = import.meta.env.BASE_URL || '/';
   const [isOpenSouthernDiscountsDrawer, setIsOpenSouthernDiscountsDrawer] = useState(false);
   const [isOpenSanqingtanDrawer, setIsOpenSanqingtanDrawer] = useState(false);
   const [showHistoryBar, setShowHistoryBar] = useState(false);
@@ -138,7 +140,7 @@ const Index = () => {
         <div 
           className="absolute top-0 left-0 w-full h-[500px] bg-cover bg-center bg-no-repeat z-0"
           style={{
-            backgroundImage: 'url(./bg@1x.png)'
+            backgroundImage: `url(${BASE_URL}bg@1x.png)`
           }}
         />
         
@@ -163,13 +165,13 @@ const Index = () => {
               <div className="flex items-center relative z-2 pl-[4px]">
                 <div className="flex -space-x-2 mr-2">
                   <div className="w-6 h-6 rounded-full border-0.5 border-white overflow-hidden">
-                    <img src="./IndexAvatar1.png" alt="avatar1" className="w-full h-full object-cover" />
+                    <img src={`${BASE_URL}IndexAvatar1.png`} alt="avatar1" className="w-full h-full object-cover" />
                   </div>
                   <div className="w-6 h-6 rounded-full border-0.5 border-white overflow-hidden">
-                    <img src="./IndexAvatar2.png" alt="avatar2" className="w-full h-full object-cover" />
+                    <img src={`${BASE_URL}IndexAvatar2.png`} alt="avatar2" className="w-full h-full object-cover" />
                   </div>
                   <div className="w-6 h-6 rounded-full border-0.5 border-white overflow-hidden">
-                    <img src="./IndexAvatar3.png" alt="avatar3" className="w-full h-full object-cover" />
+                    <img src={`${BASE_URL}IndexAvatar3.png`} alt="avatar3" className="w-full h-full object-cover" />
                   </div>
                 </div>
                 <span 
@@ -195,7 +197,7 @@ const Index = () => {
               {/* 助理形象容器 - 固定宽高比的图片容器 */}
               <div className="w-[107px] h-[149px] flex items-center justify-center">
                 <img 
-                  src="./艾小团x@2x.png" 
+                  src={`${BASE_URL}艾小团x@2x.png`}
                   alt="艾小团" 
                   className="object-contain w-full h-full"
                 />
@@ -213,7 +215,7 @@ const Index = () => {
                 {/* 使用图片替代文字标题和胶囊背景 */}
                 <div className="flex mb-1.5">
                   <img 
-                    src="./大家都在问@2x.png" 
+                    src={`${BASE_URL}大家都在问@2x.png`}
                     alt="大家都在问" 
                     className="h-[38px] object-contain"
                   />
@@ -235,7 +237,7 @@ const Index = () => {
                           onClick={handleSouthernCuisineClick}
                           className="relative flex items-center justify-center px-4 rounded-full cursor-pointer"
                           style={{
-                            backgroundImage: 'url(./butn.png)',
+                            backgroundImage: `url(${BASE_URL}butn.png)`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                             color: '#000000',
@@ -248,10 +250,10 @@ const Index = () => {
                         </div>
                       ) : (
                         <Link 
-                          to={item.path} 
-                          className="relative flex items-center justify-center px-4 rounded-full"
+                          to={item.path}
+                          className="relative flex items-center justify-center px-4 rounded-full cursor-pointer"
                           style={{
-                            backgroundImage: 'url(./butn.png)',
+                            backgroundImage: `url(${BASE_URL}butn.png)`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                             color: '#000000',
@@ -273,7 +275,7 @@ const Index = () => {
                 {/* 使用图片替代文字标题和胶囊背景 */}
                 <div className="flex mb-1.5">
                   <img 
-                    src="./热门问题@2x.png" 
+                    src={`${BASE_URL}热门问题@2x.png`}
                     alt="热门问题" 
                     className="h-[38px] object-contain"
                   />
@@ -287,9 +289,9 @@ const Index = () => {
                         <p style={{ color: '#858687', fontSize: '11px' }} className="text-left mb-1">{topic.count}</p>
                         <div className="absolute top-0 right-0 h-full">
                           <img 
-                            src={index === 0 ? "./互动展览ICON@2x.png" : 
-                                 index === 1 ? "./亲子餐厅@2x.png" : 
-                                              "./省心遛娃@2x.png"} 
+                            src={index === 0 ? `${BASE_URL}互动展览ICON@2x.png` : 
+                                 index === 1 ? `${BASE_URL}亲子餐厅@2x.png` : 
+                                              `${BASE_URL}省心遛娃@2x.png`} 
                             alt={topic.title} 
                             className="h-[91px] w-auto object-contain"
                           />
