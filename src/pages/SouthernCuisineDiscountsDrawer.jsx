@@ -25,7 +25,7 @@ const SouthernCuisineDiscountsDrawer = ({ onClose, onOpenSanqingtan }) => {
           name: "80代100代金券"
         }
       ],
-      image: "https://nocode.meituan.com/photo/search?keyword=roasted,goose,cantonese&width=300&height=200"
+      image: "/商家图烧鹅.png"
     },
     {
       id: 2,
@@ -46,7 +46,7 @@ const SouthernCuisineDiscountsDrawer = ({ onClose, onOpenSanqingtan }) => {
           name: "97代100代金券"
         }
       ],
-      image: "https://nocode.meituan.com/photo/search?keyword=yunnan,cuisine&width=300&height=200"
+      image: "/商家图云南菜.png"
     },
     {
       id: 3,
@@ -67,7 +67,7 @@ const SouthernCuisineDiscountsDrawer = ({ onClose, onOpenSanqingtan }) => {
           name: "80代100代金券"
         }
       ],
-      image: "https://nocode.meituan.com/photo/search?keyword=putien,restaurant&width=300&height=200"
+      image: "/商家图莆田.png"
     },
     {
       id: 4,
@@ -88,7 +88,7 @@ const SouthernCuisineDiscountsDrawer = ({ onClose, onOpenSanqingtan }) => {
           name: "80代100代金券"
         }
       ],
-      image: "https://nocode.meituan.com/photo/search?keyword=roasted,goose,cantonese&width=300&height=200"
+      image: "/商家图烧鹅.png"
     },
     {
       id: 5,
@@ -109,7 +109,7 @@ const SouthernCuisineDiscountsDrawer = ({ onClose, onOpenSanqingtan }) => {
           name: "80代100代金券"
         }
       ],
-      image: "https://nocode.meituan.com/photo/search?keyword=roasted,goose,cantonese&width=300&height=200"
+      image: "/商家图烧鹅.png"
     }
   ];
 
@@ -119,27 +119,21 @@ const SouthernCuisineDiscountsDrawer = ({ onClose, onOpenSanqingtan }) => {
       id: 1,
       title: "商场里的儿童餐我锁定这几家",
       likes: 1326,
-      image: "https://nocode.meituan.com/photo/search?keyword=kids,meal,restaurant&width=300&height=200"
+      image: "/推荐儿童餐1.png"
     },
     {
       id: 2,
       title: "一家适合1人的日式拉面店",
       likes: 1326,
-      image: "https://nocode.meituan.com/photo/search?keyword=japanese,ramen&width=300&height=200"
+      image: "/推荐拉面店.png"
     }
   ];
 
   const handleRestaurantClick = (restaurant) => {
-    if (restaurant.id === 1 || restaurant.id === 4 || restaurant.id === 5) {
-      if (onOpenSanqingtan) {
-        onOpenSanqingtan(); // 触发父组件的回调打开三清潭弹层
-      } else {
-        navigate('/sanqingtan-restaurant', { state: { restaurant } });
-      }
-    } else if (restaurant.id === 2) {
-      navigate('/restaurant/2', { state: { restaurant } });
-    } else if (restaurant.id === 3) {
-      navigate('/putian-restaurant', { state: { restaurant } });
+    if (onOpenSanqingtan) {
+      onOpenSanqingtan(); // 触发父组件的回调打开三清潭弹层
+    } else {
+      navigate('/sanqingtan-restaurant', { state: { restaurant } });
     }
   };
 

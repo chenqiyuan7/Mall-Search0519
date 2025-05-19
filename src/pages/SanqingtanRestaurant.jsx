@@ -3,7 +3,7 @@ import { ChevronLeft, MapPin, Clock, Users } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
-const SanqingtanRestaurantDrawer = ({ onClose }) => {
+const SanqingtanRestaurant = ({ onClose }) => {
   const navigate = useNavigate();
   
   const store = {
@@ -20,21 +20,21 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
       name: "人气爆款经典烧鹅双人配米饭",
       price: 28.9,
       originalPrice: 50,
-      image: "https://nocode.meituan.com/photo/search?keyword=roasted,goose,meal&width=200&height=200"
+      image: "/菜品图1.png"
     },
     {
       id: 2,
       name: "超值潮州卤水拼盘配时蔬",
       price: 49.9,
       originalPrice: 50,
-      image: "https://nocode.meituan.com/photo/search?keyword=chaozhou,food&width=200&height=200"
+      image: "/菜品图2.png"
     },
     {
       id: 3,
       name: "店长推荐秘制烧鹅配靓汤",
       price: 39.9,
       originalPrice: 68,
-      image: "https://nocode.meituan.com/photo/search?keyword=roasted,goose,rice&width=200&height=200"
+      image: "/菜品图3.png"
     }
   ];
 
@@ -63,17 +63,17 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
     {
       id: 1,
       name: "TOP1",
-      image: "https://nocode.meituan.com/photo/search?keyword=roasted,goose,1&width=200&height=200"
+      image: "/菜品图1.png"
     },
     {
       id: 2,
       name: "TOP2",
-      image: "https://nocode.meituan.com/photo/search?keyword=roasted,goose,2&width=200&height=200"
+      image: "/菜品图2.png"
     },
     {
       id: 3,
       name: "TOP3",
-      image: "https://nocode.meituan.com/photo/search?keyword=roasted,goose,3&width=200&height=200"
+      image: "/菜品图3.png"
     }
   ];
 
@@ -200,6 +200,7 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
                         src={pkg.image}
                         alt={pkg.name}
                         className="w-[53px] h-[53px] rounded-xl object-cover"
+                        loading="lazy"
                       />
                       <div className="flex-1 ml-[5px]">
                         <h4 className="text-xs">{pkg.name}</h4>
@@ -272,12 +273,14 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
                     src={dish.image}
                     alt={dish.name}
                     className="w-full h-full rounded-lg object-cover"
+                    loading="lazy"
                   />
                   <div className="absolute left-[5px] -top-[3px]">
                     <img 
                       src={`/TOP${dish.id}.png`}
                       alt={dish.name}
                       className="w-12 h-6 object-contain"
+                      loading="lazy"
                     />
                   </div>
                 </div>
@@ -291,4 +294,4 @@ const SanqingtanRestaurantDrawer = ({ onClose }) => {
   );
 };
 
-export default SanqingtanRestaurantDrawer;
+export default SanqingtanRestaurant;
