@@ -10,7 +10,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist -r https://github.com/chenqiyuan7/Mall-Search0519.git"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
