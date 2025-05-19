@@ -5,11 +5,22 @@ on:
     branches:
       - main  # 每次推送到main分支时触发
 
+# 设置GITHUB_TOKEN的权限
 permissions:
-  contents: write  # 允许工作流写入仓库内容
+  contents: write
+  pages: write      # 添加 pages 写入权限
+  id-token: write   # 添加 id-token 写入权限
+
+# 允许一个并发部署
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -27,9 +38,14 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          folder: dist  # 要部署的文件夹
-          branch: gh-pages  # 部署的目标分支
-          clean: true  # 清理旧文件 
+          path: 'dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2 
