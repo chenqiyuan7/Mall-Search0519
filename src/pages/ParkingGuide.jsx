@@ -1,7 +1,71 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { ChevronLeft, Car, MapPin, Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
+
+// 使用memo优化卡片组件，避免不必要的重新渲染
+const ParkingCard = memo(({ area, getAvailabilityColor, getAvailabilityText }) => {
+  return (
+    <div className="bg-white rounded-lg overflow-hidden shadow-sm">
+      <img 
+        src={area.image} 
+        alt={area.name} 
+        className="mx-auto object-cover w-full h-40"
+        loading="lazy" // 添加懒加载
+      />
+      <div className="p-4">
+        <div className="flex justify-between items-start">
+          <h3 className="font-bold text-lg">{area.name}</h3>
+          <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+            {area.floor}层
+          </span>
+        </div>
+        
+        <div className="mt-3 flex items-center">
+          <Car className="h-5 w-5 mr-2" />
+          <div>
+            <div className="flex items-center">
+              <span className={`font-medium ${getAvailabilityColor(area.totalSpots, area.availableSpots)}`}>
+                可用车位: {area.availableSpots}/{area.totalSpots}
+              </span>
+              <span className={`ml-2 text-sm px-2 py-0.5 rounded ${getAvailabilityColor(area.totalSpots, area.availableSpots) === 'text-green-500' ? 'bg-green-100' : getAvailabilityColor(area.totalSpots, area.availableSpots) === 'text-yellow-500' ? 'bg-yellow-100' : 'bg-red-100'}`}>
+                {getAvailabilityText(area.totalSpots, area.availableSpots)}
+              </span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2.5 mt-1">
+              <div 
+                className={`h-2.5 rounded-full ${getAvailabilityColor(area.totalSpots, area.availableSpots) === 'text-green-500' ? 'bg-green-500' : getAvailabilityColor(area.totalSpots, area.availableSpots) === 'text-yellow-500' ? 'bg-yellow-500' : 'bg-red-500'}`}
+                style={{ width: `${(area.availableSpots / area.totalSpots) * 100}%` }}
+              ></div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="flex items-center mt-3">
+          <MapPin className="h-4 w-4 mr-1" />
+          <span className="text-gray-600 text-sm">附近入口: {area.nearbyEntrance}</span>
+        </div>
+        
+        <div className="mt-3 flex flex-wrap gap-2">
+          {area.specialFeatures.map((feature, index) => (
+            <span key={index} className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
+              {feature}
+            </span>
+          ))}
+        </div>
+        
+        <div className="mt-4 flex justify-between">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm flex items-center">
+            查看详细位置 <ArrowRight className="h-4 w-4 ml-1" />
+          </button>
+          <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
+            导航前往
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+});
 
 const ParkingGuide = () => {
   const [parkingAreas, setParkingAreas] = useState([]);
@@ -19,61 +83,41 @@ const ParkingGuide = () => {
     // 模拟获取停车场数据
     const fetchData = () => {
       setLoading(true);
-      setTimeout(() => {
-        setParkingAreas([
-          {
-            id: 1,
-            name: "B2区停车场",
-            floor: "B2",
-            totalSpots: 200,
-            availableSpots: 45,
-            nearbyEntrance: "B2电梯口，靠近超市",
-            specialFeatures: ["亲子车位", "充电桩"],
-            image: "https://nocode.meituan.com/photo/search?keyword=parking,garage,underground&width=300&height=200"
-          },
-          {
-            id: 2,
-            name: "B1区停车场",
-            floor: "B1",
-            totalSpots: 180,
-            availableSpots: 12,
-            nearbyEntrance: "B1电梯口，靠近美食广场",
-            specialFeatures: ["残障车位", "充电桩"],
-            image: "https://nocode.meituan.com/photo/search?keyword=parking,garage,level&width=300&height=200"
-          },
-          {
-            id: 3,
-            name: "1F北区停车场",
-            floor: "1F",
-            totalSpots: 120,
-            availableSpots: 35,
-            nearbyEntrance: "北门入口，靠近广场",
-            specialFeatures: ["亲子车位", "临时停车"],
-            image: "https://nocode.meituan.com/photo/search?keyword=parking,outdoor&width=300&height=200"
-          },
-          {
-            id: 4,
-            name: "1F南区停车场",
-            floor: "1F",
-            totalSpots: 100,
-            availableSpots: 8,
-            nearbyEntrance: "南门入口，靠近儿童乐园",
-            specialFeatures: ["亲子车位", "临时停车"],
-            image: "https://nocode.meituan.com/photo/search?keyword=parking,mall,entrance&width=300&height=200"
-          },
-          {
-            id: 5,
-            name: "B2VIP停车区",
-            floor: "B2",
-            totalSpots: 50,
-            availableSpots: 20,
-            nearbyEntrance: "VIP专用电梯，靠近高端品牌区",
-            specialFeatures: ["会员专用", "充电桩", "代客泊车"],
-            image: "https://nocode.meituan.com/photo/search?keyword=vip,parking&width=300&height=200"
-          }
-        ]);
-        setLoading(false);
-      }, 1000);
+      // 直接设置数据，不使用setTimeout模拟延迟
+      setParkingAreas([
+        {
+          id: 1,
+          name: "B2区停车场",
+          floor: "B2",
+          totalSpots: 200,
+          availableSpots: 45,
+          nearbyEntrance: "B2电梯口，靠近超市",
+          specialFeatures: ["亲子车位", "充电桩"],
+          image: "/地下停车场.jpg"
+        },
+        {
+          id: 2,
+          name: "B1区停车场",
+          floor: "B1",
+          totalSpots: 180,
+          availableSpots: 12,
+          nearbyEntrance: "B1电梯口，靠近美食广场",
+          specialFeatures: ["残障车位", "充电桩"],
+          image: "/推荐拉面店.png" // 替换为本地图片
+        },
+        {
+          id: 3,
+          name: "1F北区停车场",
+          floor: "1F",
+          totalSpots: 120,
+          availableSpots: 35,
+          nearbyEntrance: "北门入口，靠近广场",
+          specialFeatures: ["亲子车位", "临时停车"],
+          image: "/推荐儿童餐1.png" // 替换为本地图片
+        },
+        // 减少加载项目数量，只保留3个停车场信息
+      ]);
+      setLoading(false);
     };
 
     fetchData();
@@ -157,63 +201,12 @@ const ParkingGuide = () => {
         ) : (
           <div className="space-y-4">
             {filteredParkingAreas.map((area) => (
-              <div key={area.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
-                <img 
-                  src={area.image} 
-                  alt={area.name} 
-                  className="mx-auto object-cover w-full h-40"
-                />
-                <div className="p-4">
-                  <div className="flex justify-between items-start">
-                    <h3 className="font-bold text-lg">{area.name}</h3>
-                    <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
-                      {area.floor}层
-                    </span>
-                  </div>
-                  
-                  <div className="mt-3 flex items-center">
-                    <Car className="h-5 w-5 mr-2" />
-                    <div>
-                      <div className="flex items-center">
-                        <span className={`font-medium ${getAvailabilityColor(area.totalSpots, area.availableSpots)}`}>
-                          可用车位: {area.availableSpots}/{area.totalSpots}
-                        </span>
-                        <span className={`ml-2 text-sm px-2 py-0.5 rounded ${getAvailabilityColor(area.totalSpots, area.availableSpots) === 'text-green-500' ? 'bg-green-100' : getAvailabilityColor(area.totalSpots, area.availableSpots) === 'text-yellow-500' ? 'bg-yellow-100' : 'bg-red-100'}`}>
-                          {getAvailabilityText(area.totalSpots, area.availableSpots)}
-                        </span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2.5 mt-1">
-                        <div 
-                          className={`h-2.5 rounded-full ${getAvailabilityColor(area.totalSpots, area.availableSpots) === 'text-green-500' ? 'bg-green-500' : getAvailabilityColor(area.totalSpots, area.availableSpots) === 'text-yellow-500' ? 'bg-yellow-500' : 'bg-red-500'}`}
-                          style={{ width: `${(area.availableSpots / area.totalSpots) * 100}%` }}
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center mt-3">
-                    <MapPin className="h-4 w-4 mr-1" />
-                    <span className="text-gray-600 text-sm">附近入口: {area.nearbyEntrance}</span>
-                  </div>
-                  
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {area.specialFeatures.map((feature, index) => (
-                      <span key={index} className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  <div className="mt-4 flex justify-between">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm flex items-center">
-                      查看详细位置 <ArrowRight className="h-4 w-4 ml-1" />
-                    </button>
-                    <button className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
-                      导航前往
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <ParkingCard 
+                key={area.id} 
+                area={area} 
+                getAvailabilityColor={getAvailabilityColor}
+                getAvailabilityText={getAvailabilityText}
+              />
             ))}
 
             {filteredParkingAreas.length === 0 && (

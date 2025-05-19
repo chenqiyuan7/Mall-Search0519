@@ -24,7 +24,7 @@ const EntertainmentPackages = () => {
       discountPrice: 298,
       validPeriod: "购买后30天内有效",
       peopleCount: "2大1小",
-      image: "https://nocode.meituan.com/photo/search?keyword=family,fun,day&width=300&height=200"
+      image: "/游乐园.jpg"
     },
     {
       id: 2,
