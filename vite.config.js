@@ -117,10 +117,8 @@ export default defineConfig({
       overlay: false
     }
   },
-  plugins: [
-    PLUGINS
-  ],
-  base: './',
+  plugins: [react()],
+  base: '/Mall-search/',  // 为GitHub Pages设置正确的base路径
   build: {
     outDir: 'dist'
   },
