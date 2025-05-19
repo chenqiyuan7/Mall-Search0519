@@ -13,7 +13,7 @@ export default defineConfig({
     }
   },
   plugins: [react()],
-  base: '/Mall-search/',  // 为GitHub Pages设置正确的base路径
+  base: '/Mall-Search0519/',  // 为GitHub Pages设置正确的base路径
   build: {
     outDir: 'dist',
     emptyOutDir: true,  // 构建前清空输出目录
