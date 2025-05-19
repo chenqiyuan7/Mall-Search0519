@@ -29,15 +29,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'npm'
 
       - name: List files before install
         run: ls -la
 
       - name: Install dependencies
         run: |
-          npm ci || npm install
-          npm list gh-pages || npm install --save-dev gh-pages
+          npm install
+          npm install --save-dev gh-pages
 
       - name: List files after install
         run: ls -la
